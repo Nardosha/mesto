@@ -25,10 +25,10 @@ body {
 }
 
 /**
- * Render the `main` element consistently in IE.
+ * Render the `page` element consistently in IE.
  */
 
-main {
+page {
   display: block;
 }
 
