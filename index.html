@@ -29,8 +29,14 @@
         <section class="content-photos">
             <div class="content-photos__wrapper">
                 <ul class="content-photos__list">
-                    <li class="content-photos__item">
-                        <img src="images/page/content-photos/content-photos_item-1.jpg" alt="Город Карачаевск">
+                    <li class="content-photos__photo-item photo-item">
+                        <div class="photo-item__wrapper">
+                            <img class="photo-item__img" src="images/page/content-photos/content-photos_item-1.jpg" alt="Город Карачаевск">
+                            <div class="photo-item__info">
+                                <h2 class="photo-item__description">Карачаевск</h2>
+                                <button class="photo-item__button-like" type="button"><3</button>
+                            </div>
+                        </div>
                     </li>
                     <li class="content-photos__item">
                         <img src="images/page/content-photos/content-photos_item-2.jpg" alt="Гора Эльбрус">
@@ -57,5 +63,22 @@
         </div>
     </footer>
 </div>
+<dialog class="popup">
+    <div class="popup__wrapper">
+        <form class="popup__form form" action="">
+            <label for="form_button_close">Закрыть окно редактирования</label>
+            <input class="popup__button-close" type="button" id="form_button_close">
+
+            <label for="input_full_name">Имя</label>
+            <input class="form__input form__input_full-name" id="input_full_name" type="text">
+
+            <label for="input_profession">Информация</label>
+            <input class="form__input form__input_profession" id="input_profession" type="text">
+
+            <label for="form_button_submit">Сохранить</label>
+            <input class="form__button-submit" type="submit" id="form_button_submit">
+        </form>
+    </div>
+</dialog>
 </body>
 </html>
