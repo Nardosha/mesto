@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pages/index.css">
+    <title>Mesto</title>
 </head>
-<body>
+<body class="page">
+<div class="root">
+    <header class="header">
+        <div class="header__wrapper">
+            <img class="header__logo" src="images/logo.svg" alt="Логотип Mesto">
+        </div>
+    </header>
 
+    <main class="main">
+        <section class="profile">
+            <div class="profile__wrapper">
+                <img class="profile__avatar">
+                <div class="profile__settings">
+                    <h1 class="profile__full-name">Жак-Ив Кусто</h1>
+                    <p class="profile__profession">Исследователь океана</p>
+                    <button class="button profile__edit-button">+</button>
+                </div>
+                <button class="button user__add-button">+</button>
+            </div>
+        </section>
+        <section class="content-photos">
+            <div class="content-photos__wrapper">
+                <ul class="content-photos__list">
+                    <li class="content-photos__item">
+                        <img src="images/page/content-photos/content-photos_item-1.jpg" alt="Город Карачаевск">
+                    </li>
+                    <li class="content-photos__item">
+                        <img src="images/page/content-photos/content-photos_item-2.jpg" alt="Гора Эльбрус">
+                    </li>
+                    <li class="content-photos__item">
+                        <img src="images/page/content-photos/content-photos_item-3.jpg" alt="Город Домбай">
+                    </li>
+                    <li class="content-photos__item">
+                        <img src="images/page/content-photos/content-photos_item-4.jpg" alt="Гора Эльбрус">
+                    </li>
+                    <li class="content-photos__item">
+                        <img src="images/page/content-photos/content-photos_item-5.jpg" alt="Город Домбай">
+                    </li>
+                    <li class="content-photos__item">
+                        <img src="images/page/content-photos/content-photos_item-6.jpg" alt="Город Карачаево-Черкесия">
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer__wrapper">
+            <p class="footer__copyright">© 2020 Mesto Russia</p>
+        </div>
+    </footer>
+</div>
 </body>
 </html>
