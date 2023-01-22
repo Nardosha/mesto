@@ -84,7 +84,6 @@
 
 .profile__wrapper {
     box-sizing: border-box;
-    background: #594d65;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -103,8 +102,6 @@
     height: 120px;
     clip-path: circle(50%);
     overflow: hidden;
-
-    background: #73755e;
 }
 
 .profile__avatar {
@@ -114,7 +111,6 @@
 }
 
 .profile__settings {
-    background: #386e48;
     color: #fff;
     display: grid;
     justify-items: center;
@@ -172,7 +168,7 @@
         flex-direction: row;
         justify-content: space-between;
         gap: 30px;
-        padding: 0 27px;
+        padding: 40px 27px 25px 27px;
     }
 
     .profile__settings {
@@ -211,3 +207,93 @@
     }
 }
 
+.content-photos {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.content-photos__wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 18px 19px 48px 19px;
+}
+
+.content-photos__list {
+    list-style: none;
+    display: grid;
+    /*grid-template-columns: repeat(auto-fit, minmax(282px, min-content));*/
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(361px, 1fr));
+    row-gap: 20px;
+    column-gap: 17px;
+    justify-content: center;
+    justify-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.content-photos__photo-item {
+
+}
+
+.photo-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 361px;
+}
+
+.photo-item__wrapper {
+    display: grid;
+    grid-template-rows: auto min-content;
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: 100%;
+}
+
+.photo-item__info {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 79px;
+
+    padding: 25px 15px 25px 21px;
+}
+
+.photo-item__img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.photo-item__description {
+    flex: 1 1 80%;
+    color: #000;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: calc(29 / 24 * 100%);
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 226px;
+
+    padding: 0;
+    margin: 0;
+}
+
+.photo-item__button-like {
+    flex: 1 1 20%;
+    cursor: pointer;
+    max-width: 22px;
+    max-height: 19px;
+}
+
+@media (min-width: 768px) {
+    .content-photos__wrapper {
+        padding: 25px 19px 48px 19px;
+    }
+}
