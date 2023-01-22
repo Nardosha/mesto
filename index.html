@@ -6,76 +6,144 @@
     <link rel="stylesheet" href="pages/index.css">
     <title>Mesto</title>
 </head>
-<body class="page">
-<div class="root">
+<body class="root">
+<div class="wrapper">
     <header class="header">
         <div class="header__wrapper">
             <img class="header__logo" src="images/logo.svg" alt="Логотип Mesto">
         </div>
     </header>
 
-    <main class="main">
+    <main class="page">
         <section class="profile">
             <div class="profile__wrapper">
-                <img class="profile__avatar">
+                <div class="profile__avatar-wrapper">
+                    <img class="profile__avatar" src="images/page/avatar.jpg" alt="Фотография пользователя">
+                </div>
                 <div class="profile__settings">
                     <h1 class="profile__full-name">Жак-Ив Кусто</h1>
                     <p class="profile__profession">Исследователь океана</p>
-                    <button class="button profile__edit-button">+</button>
+                    <button class="button profile__edit-button" type="button">
+                        <img src="images/page/profile/profile__edit-button.svg"
+                             alt="Edit">
+                    </button>
                 </div>
-                <button class="button user__add-button">+</button>
+                <button class="button profile__add-button" type="button">
+                    <img src="images/page/profile/profile__add-button.svg"
+                         alt="Edit">
+                </button>
             </div>
         </section>
+
         <section class="content-photos">
             <div class="content-photos__wrapper">
                 <ul class="content-photos__list">
                     <li class="content-photos__photo-item photo-item">
                         <div class="photo-item__wrapper">
-                            <img class="photo-item__img" src="images/page/content-photos/content-photos_item-1.jpg" alt="Город Карачаевск">
+                            <img class="photo-item__img"
+                                 src="images/page/content-photos/content-photos_item-1.jpg"
+                                 alt="Город Карачаевск">
                             <div class="photo-item__info">
                                 <h2 class="photo-item__description">Карачаевск</h2>
-                                <button class="photo-item__button-like" type="button"><3</button>
+                                <button class="button photo-item__button-like" type="button">
+                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                                </button>
                             </div>
                         </div>
                     </li>
-                    <li class="content-photos__item">
-                        <img src="images/page/content-photos/content-photos_item-2.jpg" alt="Гора Эльбрус">
+                    <li class="content-photos__photo-item photo-item">
+                        <div class="photo-item__wrapper">
+                            <img class="photo-item__img"
+                                 src="images/page/content-photos/content-photos_item-2.jpg"
+                                 alt="Гора Эльбрус">
+                            <div class="photo-item__info">
+                                <h2 class="photo-item__description">Гора Эльбрус</h2>
+                                <button class="button photo-item__button-like" type="button">
+                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                                </button>
+                            </div>
+                        </div>
                     </li>
-                    <li class="content-photos__item">
-                        <img src="images/page/content-photos/content-photos_item-3.jpg" alt="Город Домбай">
+                    <li class="content-photos__photo-item photo-item">
+                        <div class="photo-item__wrapper">
+                            <img class="photo-item__img"
+                                 src="images/page/content-photos/content-photos_item-3.jpg"
+                                 alt="Город Домбай">
+                            <div class="photo-item__info">
+                                <h2 class="photo-item__description">Домбай</h2>
+                                <button class="button photo-item__button-like" type="button">
+                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                                </button>
+                            </div>
+                        </div>
                     </li>
-                    <li class="content-photos__item">
-                        <img src="images/page/content-photos/content-photos_item-4.jpg" alt="Гора Эльбрус">
+                    <li class="content-photos__photo-item photo-item">
+                        <div class="photo-item__wrapper">
+                            <img class="photo-item__img"
+                                 src="images/page/content-photos/content-photos_item-4.jpg"
+                                 alt="Гора Эльбрус">
+                            <div class="photo-item__info">
+                                <h2 class="photo-item__description">Гора Эльбрус</h2>
+                                <button class="button photo-item__button-like" type="button">
+                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                                </button>
+                            </div>
+                        </div>
                     </li>
-                    <li class="content-photos__item">
-                        <img src="images/page/content-photos/content-photos_item-5.jpg" alt="Город Домбай">
+                    <li class="content-photos__photo-item photo-item">
+                        <div class="photo-item__wrapper">
+                            <img class="photo-item__img"
+                                 src="images/page/content-photos/content-photos_item-5.jpg"
+                                 alt="Город Домбай">
+                            <div class="photo-item__info">
+                                <h2 class="photo-item__description">Город Домбай</h2>
+                                <button class="button photo-item__button-like" type="button">
+                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                                </button>
+                            </div>
+                        </div>
                     </li>
-                    <li class="content-photos__item">
-                        <img src="images/page/content-photos/content-photos_item-6.jpg" alt="Город Карачаево-Черкесия">
+                    <li class="content-photos__photo-item photo-item">
+                        <div class="photo-item__wrapper">
+                            <img class="photo-item__img"
+                                 src="images/page/content-photos/content-photos_item-6.jpg"
+                                 alt="Город Карачаевск">
+                            <div class="photo-item__info">
+                                <h2 class="photo-item__description">Город Карачаево-Черкесия</h2>
+                                <button class="button photo-item__button-like" type="button">
+                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                                </button>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
         </section>
     </main>
+
     <footer class="footer">
         <div class="footer__wrapper">
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </div>
     </footer>
 </div>
+
 <dialog class="popup">
     <div class="popup__wrapper">
         <form class="popup__form form" action="">
-            <label for="form_button_close">Закрыть окно редактирования</label>
-            <input class="popup__button-close" type="button" id="form_button_close">
+            <button class="button form__button-close" type="button" id="form_button_close">
+                <img src="images/page/popup/popup__button-close.svg" alt="Close">
+            </button>
 
-            <label for="input_full_name">Имя</label>
-            <input class="form__input form__input_full-name" id="input_full_name" type="text">
+            <h2 class="popup__title">Редактировать профиль</h2>
 
-            <label for="input_profession">Информация</label>
-            <input class="form__input form__input_profession" id="input_profession" type="text">
+            <label class="popup__label" for="input_full_name">Имя</label>
+            <input class="form__input form__input_full-name" id="input_full_name" type="text" placeholder="Введите имя">
 
-            <label for="form_button_submit">Сохранить</label>
+            <label class="popup__label" for="input_profession">Информация</label>
+            <input class="form__input form__input_profession" id="input_profession" type="text" placeholder="Введите описание">
+
+            <label class="popup__label" for="form_button_submit">Сохранить</label>
             <input class="form__button-submit" type="submit" id="form_button_submit">
         </form>
     </div>
