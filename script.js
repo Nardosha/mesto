@@ -1,41 +1,38 @@
-const popup = document.querySelector('.popup')
-const popupForm = document.querySelector('.popup__form')
-const buttonEdit = document.querySelector('.profile__edit-button')
-const buttonClosePopup = document.querySelector('.form__button-close')
+const ACTION_TYPES = {
+    EDIT: 'EDIT',
+    CLOSE: 'CLOSE',
+}
 
 const setEventListeners = () => {
     const actionButtons = document.querySelectorAll('[data-action]')
-    console.log(actionButtons)
 
     actionButtons.forEach(btn => {
         btn.addEventListener('click', actionHandler)
     })
 }
 
-setEventListeners()
-
-const ACTION_TYPES = {
-    EDIT: 'EDIT',
-    CLOSE: 'CLOSE',
-}
 const actionHandler = (e) => {
     const actionType = e.target.dataset.action
+
+    const popup = document.querySelector('.popup')
+    const popupForm = document.querySelector('.popup__form')
+
+
     if (actionType === ACTION_TYPES.EDIT) {
-        openPopup()
-        setFormFields()
+        openPopup(popup, popupForm)
+        setFormFields(popupForm)
     }
-    if (actionType === ACTION_TYPES.EDIT) {
-        closePopup()
+    if (actionType === ACTION_TYPES.CLOSE) {
+        closePopup(popup, popupForm)
     }
 }
 
-const openPopup = () => {
-    console.log('OPEN')
+const openPopup = (popup, popupForm) => {
     popup.classList.add('popup_opened')
     popupForm.classList.add('popup_opened')
 }
 
-const closePopup = () => {
+const closePopup = (popup, popupForm) => {
     popup.classList.remove('popup_opened')
     popupForm.classList.remove('popup_opened')
 }
@@ -70,7 +67,7 @@ const getProfileValues = (formFieldsMap) => {
     return formFieldsMap
 }
 
-const setFormFields = () => {
+const setFormFields = (popupForm) => {
     const formFields = popupForm.querySelectorAll('.form__input')
 
     const formFieldsMap = getFormFields(formFields)
@@ -82,10 +79,6 @@ const setFormFields = () => {
             field.value = profileFields.get(fieldName)
         }
     })
-
-    console.log(profileFields);
 }
 
-buttonEdit.addEventListener('click', actionHandler)
-buttonClosePopup.addEventListener('click', closePopup)
-
+setEventListeners()
