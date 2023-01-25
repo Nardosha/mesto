@@ -1,0 +1,19 @@
+.profile__settings {
+    color: #fff;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 14px;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: repeat(2, min-content);
+}
+
+@media (min-width: 768px) {
+    .profile__settings {
+        flex: 1 1 auto;
+        justify-items: stretch;
+        column-gap: 18px;
+        row-gap: 16px;
+    }
+}

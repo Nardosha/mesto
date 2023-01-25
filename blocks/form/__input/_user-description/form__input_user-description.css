@@ -1,0 +1,9 @@
+.form__input_user-description {
+    margin: 0 0 45px 0;
+}
+
+@media (min-width: 768px) {
+    .form__input_user-description {
+        margin: 0 0 48px 0;
+    }
+}

@@ -9,115 +9,111 @@
 <body class="root">
 <div class="wrapper">
     <header class="header">
-        <div class="header__wrapper">
-            <img class="header__logo" src="images/logo.svg" alt="Логотип Mesto">
-        </div>
+        <img class="header__logo" src="images/logo.svg" alt="Логотип Mesto">
     </header>
 
     <main class="page">
         <section class="profile">
-            <div class="profile__wrapper">
-                <div class="profile__avatar-wrapper">
-                    <img class="profile__avatar" src="images/page/avatar.jpg" alt="Фотография пользователя">
-                </div>
-                <div class="profile__settings">
-                    <h1 class="profile__full-name">Жак-Ив Кусто</h1>
-                    <p class="profile__profession">Исследователь океана</p>
-                    <button class="button profile__edit-button" type="button">
-                        <img src="images/page/profile/profile__edit-button.svg"
-                             alt="Edit">
-                    </button>
-                </div>
-                <button class="button profile__add-button" type="button">
-                    <img src="images/page/profile/profile__add-button.svg"
-                         alt="Edit">
+            <div class="profile__avatar-wrapper">
+                <img class="profile__avatar" src="images/page/avatar.jpg" alt="Фотография пользователя">
+            </div>
+            <div class="profile__settings">
+                <h1 class="profile__full-name" data-user-field="userFullName">Жак-Ив Кусто</h1>
+                <p class="profile__description" data-user-field="userDescription">Исследователь океана</p>
+                <button class="button profile__edit-button" data-action="EDIT" type="button">
+                    <svg class="profile__edit-icon" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 1.32827L2.60377 8.7666L1.28302 7.41936L8.66038 0L10 1.32827ZM0 10L1.96226 9.41177L0.584906 8.08349L0 10Z" fill="white"/>
+                    </svg>
                 </button>
             </div>
+            <button class="button profile__add-button" type="button">
+                <svg class="profile__add-button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 7.11111H8.88889V0H7.11111V7.11111H0V8.88889H7.11111V16H8.88889V8.88889H16V7.11111Z" fill="white"/>
+                </svg>
+            </button>
         </section>
 
         <section class="content-photos">
-            <div class="content-photos__wrapper">
-                <ul class="content-photos__list">
-                    <li class="content-photos__photo-item photo-item">
-                        <div class="photo-item__wrapper">
-                            <img class="photo-item__img"
-                                 src="images/page/content-photos/content-photos_item-1.jpg"
-                                 alt="Город Карачаевск">
-                            <div class="photo-item__info">
-                                <h2 class="photo-item__description">Карачаевск</h2>
-                                <button class="button photo-item__button-like" type="button">
-                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
-                                </button>
-                            </div>
+            <ul class="content-photos__list">
+                <li class="photo-item">
+                    <div class="photo-item__wrapper">
+                        <img class="photo-item__img"
+                             src="images/page/content-photos/content-photos_item-1.jpg"
+                             alt="Город Карачаевск">
+                        <div class="photo-item__info">
+                            <h2 class="photo-item__description">Карачаевск</h2>
+                            <button class="button photo-item__button-like" type="button">
+                                <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                            </button>
                         </div>
-                    </li>
-                    <li class="content-photos__photo-item photo-item">
-                        <div class="photo-item__wrapper">
-                            <img class="photo-item__img"
-                                 src="images/page/content-photos/content-photos_item-2.jpg"
-                                 alt="Гора Эльбрус">
-                            <div class="photo-item__info">
-                                <h2 class="photo-item__description">Гора Эльбрус</h2>
-                                <button class="button photo-item__button-like" type="button">
-                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
-                                </button>
-                            </div>
+                    </div>
+                </li>
+                <li class="photo-item">
+                    <div class="photo-item__wrapper">
+                        <img class="photo-item__img"
+                             src="images/page/content-photos/content-photos_item-2.jpg"
+                             alt="Гора Эльбрус">
+                        <div class="photo-item__info">
+                            <h2 class="photo-item__description">Гора Эльбрус</h2>
+                            <button class="button photo-item__button-like" type="button">
+                                <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                            </button>
                         </div>
-                    </li>
-                    <li class="content-photos__photo-item photo-item">
-                        <div class="photo-item__wrapper">
-                            <img class="photo-item__img"
-                                 src="images/page/content-photos/content-photos_item-3.jpg"
-                                 alt="Город Домбай">
-                            <div class="photo-item__info">
-                                <h2 class="photo-item__description">Домбай</h2>
-                                <button class="button photo-item__button-like" type="button">
-                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
-                                </button>
-                            </div>
+                    </div>
+                </li>
+                <li class="photo-item">
+                    <div class="photo-item__wrapper">
+                        <img class="photo-item__img"
+                             src="images/page/content-photos/content-photos_item-3.jpg"
+                             alt="Город Домбай">
+                        <div class="photo-item__info">
+                            <h2 class="photo-item__description">Домбай</h2>
+                            <button class="button photo-item__button-like" type="button">
+                                <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                            </button>
                         </div>
-                    </li>
-                    <li class="content-photos__photo-item photo-item">
-                        <div class="photo-item__wrapper">
-                            <img class="photo-item__img"
-                                 src="images/page/content-photos/content-photos_item-4.jpg"
-                                 alt="Гора Эльбрус">
-                            <div class="photo-item__info">
-                                <h2 class="photo-item__description">Гора Эльбрус</h2>
-                                <button class="button photo-item__button-like" type="button">
-                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
-                                </button>
-                            </div>
+                    </div>
+                </li>
+                <li class="photo-item">
+                    <div class="photo-item__wrapper">
+                        <img class="photo-item__img"
+                             src="images/page/content-photos/content-photos_item-4.jpg"
+                             alt="Гора Эльбрус">
+                        <div class="photo-item__info">
+                            <h2 class="photo-item__description">Гора Эльбрус</h2>
+                            <button class="button photo-item__button-like" type="button">
+                                <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                            </button>
                         </div>
-                    </li>
-                    <li class="content-photos__photo-item photo-item">
-                        <div class="photo-item__wrapper">
-                            <img class="photo-item__img"
-                                 src="images/page/content-photos/content-photos_item-5.jpg"
-                                 alt="Город Домбай">
-                            <div class="photo-item__info">
-                                <h2 class="photo-item__description">Город Домбай</h2>
-                                <button class="button photo-item__button-like" type="button">
-                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
-                                </button>
-                            </div>
+                    </div>
+                </li>
+                <li class="photo-item">
+                    <div class="photo-item__wrapper">
+                        <img class="photo-item__img"
+                             src="images/page/content-photos/content-photos_item-5.jpg"
+                             alt="Город Домбай">
+                        <div class="photo-item__info">
+                            <h2 class="photo-item__description">Город Домбай</h2>
+                            <button class="button photo-item__button-like" type="button">
+                                <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                            </button>
                         </div>
-                    </li>
-                    <li class="content-photos__photo-item photo-item">
-                        <div class="photo-item__wrapper">
-                            <img class="photo-item__img"
-                                 src="images/page/content-photos/content-photos_item-6.jpg"
-                                 alt="Город Карачаевск">
-                            <div class="photo-item__info">
-                                <h2 class="photo-item__description">Город Карачаево-Черкесия</h2>
-                                <button class="button photo-item__button-like" type="button">
-                                    <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
-                                </button>
-                            </div>
+                    </div>
+                </li>
+                <li class="photo-item">
+                    <div class="photo-item__wrapper">
+                        <img class="photo-item__img"
+                             src="images/page/content-photos/content-photos_item-6.jpg"
+                             alt="Город Карачаевск">
+                        <div class="photo-item__info">
+                            <h2 class="photo-item__description">Город Карачаево-Черкесия</h2>
+                            <button class="button photo-item__button-like" type="button">
+                                <img src="images/page/content-photos/photo-item__button-like.svg" alt="Like">
+                            </button>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+            </ul>
         </section>
     </main>
 
@@ -128,25 +124,39 @@
     </footer>
 </div>
 
-<dialog class="popup">
-    <div class="popup__wrapper">
-        <form class="popup__form form" action="">
-            <button class="button form__button-close" type="button" id="form_button_close">
-                <img src="images/page/popup/popup__button-close.svg" alt="Close">
+<dialog class="popup" open>
+    <div class="popup__container">
+        <form class="popup__form form" action="#">
+            <button class="button form__button-close" type="button" id="form_button_close" data-action="CLOSE">
+                <svg class="form__close-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 28.8L19.2 16L32 3.2L28.8 0L16 12.8L3.2 0L0 3.2L12.8 16L0 28.8L3.2 32L16 19.2L28.8 32L32 28.8Z" fill="white"/>
+                </svg>
             </button>
 
-            <h2 class="popup__title">Редактировать профиль</h2>
+            <h2 class="form__title">Редактировать профиль</h2>
 
-            <label class="popup__label" for="input_full_name">Имя</label>
-            <input class="form__input form__input_full-name" id="input_full_name" type="text" placeholder="Введите имя">
+            <label class="form__label" for="input_user_full_name">Имя</label>
+            <input class="form__input form__input_user-full-name"
+                   id="input_user_full_name"
+                   value=""
+                   data-user-field="userFullName"
+                   type="text"
+                   placeholder="Введите имя">
 
-            <label class="popup__label" for="input_profession">Информация</label>
-            <input class="form__input form__input_profession" id="input_profession" type="text" placeholder="Введите описание">
+            <label class="form__label" for="input_user_description">Информация</label>
+            <input class="form__input form__input_user-description"
+                   id="input_user_description"
+                   value=""
+                   data-user-field="userDescription"
+                   type="text"
+                   placeholder="Введите описание">
 
-            <label class="popup__label" for="form_button_submit">Сохранить</label>
+            <label class="form__label" for="form_button_submit">Сохранить</label>
             <input class="form__button-submit" type="submit" id="form_button_submit">
         </form>
     </div>
 </dialog>
+
+<script src="scripts/index.js"></script>
 </body>
 </html>
