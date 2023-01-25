@@ -10,20 +10,8 @@
     transition: transform .5s ease-in;
 }
 
-/*todo*/
-.form__button-close img {
-    max-width: 20px;
-    max-height: 20px;
-}
-
-
 @media (min-width: 768px) {
     .form__button-close {
         transform: translate(43px, -43px);
-    }
-
-    .form__button-close img {
-        max-width: 32px;
-        max-height: 32px;
     }
 }
