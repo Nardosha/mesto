@@ -1,0 +1,14 @@
+.form__close-icon {
+    width: 100%;
+    height: 100%;
+    max-width: 20px;
+    max-height: 20px;
+}
+
+
+@media (min-width: 768px) {
+    .form__button-close img {
+        max-width: 32px;
+        max-height: 32px;
+    }
+}
