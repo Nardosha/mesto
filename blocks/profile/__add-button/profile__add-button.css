@@ -1,0 +1,11 @@
+.profile__add-button {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 50px;
+}
+
+@media (min-width: 768px) {
+    .profile__add-button {
+        max-width: 150px;
+    }
+}

@@ -1,0 +1,14 @@
+.root {
+    box-sizing: border-box;
+    background-color: #000;
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #fff;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    width: 100%;
+    height: 100%;
+}
