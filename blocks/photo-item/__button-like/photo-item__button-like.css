@@ -1,0 +1,18 @@
+.photo-item__button-like {
+    background: transparent;
+    border: none;
+    flex: 1 1 20%;
+    max-width: 22px;
+    max-height: 19px;
+    padding: 0;
+    margin: 0;
+}
+
+.photo-item__button-like:hover {
+    opacity: .5;
+}
+
+/*todo fix img in buttons*/
+.photo-item__button-like:hover img {
+    fill: black;
+}

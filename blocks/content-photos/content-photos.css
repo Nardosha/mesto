@@ -1,0 +1,14 @@
+.content-photos {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 880px;
+    height: 100%;
+    padding: 18px 19px 24px 19px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .content-photos {
+        padding: 25px 19px 33px 19px;
+    }
+}

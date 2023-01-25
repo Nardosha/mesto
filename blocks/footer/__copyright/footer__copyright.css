@@ -1,15 +1,14 @@
-.profile__description {
+.footer__copyright {
+    font-weight: 400;
     font-size: 14px;
     line-height: calc(17 / 14 * 100%);
-    font-weight: 400;
-    grid-row: 2/3;
-    grid-column: 1/-1;
+    color: #545454;
     padding: 0;
     margin: 0;
 }
 
 @media (min-width: 768px) {
-    .profile__description {
+    .footer__copyright {
         font-size: 18px;
         line-height: calc(22 / 18 * 100%);
     }
