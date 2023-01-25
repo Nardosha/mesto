@@ -10,6 +10,6 @@
 
 @media (min-width: 768px) {
     .footer {
-        padding: 33px 19px 60px 19px;
+        padding: 33px 0 60px 0;
     }
 }
