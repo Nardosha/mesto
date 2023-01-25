@@ -1,4 +1,5 @@
 .photo-item__button-like {
+    position: relative;
     background: transparent;
     border: none;
     flex: 1 1 20%;
@@ -8,11 +9,21 @@
     margin: 0;
 }
 
-.photo-item__button-like:hover {
-    opacity: .5;
+.photo-item__button-like::after {
+    position: absolute;
+    content: "";
+    background: url("../../../images/page/content-photos/photo-item__button-like.svg") center no-repeat;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 22px;
+    min-width: 22px;
+    transform: translate(0, -50%);
 }
 
-/*todo fix img in buttons*/
-.photo-item__button-like:hover img {
+.photo-item__button-like:hover::after {
+    opacity: .5;
     fill: black;
+
 }

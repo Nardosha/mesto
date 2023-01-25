@@ -7,7 +7,7 @@
 
 
 @media (min-width: 768px) {
-    .form__button-close img {
+    .form__close-icon {
         max-width: 32px;
         max-height: 32px;
     }
