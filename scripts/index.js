@@ -9,32 +9,39 @@ const setEventListeners = () => {
     actionButtons.forEach(btn => {
         btn.addEventListener('click', actionHandler)
     })
+
+    const editButton = document.querySelector('.profile__edit-button')
+    editButton.addEventListener('click', actionHandler)
 }
 
 const actionHandler = (e) => {
-    const actionType = e.target.dataset.action
+    const closestActionButton = e.target.closest('[data-action]')
+    const actionType = closestActionButton.dataset.action
 
+    const page = document.querySelector('.root')
     const popup = document.querySelector('.popup')
     const popupForm = document.querySelector('.popup__form')
 
 
     if (actionType === ACTION_TYPES.EDIT) {
-        openPopup(popup, popupForm)
+        openPopup(popup, popupForm, page)
         setFormFields(popupForm)
     }
     if (actionType === ACTION_TYPES.CLOSE) {
-        closePopup(popup, popupForm)
+        closePopup(popup, popupForm, page)
     }
 }
 
-const openPopup = (popup, popupForm) => {
+const openPopup = (popup, popupForm, page) => {
     popup.classList.add('popup_opened')
     popupForm.classList.add('popup_opened')
+    page.style.overflow = 'hidden'
 }
 
-const closePopup = (popup, popupForm) => {
+const closePopup = (popup, popupForm, page) => {
     popup.classList.remove('popup_opened')
     popupForm.classList.remove('popup_opened')
+    page.style.overflow = 'auto'
 }
 
 const getFormFields = (formFields) => {
