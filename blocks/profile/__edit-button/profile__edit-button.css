@@ -5,22 +5,12 @@
     max-width: 18px;
     max-height: 18px;
     padding: 5px;
-}
-
-.profile__edit-button img {
-    max-width: 7px;
-    max-height: 7px;
+    margin: 0;
 }
 
 @media (min-width: 768px) {
     .profile__edit-button {
         max-width: 24px;
         max-height: 24px;
-        padding: 7px;
-    }
-
-    .profile__edit-button img {
-        max-width: 10px;
-        max-height: 10px;
     }
 }
