@@ -1,17 +1,24 @@
 .form__button-close {
-    cursor: pointer;
     position: absolute;
+    background: url("../../../images/page/popup/popup__button-close.svg") center no-repeat;
     top: 0;
     right: 0;
-    background: transparent;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    max-width: 20px;
+    max-height: 20px;
     border: 0;
-    padding: 5px;
+    padding: 0;
+    cursor: pointer;
     transform: translate(5px, -36px);
     transition: transform .5s ease-in;
 }
 
 @media (min-width: 768px) {
     .form__button-close {
+        max-width: 32px;
+        max-height: 32px;
         transform: translate(43px, -43px);
     }
 }
