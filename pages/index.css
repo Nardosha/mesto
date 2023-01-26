@@ -13,6 +13,8 @@
 
 
 @import '../blocks/page/page.css';
+@import '../blocks/page/_disabled/page_disabled.css';
+
 @import '../blocks/profile/profile.css';
 @import '../blocks/profile/__avatar-wrapper/profile__avatar-wrapper.css';
 @import '../blocks/profile/__avatar/profile__avatar.css';
