@@ -23,8 +23,6 @@
 @import '../blocks/profile/__full-name/profile__full-name.css';
 @import '../blocks/profile/__description/profile__description.css';
 @import '../blocks/profile/__edit-button/profile__edit-button.css';
-@import '../blocks/profile/__edit-icon/profile__edit-icon.css';
-@import '../blocks/profile/__add-icon/profile__add-icon.css';
 
 
 @import '../blocks/content-photos/content-photos.css';
@@ -52,7 +50,6 @@
 @import '../blocks/form/form.css';
 @import '../blocks/form/__label/form__label.css';
 @import '../blocks/form/__button-close/form__button-close.css';
-@import '../blocks/form/__close-icon/form__close-icon.css';
 @import '../blocks/form/__button-submit/form__button-submit.css';
 @import '../blocks/form/__title/form__title.css';
 @import '../blocks/form/__input/form__input.css';
