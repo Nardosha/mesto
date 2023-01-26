@@ -1,6 +1,7 @@
 const ACTION_TYPES = {
     EDIT: 'EDIT',
     CLOSE: 'CLOSE',
+    SUBMIT: 'SUBMIT',
 }
 
 const setEventListeners = () => {
@@ -17,31 +18,32 @@ const setEventListeners = () => {
 const actionHandler = (e) => {
     const closestActionButton = e.target.closest('[data-action]')
     const actionType = closestActionButton.dataset.action
-
-    const page = document.querySelector('.root')
-    const popup = document.querySelector('.popup')
     const popupForm = document.querySelector('.popup__form')
 
 
     if (actionType === ACTION_TYPES.EDIT) {
-        openPopup(popup, popupForm, page)
+        togglePopup(popupForm)
         setFormFields(popupForm)
+        return
     }
+
     if (actionType === ACTION_TYPES.CLOSE) {
-        closePopup(popup, popupForm, page)
+        togglePopup(popupForm)
+        return;
+    }
+
+    if (actionType === ACTION_TYPES.SUBMIT) {
+        submit(e, popupForm)
     }
 }
 
-const openPopup = (popup, popupForm, page) => {
-    popup.classList.add('popup_opened')
-    popupForm.classList.add('popup_opened')
-    page.style.overflow = 'hidden'
-}
+const togglePopup = (popupForm) => {
+    const page = document.querySelector('.root')
+    const popup = document.querySelector('.popup')
 
-const closePopup = (popup, popupForm, page) => {
-    popup.classList.remove('popup_opened')
-    popupForm.classList.remove('popup_opened')
-    page.style.overflow = 'auto'
+    popup.classList.toggle('popup_opened')
+    popupForm.classList.toggle('popup_opened')
+    page.classList.toggle('page_disabled')
 }
 
 const getFormFields = (formFields) => {
@@ -88,4 +90,28 @@ const setFormFields = (popupForm) => {
     })
 }
 
+const submit = (e, popupForm) => {
+    e.preventDefault()
+
+    const formData = new FormData(popupForm)
+
+    setProfileValues(formData)
+    togglePopup(popupForm)
+}
+
+
+const setProfileValues = (formData) => {
+    const userProfile = document.querySelector('.profile__settings')
+
+    Array.from(userProfile.children).forEach(child => {
+        const fieldName = child.dataset.userField
+        const formField = formData.get(fieldName)
+
+        if (fieldName && formData.get(fieldName)) {
+            child.textContent = formField
+        }
+    })
+}
+
 setEventListeners()
+
