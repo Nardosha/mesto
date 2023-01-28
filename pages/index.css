@@ -16,7 +16,6 @@
 @import '../blocks/page/_disabled/page_disabled.css';
 
 @import '../blocks/profile/profile.css';
-@import '../blocks/profile/__avatar-wrapper/profile__avatar-wrapper.css';
 @import '../blocks/profile/__avatar/profile__avatar.css';
 @import '../blocks/profile/__settings/profile__settings.css';
 @import '../blocks/profile/__add-button/profile__add-button.css';
@@ -30,7 +29,6 @@
 
 
 @import '../blocks/photo-item/photo-item.css';
-@import '../blocks/photo-item/__wrapper/photo-item__wrapper.css';
 @import '../blocks/photo-item/__img/photo-item__img.css';
 @import '../blocks/photo-item/__info/photo-item__info.css';
 @import '../blocks/photo-item/__description/photo-item__description.css';
@@ -43,8 +41,8 @@
 
 @import '../blocks/popup/popup.css';
 @import '../blocks/popup/__form/popup__form.css';
-@import '../blocks/popup/_opened/popup_opened.css';
 @import '../blocks/popup/__container/popup__container.css';
+@import '../blocks/popup/_opened/popup_opened.css';
 
 
 @import '../blocks/form/form.css';
@@ -53,5 +51,5 @@
 @import '../blocks/form/__button-submit/form__button-submit.css';
 @import '../blocks/form/__title/form__title.css';
 @import '../blocks/form/__input/form__input.css';
-@import '../blocks/form/__input/_user-description/form__input_user-description.css';
-@import '../blocks/form/__input/_user-full-name/form__input_user-full-name.css';
+@import '../blocks/form/__input/_field/form__input_field_user-description.css';
+@import '../blocks/form/__input/_field/form__input_field_user-full-name.css';

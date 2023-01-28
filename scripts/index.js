@@ -18,31 +18,31 @@ const setEventListeners = () => {
 const actionHandler = (e) => {
     const closestActionButton = e.target.closest('[data-action]')
     const actionType = closestActionButton.dataset.action
-    const popupForm = document.querySelector('.popup__form')
+    const popupContainer = document.querySelector('.popup__container')
 
 
     if (actionType === ACTION_TYPES.EDIT) {
-        togglePopup(popupForm)
-        setFormFields(popupForm)
+        togglePopup(popupContainer)
+        setFormFields(popupContainer)
         return
     }
 
     if (actionType === ACTION_TYPES.CLOSE) {
-        togglePopup(popupForm)
+        togglePopup(popupContainer)
         return;
     }
 
     if (actionType === ACTION_TYPES.SUBMIT) {
-        submit(e, popupForm)
+        submit(e, popupContainer)
     }
 }
 
-const togglePopup = (popupForm) => {
+const togglePopup = (popupContainer) => {
     const page = document.querySelector('.root')
     const popup = document.querySelector('.popup')
 
     popup.classList.toggle('popup_opened')
-    popupForm.classList.toggle('popup_opened')
+    popupContainer.classList.toggle('popup_opened')
     page.classList.toggle('page_disabled')
 }
 
@@ -76,8 +76,8 @@ const getProfileValues = (formFieldsMap) => {
     return formFieldsMap
 }
 
-const setFormFields = (popupForm) => {
-    const formFields = popupForm.querySelectorAll('.form__input')
+const setFormFields = (popupContainer) => {
+    const formFields = popupContainer.querySelectorAll('.form__input')
 
     const formFieldsMap = getFormFields(formFields)
     const profileFields = getProfileValues(formFieldsMap)
@@ -90,13 +90,13 @@ const setFormFields = (popupForm) => {
     })
 }
 
-const submit = (e, popupForm) => {
+const submit = (e, popupContainer) => {
     e.preventDefault()
 
-    const formData = new FormData(popupForm)
+    const formData = new FormData(popupContainer)
 
     setProfileValues(formData)
-    togglePopup(popupForm)
+    togglePopup(popupContainer)
 }
 
 
