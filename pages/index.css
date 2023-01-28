@@ -40,15 +40,15 @@
 
 
 @import '../blocks/popup/popup.css';
-@import '../blocks/popup/__form/popup__form.css';
 @import '../blocks/popup/__container/popup__container.css';
 @import '../blocks/popup/_opened/popup_opened.css';
+@import '../blocks/popup/__button-close/form__button-close.css';
+@import '../blocks/popup/__title/popup__title.css';
+@import '../blocks/popup/__form/popup__form.css';
 
 
 @import '../blocks/form/form.css';
 @import '../blocks/form/__label/form__label.css';
-@import '../blocks/popup/__button-close/form__button-close.css';
-@import '../blocks/form/__title/form__title.css';
 @import '../blocks/form/__inputs/form__inputs.css';
 @import '../blocks/form/__input/form__input.css';
 @import '../blocks/form/__button-submit/form__button-submit.css';

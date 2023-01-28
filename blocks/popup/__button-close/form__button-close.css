@@ -11,7 +11,7 @@
     border: 0;
     padding: 0;
     cursor: pointer;
-    transform: translate(5px, -36px);
+    transform: translate(0, -36px);
     transition: transform .5s ease-in;
 }
 
@@ -19,6 +19,6 @@
     .popup__button-close {
         max-width: 32px;
         max-height: 32px;
-        transform: translate(43px, -43px);
+        transform: translate(40px, -40px);
     }
 }
