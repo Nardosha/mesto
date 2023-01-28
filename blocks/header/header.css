@@ -1,6 +1,6 @@
 .header {
     box-sizing: border-box;
-    border-bottom: 1px solid #545454;
+    border-bottom: 1px solid rgba(84, 84, 84, 1);
     display: flex;
     justify-content: left;
     align-items: center;

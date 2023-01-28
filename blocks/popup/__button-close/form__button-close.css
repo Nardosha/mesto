@@ -1,4 +1,4 @@
-.form__button-close {
+.popup__button-close {
     position: absolute;
     background: url("../../../images/page/popup/popup__button-close.svg") center no-repeat;
     top: 0;
@@ -16,7 +16,7 @@
 }
 
 @media (min-width: 768px) {
-    .form__button-close {
+    .popup__button-close {
         max-width: 32px;
         max-height: 32px;
         transform: translate(43px, -43px);

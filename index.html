@@ -14,11 +14,13 @@
 
     <main class="page">
         <section class="profile">
-            <img class="profile__avatar" src="images/page/avatar.jpg" alt="Фотография пользователя">
-            <div class="profile__settings">
-                <h1 class="profile__full-name" data-user-field="userFullName">Жак-Ив Кусто</h1>
-                <p class="profile__description" data-user-field="userDescription">Исследователь океана</p>
-                <button class="button profile__edit-button" data-action="EDIT" type="button" aria-label="edit"></button>
+            <div class="profile__info-container">
+                <img class="profile__avatar" src="images/page/avatar.jpg" alt="Фотография пользователя">
+                <div class="profile__settings">
+                    <h1 class="profile__full-name" data-user-field="userFullName">Жак-Ив Кусто</h1>
+                    <p class="profile__description" data-user-field="userDescription">Исследователь океана</p>
+                    <button class="button profile__edit-button" data-action="EDIT" type="button" aria-label="edit"></button>
+                </div>
             </div>
             <button class="button profile__add-button" type="button" aria-label="add"></button>
         </section>
@@ -90,35 +92,37 @@
 
 <dialog class="popup" open>
     <div class="popup__container">
-        <button class="button form__button-close"
-                type="button" id="form_button_close"
+        <button class="button popup__button-close"
+                type="button" id="popup_button_close"
                 data-action="CLOSE"
                 aria-label="close">
         </button>
 
         <h2 class="form__title">Редактировать профиль</h2>
 
-        <form class="popup__form form" action="#" name="form_profile">
+        <form class="popup__form form" action="#" name="form_profile" id="form_profile">
+            <fieldset class="form__inputs" form="form_profile">
+                <label class="form__label" for="input_user_full_name">Имя</label>
+                <input class="form__input form__input_field_user-full-name"
+                       id="input_user_full_name"
+                       value=""
+                       data-user-field="userFullName"
+                       name="userFullName"
+                       type="text"
+                       placeholder="Введите имя"
+                       required>
 
-            <label class="form__label" for="input_user_full_name">Имя</label>
-            <input class="form__input form__input_field_user-full-name"
-                   id="input_user_full_name"
-                   value=""
-                   data-user-field="userFullName"
-                   name="userFullName"
-                   type="text"
-                   placeholder="Введите имя"
-                   required>
+                <label class="form__label" for="input_user_description">Информация</label>
+                <input class="form__input form__input_field_user-description"
+                       id="input_user_description"
+                       value=""
+                       data-user-field="userDescription"
+                       name="userDescription"
+                       type="text"
+                       placeholder="Введите описание"
+                       required>
 
-            <label class="form__label" for="input_user_description">Информация</label>
-            <input class="form__input form__input_field_user-description"
-                   id="input_user_description"
-                   value=""
-                   data-user-field="userDescription"
-                   name="userDescription"
-                   type="text"
-                   placeholder="Введите описание"
-                   required>
+            </fieldset>
 
             <button class="form__button-submit"
                     type="submit"
