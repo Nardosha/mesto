@@ -1,16 +1,8 @@
 .form {
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: 100%;
-    padding: 25px 22px;
     margin: 0;
 }
-
-@media (min-width: 768px) {
-    .form {
-        padding: 34px 36px 37px 36px;
-    }
- }
