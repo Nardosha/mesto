@@ -1,16 +1,11 @@
-.form {
+.form__inputs {
+    border: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 45px;
+    gap: 30px;
     width: 100%;
-    height: 100%;
+    padding: 0;
     margin: 0;
-}
-
-@media (min-width: 768px) {
-    .form {
-        gap: 48px;
-    }
 }
