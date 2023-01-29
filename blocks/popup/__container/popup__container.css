@@ -21,7 +21,7 @@
 @media (min-width: 768px) {
     .popup__container {
         align-items: flex-start;
-        gap: 54px;
+        gap: 48px;
         max-width: 430px;
         max-height: 330px;
         padding: 34px 36px 37px 36px;
