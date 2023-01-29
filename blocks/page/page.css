@@ -1,6 +1,6 @@
 .page {
     box-sizing: border-box;
-    scrollbar-gutter: stable;
+    /*scrollbar-gutter: stable;*/
     width: 100%;
     height: 100%;
     padding: 0;

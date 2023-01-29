@@ -17,7 +17,7 @@
         flex-direction: row;
         justify-content: space-between;
         padding: 40px 19px 25px 19px;
-        gap: 0;
+        gap: 60px;
     }
 }
 
