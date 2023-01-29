@@ -7,7 +7,7 @@
     align-items: center;
     text-align: center;
     column-gap: 10px;
-    row-gap: 14px;
+    row-gap: 8px;
     margin: 0;
 }
 
@@ -16,7 +16,7 @@
         flex: 1 1 auto;
         justify-items: stretch;
         column-gap: 18px;
-        row-gap: 16px;
+        row-gap: 6px;
         text-align: left;
     }
 }
