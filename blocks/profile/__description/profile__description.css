@@ -12,5 +12,8 @@
     .profile__description {
         font-size: 18px;
         line-height: calc(22 / 18 * 100%);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }
