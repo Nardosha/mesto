@@ -1,13 +1,14 @@
 .profile__settings {
     color: #fff;
     display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2, min-content);
     justify-items: center;
     align-items: center;
+    text-align: center;
     column-gap: 10px;
-    row-gap: 14px;
-    grid-template-columns: repeat(2, max-content);
-    grid-template-rows: repeat(2, min-content);
-    margin: 0 0 30px 0;
+    row-gap: 8px;
+    margin: 0;
 }
 
 @media (min-width: 768px) {
@@ -15,7 +16,7 @@
         flex: 1 1 auto;
         justify-items: stretch;
         column-gap: 18px;
-        row-gap: 16px;
-        margin: 0;
+        row-gap: 6px;
+        text-align: left;
     }
 }

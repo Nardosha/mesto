@@ -1,8 +1,29 @@
 .popup__container {
+    box-sizing: border-box;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+    background-color: #FFFFFF;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    min-height: 100%;
-    padding: 19px;
+    gap: 75px;
+    width: 100%;
+    max-width: 430px;
+    max-height: 322px;
+    padding: 25px 22px;
+    transform: scale(0);
+    margin: 0 auto;
+    transition: all .4s ease-in-out;
+}
+
+@media (min-width: 768px) {
+    .popup__container {
+        align-items: flex-start;
+        gap: 48px;
+        max-width: 430px;
+        max-height: 330px;
+        padding: 34px 36px 37px 36px;
+    }
 }

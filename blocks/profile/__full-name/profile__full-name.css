@@ -13,5 +13,8 @@
         font-size: 42px;
         line-height: calc(48 / 42 * 100%);
         font-weight: 500;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }

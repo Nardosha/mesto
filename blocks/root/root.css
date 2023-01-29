@@ -1,10 +1,10 @@
 .root {
     box-sizing: border-box;
     background-color: #000;
-    font-family: Inter, sans-serif;
+    font-family: Inter, Arial, sans-serif;
     font-style: normal;
     font-size: 16px;
-    line-height: 20px;
+    line-height: calc(20 / 16 * 100%);
     color: #fff;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;

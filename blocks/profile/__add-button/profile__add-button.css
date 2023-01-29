@@ -1,31 +1,17 @@
 .profile__add-button {
     position: relative;
+    background: url("../../../images/page/profile/profile__add-button.svg") center no-repeat ;
+    background-size: 18px 18px;
+    border: 2px solid #fff;
+    border-radius: 2px;
     flex: 1 1 auto;
     width: 100%;
     min-height: 50px;
 }
 
-.profile__add-button::after {
-    content: "";
-    position: absolute;
-    background: url("../../../images/page/profile/profile__add-button.svg") center no-repeat;
-    background-size: cover;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    max-width: 18px;
-    max-height: 18px;
-    transform: translate(-50%, -50%);
-}
-
 @media (min-width: 768px) {
     .profile__add-button {
         max-width: 150px;
-    }
-
-    .profile__add-button::after {
-        max-width: 22px;
-        max-height: 22px;
+        background-size: 22px 22px;
     }
 }
