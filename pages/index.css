@@ -4,7 +4,6 @@
 
 /* ----- BLOCKS ----- */
 @import '../blocks/root/root.css';
-@import '../blocks/scroll-lock/scroll-lock.css';
 @import '../blocks/wrapper/wrapper.css';
 @import '../blocks/button/button.css';
 
