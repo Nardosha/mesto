@@ -8,12 +8,10 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 75px;
+    gap: 76px;
     width: 100%;
     max-width: 430px;
-    max-height: 322px;
     padding: 25px 22px;
-    transform: scale(0);
     margin: 0 auto;
     transition: all .4s ease-in-out;
 }
@@ -23,7 +21,6 @@
         align-items: flex-start;
         gap: 48px;
         max-width: 430px;
-        max-height: 330px;
         padding: 34px 36px 37px 36px;
     }
 }

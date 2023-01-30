@@ -4,7 +4,7 @@
     grid-template-columns: auto;
     grid-template-rows: repeat(2, min-content);
     justify-items: center;
-    align-items: center;
+    align-items: baseline;
     text-align: center;
     column-gap: 10px;
     row-gap: 8px;
@@ -16,7 +16,7 @@
         flex: 1 1 auto;
         justify-items: stretch;
         column-gap: 18px;
-        row-gap: 6px;
+        row-gap: 9px;
         text-align: left;
     }
 }
