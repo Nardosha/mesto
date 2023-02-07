@@ -9,22 +9,15 @@ const popupForm = document.querySelector('.popup__form')
 const inputName = popupForm.querySelector('.form__input_field_user-full-name')
 const inputDescription = popupForm.querySelector('.form__input_field_user-description')
 
-const openEditProfilePopup = (e) => {
-    console.log(1,e.target.dataset)
-    if (e.target.dataset.action === 'EDIT') {
-        editProfilePopup.classList.add('popup_opened')
+const openEditProfilePopup = () => {
+    editProfilePopup.classList.add('popup_opened')
 
-        inputName.value = profileName.textContent
-        inputDescription.value = profileDescription.textContent
-    }
+    inputName.value = profileName.textContent
+    inputDescription.value = profileDescription.textContent
 }
 
-const openAddImagePopup = (e) => {
-    console.log(2,e.target.dataset)
-
-    if (e.target.dataset.action === 'ADD') {
-        addImagePopup.classList.add('popup_opened')
-    }
+const openAddImagePopup = () => {
+    addImagePopup.classList.add('popup_opened')
 }
 
 
