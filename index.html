@@ -23,7 +23,7 @@
                             aria-label="Редактировать"></button>
                 </div>
             </div>
-            <button class="button profile__add-button" type="button" aria-label="Загрузить"></button>
+            <button class="button profile__add-button" type="button" aria-label="Загрузить" data-action="ADD"></button>
         </section>
 
         <section class="content-photos">
@@ -91,7 +91,7 @@
     </footer>
 </div>
 
-    <dialog class="popup" data-popup-type="editProfile" open>
+    <dialog class="popup popup_edit-profile" data-popup-type="editProfile" open>
         <div class="popup__container">
             <button class="button popup__button-close"
                     type="button"
@@ -134,7 +134,7 @@
         </div>
     </dialog>
 
-<dialog class="popup" data-popup-type="addImage" open>
+<dialog class="popup popup_add-image" data-popup-type="addImage" open>
 <div class="popup__container">
     <button class="button popup__button-close"
             type="button"
@@ -142,7 +142,7 @@
             aria-label="Закрыть">
     </button>
 
-    <h2 class="popup__title">Редактировать профиль</h2>
+    <h2 class="popup__title">Новое место</h2>
 
     <form class="popup__form form" action="#" name="form_image" id="form_image">
         <fieldset class="form__inputs" form="form_image">
