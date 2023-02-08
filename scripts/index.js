@@ -6,6 +6,7 @@ const editProfilePopup = document.querySelector('.popup_edit-profile')
 const editingProfilePopupForm = editProfilePopup.querySelector('.popup__form')
 const inputName = editingProfilePopupForm.querySelector('.form__input_field_user-full-name')
 const inputDescription = editingProfilePopupForm.querySelector('.form__input_field_user-description')
+
 // PHOTO
 const addImagePopup = document.querySelector('.popup_add-image')
 const addingNewPhotoPopupForm = addImagePopup.querySelector('.popup__form')
@@ -98,6 +99,11 @@ const likeHandler = (e) => {
     e.target.classList.toggle('photo-item__button-like_active')
 }
 
+const deleteHandler = (e) => {
+    const photoElement = e.target.closest('.photo-item')
+    photoElement.remove()
+}
+
 
 editProfileButton.addEventListener('click', openEditProfilePopup)
 addPhotoButton.addEventListener('click', openAddImagePopup)
@@ -109,10 +115,16 @@ addingNewPhotoPopupForm.addEventListener('submit', submitAddingPhotoForm)
 
 initialCards.map(addPhoto)
 
+//PHOTO ITEM ACTIONS
 const buttonsLike = photoContainer.querySelectorAll('.photo-item__button-like')
+const buttonsDelete = photoContainer.querySelectorAll('.photo-item__button-delete')
 
 buttonsLike.forEach(btn => {
     btn.addEventListener('click', likeHandler)
+})
+
+buttonsDelete.forEach(btn => {
+    btn.addEventListener('click', deleteHandler)
 })
 
 
