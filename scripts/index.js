@@ -15,7 +15,7 @@ const addingNewPhotoPopupForm = addImagePopup.querySelector('.popup__form')
 const addingNewPhotoPopupContainer = addImagePopup.querySelector('.popup__container')
 const addPhotoButton = document.querySelector('.profile__add-button')
 const inputImageDescription = document.querySelector('.form__input_field_image-description')
-const inputImageSrc = document.querySelector('.form__input_field_image_src')
+const inputImageSrc = document.querySelector('.form__input_field_image-src')
 const photoTemplate = document.querySelector('.photo-template').content
 const photoContainer = document.querySelector('.content-photos__list')
 
