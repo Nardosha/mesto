@@ -2,14 +2,17 @@
 const profileName = document.querySelector('.profile__full-name')
 const profileDescription = document.querySelector('.profile__description')
 const editProfileButton = document.querySelector('.profile__edit-button')
+// EDIT PROFILE POPUP
 const editProfilePopup = document.querySelector('[data-edit-profile-popup]')
 const editingProfilePopupForm = editProfilePopup.querySelector('.popup__form')
+const editingProfilePopupContainer= editProfilePopup.querySelector('.popup__container')
 const inputName = editingProfilePopupForm.querySelector('.form__input_field_user-full-name')
 const inputDescription = editingProfilePopupForm.querySelector('.form__input_field_user-description')
 
-// PHOTO
+// ADD PHOTO POPUP
 const addImagePopup = document.querySelector('[data-add-photo-popup]')
 const addingNewPhotoPopupForm = addImagePopup.querySelector('.popup__form')
+const addingNewPhotoPopupContainer = addImagePopup.querySelector('.popup__container')
 const addPhotoButton = document.querySelector('.profile__add-button')
 const inputImageDescription = document.querySelector('.form__input_field_image-description')
 const inputImageSrc = document.querySelector('.form__input_field_image_src')
@@ -17,9 +20,8 @@ const photoTemplate = document.querySelector('.photo-template').content
 const photoContainer = document.querySelector('.content-photos__list')
 
 const closeButtons = document.querySelectorAll('[data-action]')
-
-
 const photoPopup = document.querySelector('[data-photo-popup]')
+const photoPopupContainer = photoPopup.querySelector('.popup-show-photo__container')
 
 const initialCards = [
     {
@@ -67,6 +69,7 @@ const addPhoto = (photo) => {
 
 const openEditProfilePopup = () => {
     editProfilePopup.classList.add('popup_opened')
+    editingProfilePopupContainer.classList.add('popup_opened')
 
     inputName.value = profileName.textContent
     inputDescription.value = profileDescription.textContent
@@ -74,13 +77,19 @@ const openEditProfilePopup = () => {
 
 const openAddImagePopup = () => {
     addImagePopup.classList.add('popup_opened')
+    addingNewPhotoPopupContainer.classList.add('popup_opened')
 }
 
 
 const closePopup = () => {
     editProfilePopup.classList.remove('popup_opened')
+    editingProfilePopupContainer.classList.remove('popup_opened')
+
     addImagePopup.classList.remove('popup_opened')
+    addingNewPhotoPopupContainer.classList.remove('popup_opened')
+
     photoPopup.classList.remove('popup_opened')
+    photoPopupContainer.classList.remove('popup_opened')
 }
 
 const submitEditingProfileForm = (e) => {
@@ -127,7 +136,9 @@ const openPhotoPopup = (e) => {
     photo.src = targetSrc
     photo.alt = targetDescription
     photoDescription.textContent = targetDescription
+
     photoPopup.classList.add('popup_opened')
+    photoPopupContainer.classList.add('popup_opened')
 }
 
 initialCards.map(addPhoto)
