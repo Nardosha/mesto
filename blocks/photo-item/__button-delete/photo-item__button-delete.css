@@ -1,0 +1,9 @@
+.photo-item__button-delete {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: url("../../../images/page/content-photos/photo-item__button-delete.svg") center/cover no-repeat;
+    border: none;
+    width: 18px;
+    height: 19px;
+}
