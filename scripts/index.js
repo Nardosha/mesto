@@ -94,6 +94,10 @@ submitAddingPhotoForm = (e) => {
     closePopup()
 }
 
+const likeHandler = (e) => {
+    e.target.classList.toggle('photo-item__button-like_active')
+}
+
 
 editProfileButton.addEventListener('click', openEditProfilePopup)
 addPhotoButton.addEventListener('click', openAddImagePopup)
@@ -104,5 +108,12 @@ editingProfilePopupForm.addEventListener('submit', submitEditingProfileForm)
 addingNewPhotoPopupForm.addEventListener('submit', submitAddingPhotoForm)
 
 initialCards.map(addPhoto)
+
+const buttonsLike = photoContainer.querySelectorAll('.photo-item__button-like')
+
+buttonsLike.forEach(btn => {
+    btn.addEventListener('click', likeHandler)
+})
+
 
 
