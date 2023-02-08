@@ -33,6 +33,8 @@
 @import '../blocks/photo-item/__info/photo-item__info.css';
 @import '../blocks/photo-item/__description/photo-item__description.css';
 @import '../blocks/photo-item/__button-like/photo-item__button-like.css';
+@import '../blocks/photo-item/__button-like/_active/photo-item__button-like_active.css';
+@import '../blocks/photo-item/__button-delete/photo-item__button-delete.css';
 
 
 @import '../blocks/footer/footer.css';
@@ -41,14 +43,19 @@
 
 @import '../blocks/popup/popup.css';
 @import '../blocks/popup/__container/popup__container.css';
-@import '../blocks/popup/_opened/popup_opened.css';
 @import '../blocks/popup/__button-close/form__button-close.css';
 @import '../blocks/popup/__title/popup__title.css';
 @import '../blocks/popup/__form/popup__form.css';
 
+@import '../blocks/popup-show-photo/popup-show-photo.css';
+@import '../blocks/popup-show-photo/__container/popup-show-photo__container.css';
+@import '../blocks/popup-show-photo/__photo/popup-show-photo__photo.css';
+@import '../blocks/popup-show-photo/__description/popup-show-photo__description.css';
 
 @import '../blocks/form/form.css';
 @import '../blocks/form/__label/form__label.css';
 @import '../blocks/form/__inputs/form__inputs.css';
 @import '../blocks/form/__input/form__input.css';
 @import '../blocks/form/__button-submit/form__button-submit.css';
+
+@import '../blocks/popup/_opened/popup_opened.css';
