@@ -48,6 +48,10 @@
 @import '../blocks/popup/__title/popup__title.css';
 @import '../blocks/popup/__form/popup__form.css';
 
+@import '../blocks/popup-show-photo/popup-show-photo.css';
+@import '../blocks/popup-show-photo/__container/popup-show-photo__container.css';
+@import '../blocks/popup-show-photo/__photo/popup-show-photo__photo.css';
+@import '../blocks/popup-show-photo/__description/popup-show-photo__description.css';
 
 @import '../blocks/form/form.css';
 @import '../blocks/form/__label/form__label.css';

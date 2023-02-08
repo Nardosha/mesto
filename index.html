@@ -36,7 +36,7 @@
     </footer>
 </div>
 
-    <dialog class="popup popup_edit-profile" data-popup-type="editProfile" open>
+<dialog class="popup" data-edit-profile-popup open>
         <div class="popup__container">
             <button class="button popup__button-close"
                     type="button"
@@ -79,7 +79,7 @@
         </div>
     </dialog>
 
-<dialog class="popup popup_add-image" data-popup-type="addImage" open>
+<dialog class="popup" data-add-photo-popup open>
 <div class="popup__container">
     <button class="button popup__button-close"
             type="button"
@@ -121,14 +121,26 @@
 </div>
 </dialog>
 
+<dialog class="popup popup-show-photo" data-photo-popup open>
+    <div class="popup-show-photo__container">
+        <button class="button popup__button-close"
+                type="button"
+                data-action="CLOSE"
+                aria-label="Закрыть">
+        </button>
+        <img class="popup-show-photo__photo" src="#" alt="Описание фото">
+        <h2 class="popup-show-photo__description"></h2>
+    </div>
+</dialog>
+
 <template class="photo-template">
     <li class="photo-item">
         <button class="button photo-item__button-delete" type="button"></button>
         <img class="photo-item__img"
              src="images/page/content-photos/content-photos_item-1.jpg"
-             alt="Город Карачаевск">
+             alt="Описание фото">
         <div class="photo-item__info">
-            <h2 class="photo-item__description">Карачаевск</h2>
+            <h2 class="photo-item__description"></h2>
             <button class="button photo-item__button-like" type="button"></button>
         </div>
     </li>
