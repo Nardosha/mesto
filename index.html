@@ -27,62 +27,7 @@
         </section>
 
         <section class="content-photos">
-            <ul class="content-photos__list">
-                <li class="photo-item">
-                    <img class="photo-item__img"
-                         src="images/page/content-photos/content-photos_item-1.jpg"
-                         alt="Город Карачаевск">
-                    <div class="photo-item__info">
-                        <h2 class="photo-item__description">Карачаевск</h2>
-                        <button class="button photo-item__button-like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photo-item">
-                    <img class="photo-item__img"
-                         src="images/page/content-photos/content-photos_item-2.jpg"
-                         alt="Гора Эльбрус">
-                    <div class="photo-item__info">
-                        <h2 class="photo-item__description">Гора Эльбрус</h2>
-                        <button class="button photo-item__button-like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photo-item">
-                    <img class="photo-item__img"
-                         src="images/page/content-photos/content-photos_item-3.jpg"
-                         alt="Город Домбай">
-                    <div class="photo-item__info">
-                        <h2 class="photo-item__description">Домбай</h2>
-                        <button class="button photo-item__button-like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photo-item">
-                    <img class="photo-item__img"
-                         src="images/page/content-photos/content-photos_item-4.jpg"
-                         alt="Гора Эльбрус">
-                    <div class="photo-item__info">
-                        <h2 class="photo-item__description">Гора Эльбрус</h2>
-                        <button class="button photo-item__button-like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photo-item">
-                    <img class="photo-item__img"
-                         src="images/page/content-photos/content-photos_item-5.jpg"
-                         alt="Домбай">
-                    <div class="photo-item__info">
-                        <h2 class="photo-item__description">Домбай</h2>
-                        <button class="button photo-item__button-like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photo-item">
-                    <img class="photo-item__img"
-                         src="images/page/content-photos/content-photos_item-6.jpg"
-                         alt="Город Карачаевск">
-                    <div class="photo-item__info">
-                        <h2 class="photo-item__description">Карачаево-Черкесия</h2>
-                        <button class="button photo-item__button-like" type="button"></button>
-                    </div>
-                </li>
-            </ul>
+            <ul class="content-photos__list"></ul>
         </section>
     </main>
 
@@ -146,9 +91,9 @@
 
     <form class="popup__form form" action="#" name="form_image" id="form_image">
         <fieldset class="form__inputs" form="form_image">
-            <label class="form__label" for="input_image_sign">Название</label>
-            <input class="form__input form__input_field_image-sign"
-                   id="input_image_sign"
+            <label class="form__label" for="input_image_description">Название</label>
+            <input class="form__input form__input_field_image-description"
+                   id="input_image_description"
                    value=""
                    data-user-field="imageSign"
                    name="imageSign"
@@ -175,6 +120,18 @@
     </form>
 </div>
 </dialog>
+
+<template class="photo-template">
+    <li class="photo-item">
+        <img class="photo-item__img"
+             src="images/page/content-photos/content-photos_item-1.jpg"
+             alt="Город Карачаевск">
+        <div class="photo-item__info">
+            <h2 class="photo-item__description">Карачаевск</h2>
+            <button class="button photo-item__button-like" type="button"></button>
+        </div>
+    </li>
+</template>
 
 <script src="scripts/index.js"></script>
 </body>
