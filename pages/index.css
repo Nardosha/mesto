@@ -33,6 +33,7 @@
 @import '../blocks/photo-item/__info/photo-item__info.css';
 @import '../blocks/photo-item/__description/photo-item__description.css';
 @import '../blocks/photo-item/__button-like/photo-item__button-like.css';
+@import '../blocks/photo-item/__button-like/_active/photo-item__button-like_active.css';
 
 
 @import '../blocks/footer/footer.css';
