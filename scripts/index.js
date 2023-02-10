@@ -66,13 +66,13 @@ const renderPhoto = (photoNode) => {
     photosContainer.prepend(photoNode)
 }
 
-const addPhoto = (photo) => {
+const createNewPhoto = (photo) => {
     const photoElement = photoTemplate.cloneNode(true)
     photoElement.querySelector('.photo-item__description').textContent = photo.name
     photoElement.querySelector('.photo-item__img').src = photo.link
     photoElement.querySelector('.photo-item__img').alt = photo.name
 
-    renderPhoto(photoElement)
+    return photoElement
 }
 
 const submitEditingProfileForm = (e) => {
@@ -123,16 +123,21 @@ const photoActionHandler = (e) => {
 submitAddingPhotoForm = (e) => {
     e.preventDefault()
 
-    const newPhoto = {
+    const newPhotoParams = {
         name: inputPhotoDescription.value,
         link: inputPhotoSrc.value
     }
-    addPhoto(newPhoto)
-    e.target.reset()
+    const newPhoto = createNewPhoto(newPhotoParams)
+
+    renderPhoto(newPhoto)
     closePopup(addPhotoPopup)
+    e.target.reset()
 }
 
-initialCards.map(addPhoto)
+initialCards.forEach(cardParams => {
+    const newPhoto = createNewPhoto(cardParams)
+    renderPhoto(newPhoto)
+})
 
 // LISTENERS
 editingProfilePopupForm.addEventListener('submit', submitEditingProfileForm)
