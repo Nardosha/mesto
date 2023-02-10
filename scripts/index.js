@@ -82,7 +82,7 @@ const submitEditingProfileForm = (e) => {
     closePopup(editProfilePopup)
 }
 
-const likeHandler = (e) => {
+const toggleLikeButton = (e) => {
     e.target.classList.toggle('photo-item__button-like_active')
 }
 
@@ -103,7 +103,7 @@ const openPhotoPopup = (e) => {
     openPopup(photoPopup)
 }
 
-const photoActionHandler = (e) => {
+const handlerPhotoAction = (e) => {
     const actionType = e.target?.dataset.action
 
     if (actionType === 'DELETE') {
@@ -111,7 +111,7 @@ const photoActionHandler = (e) => {
     }
 
     if (actionType === 'LIKE') {
-        likeHandler(e)
+        toggleLikeButton(e)
     }
 
     if (actionType === 'PREVIEW') {
@@ -148,8 +148,10 @@ openPopupButtons.forEach(btn => {
     const popupType = btn.dataset.actionType
 
     if (popupType === 'EDIT') {
-        btn.addEventListener('click', () => openPopup(editProfilePopup))
-        fillEditForm()
+        btn.addEventListener('click', () => {
+            openPopup(editProfilePopup)
+            fillEditForm()
+        })
     }
 
     if (popupType === 'ADD') {
@@ -166,4 +168,4 @@ closePopupButtons.forEach(btn => {
     }
 })
 
-photosContainer.addEventListener('click', photoActionHandler)
+photosContainer.addEventListener('click', handlerPhotoAction)
