@@ -19,11 +19,11 @@
                 <div class="profile__settings">
                     <h1 class="profile__full-name" data-user-field="userFullName">Жак-Ив Кусто</h1>
                     <p class="profile__description" data-user-field="userDescription">Исследователь океана</p>
-                    <button class="button profile__edit-button" data-action="EDIT" type="button"
+                    <button class="button profile__edit-button" data-action="OPEN" data-action-type="EDIT" type="button"
                             aria-label="Редактировать"></button>
                 </div>
             </div>
-            <button class="button profile__add-button" type="button" aria-label="Загрузить" data-action="ADD"></button>
+            <button class="button profile__add-button" type="button" aria-label="Загрузить" data-action="OPEN" data-action-type="ADD"></button>
         </section>
 
         <section class="content-photos">
@@ -36,7 +36,7 @@
     </footer>
 </div>
 
-<dialog class="popup" data-edit-profile-popup open>
+<dialog class="popup" data-popup-type="EDIT" open>
         <div class="popup__container">
             <button class="button popup__button-close"
                     type="button"
@@ -79,7 +79,7 @@
         </div>
     </dialog>
 
-<dialog class="popup" data-add-photo-popup open>
+<dialog class="popup" data-popup-type="ADD" open>
 <div class="popup__container">
     <button class="button popup__button-close"
             type="button"
@@ -121,7 +121,7 @@
 </div>
 </dialog>
 
-<dialog class="popup popup-show-photo" data-photo-popup open>
+<dialog class="popup popup-show-photo" data-popup-type="SHOW" open>
     <div class="popup-show-photo__container">
         <button class="button popup__button-close"
                 type="button"
@@ -135,13 +135,15 @@
 
 <template class="photo-template">
     <li class="photo-item">
-        <button class="button photo-item__button-delete" type="button" aria-label="Удалить"></button>
+        <button class="button photo-item__button-delete" type="button" aria-label="Удалить" data-action="DELETE"></button>
         <img class="photo-item__img"
              src="images/page/content-photos/content-photos_item-1.jpg"
-             alt="Описание фото">
+             alt="Описание фото"
+             data-action="PREVIEW"
+        >
         <div class="photo-item__info">
             <h2 class="photo-item__description">Описание фото</h2>
-            <button class="button photo-item__button-like" type="button"></button>
+            <button class="button photo-item__button-like" type="button" data-action="LIKE"></button>
         </div>
     </li>
 </template>
