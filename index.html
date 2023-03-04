@@ -23,7 +23,8 @@
                             aria-label="Редактировать"></button>
                 </div>
             </div>
-            <button class="button profile__add-button" type="button" aria-label="Загрузить" data-action="OPEN" data-action-type="ADD"></button>
+            <button class="button profile__add-button" type="button" aria-label="Загрузить" data-action="OPEN"
+                    data-action-type="ADD"></button>
         </section>
 
         <section class="content-photos">
@@ -37,18 +38,18 @@
 </div>
 
 <dialog class="popup" data-popup-type="EDIT" open>
-        <div class="popup__container">
-            <button class="button popup__button-close"
-                    type="button"
-                    data-action="CLOSE"
-                    aria-label="Закрыть">
-            </button>
+    <div class="popup__container">
+        <button class="button popup__button-close"
+                type="button"
+                data-action="CLOSE"
+                aria-label="Закрыть">
+        </button>
 
-            <h2 class="popup__title">Редактировать профиль</h2>
+        <h2 class="popup__title">Редактировать профиль</h2>
 
-            <form class="popup__form form" action="#" name="form_profile" id="form_profile">
-                <fieldset class="form__inputs" form="form_profile">
-                    <label class="form__label" for="input_user_full_name">Имя</label>
+        <form class="popup__form form" action="#" name="form_profile" id="form_profile">
+            <fieldset class="form__inputs" form="form_profile">
+                <label class="form__label" for="input_user_full_name">
                     <input class="form__input form__input_field_user-full-name"
                            id="input_user_full_name"
                            value=""
@@ -60,8 +61,10 @@
                            maxlength="40"
                            required
                     >
+                    <span class="form__input-error input_user_full_name-error"></span>
+                </label>
 
-                    <label class="form__label" for="input_user_description">Информация</label>
+                <label class="form__label" for="input_user_description">
                     <input class="form__input form__input_field_user-description"
                            id="input_user_description"
                            value=""
@@ -72,60 +75,67 @@
                            minlength="2"
                            maxlength="200"
                            required>
+                    <span class="form__input-error input_user_description-error"></span>
+                </label>
 
-                </fieldset>
+            </fieldset>
 
-                <button class="form__button-submit"
-                        type="submit"
-                        id="form_button_submit"
-                        data-action="SUBMIT">Сохранить
-                </button>
-            </form>
-        </div>
-    </dialog>
+            <button class="form__button-submit"
+                    type="submit"
+                    id="form_button_submit"
+                    data-action="SUBMIT">Сохранить
+            </button>
+        </form>
+    </div>
+</dialog>
 
 <dialog class="popup" data-popup-type="ADD" open>
-<div class="popup__container">
-    <button class="button popup__button-close"
-            type="button"
-            data-action="CLOSE"
-            aria-label="Закрыть">
-    </button>
-
-    <h2 class="popup__title">Новое место</h2>
-
-    <form class="popup__form form" action="#" name="form_image" id="form_image">
-        <fieldset class="form__inputs" form="form_image">
-            <label class="form__label" for="input_image_description">Название</label>
-            <input class="form__input form__input_field_image-description"
-                   id="input_image_description"
-                   value=""
-                   data-user-field="imageSign"
-                   name="imageSign"
-                   type="text"
-                   placeholder="Название"
-                   minlength="2"
-                   maxlength="30"
-                   required>
-
-            <label class="form__label" for="input_image_src">Ссылка на картинку</label>
-            <input class="form__input form__input_field_image-src"
-                   id="input_image_src"
-                   value=""
-                   data-user-field="userSrc"
-                   name="imageSrc"
-                   type="url"
-                   placeholder="Ссылка на картинку"
-                   required>
-
-        </fieldset>
-
-        <button class="form__button-submit"
-                type="submit"
-                data-action="SUBMIT">Сохранить
+    <div class="popup__container">
+        <button class="button popup__button-close"
+                type="button"
+                data-action="CLOSE"
+                aria-label="Закрыть">
         </button>
-    </form>
-</div>
+
+        <h2 class="popup__title">Новое место</h2>
+
+        <form class="popup__form form" action="#" name="form_image" id="form_image">
+            <fieldset class="form__inputs" form="form_image">
+                <label class="form__label" for="input_image_description">
+                    <input class="form__input form__input_field_image-description"
+                           id="input_image_description"
+                           value=""
+                           data-user-field="imageSign"
+                           name="imageSign"
+                           type="text"
+                           placeholder="Название"
+                           minlength="2"
+                           maxlength="30"
+                           required>
+                    <span class="form__input-error input_image_description-error"></span>
+                </label>
+
+                <label class="form__label" for="input_image_src">
+                    <input class="form__input form__input_field_image-src"
+                           id="input_image_src"
+                           value=""
+                           data-user-field="userSrc"
+                           name="imageSrc"
+                           type="url"
+                           placeholder="Ссылка на картинку"
+                           required>
+
+                    <span class="form__input-error input_image_src-error"></span>
+                </label>
+
+            </fieldset>
+
+            <button class="form__button-submit"
+                    type="submit"
+                    data-action="SUBMIT">Сохранить
+            </button>
+        </form>
+    </div>
 </dialog>
 
 <dialog class="popup popup-show-photo" data-popup-type="SHOW" open>
@@ -142,7 +152,8 @@
 
 <template class="photo-template">
     <li class="photo-item">
-        <button class="button photo-item__button-delete" type="button" aria-label="Удалить" data-action="DELETE"></button>
+        <button class="button photo-item__button-delete" type="button" aria-label="Удалить"
+                data-action="DELETE"></button>
         <img class="photo-item__img"
              src="images/page/content-photos/content-photos_item-1.jpg"
              alt="Описание фото"

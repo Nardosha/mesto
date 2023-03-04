@@ -139,13 +139,36 @@ initialCards.forEach(cardParams => {
     renderPhoto(newPhoto)
 })
 
-const checkInputValidity = (inputList) => {
+const checkInputValidity = (form, input) => {
+    const isValidInput = input.validity.valid
+    const inputMessage = form.querySelector(`.${input.id}-error`)
+
+    if (!isValidInput) {
+        showError(input, inputMessage)
+    } else {
+        hideError(input, inputMessage)
+    }
+}
+
+const isValid = (inputList) => {
     return inputList.some(input => !input.validity.valid)
 }
 
+const showError = (input, inputMessage) => {
+    input.classList.add('form__input_type_error')
+    inputMessage.classList.add('form__input-error_active')
+    inputMessage.textContent = input.validationMessage
+}
+
+const hideError = (input, inputMessage) => {
+    input.classList.remove('form__input_type_error')
+    inputMessage.classList.remove('form__input-error_active')
+    inputMessage.textContent = ''
+}
+
+
 const setButtonState = (inputList, button) => {
-    const invalidInput = checkInputValidity(inputList)
-    if (invalidInput) {
+    if (isValid(inputList)) {
         button.classList.add('form__button-submit_type_disabled')
     } else {
         button.classList.remove('form__button-submit_type_disabled')
@@ -157,8 +180,10 @@ const setInputListeners = (form) => {
     const buttonSubmit = form.querySelector('.form__button-submit')
 
     setButtonState(inputList, buttonSubmit)
+
     inputList.forEach(input => {
         input.addEventListener('input', () => {
+            checkInputValidity(form, input, buttonSubmit)
             setButtonState(inputList, buttonSubmit)
         })
     })
@@ -199,8 +224,10 @@ openPopupButtons.forEach(btn => {
     }
 
     if (popupType === 'ADD') {
-        btn.addEventListener('click', () => openPopup(addPhotoPopup))
-        enableValidation();
+        btn.addEventListener('click', () => {
+            openPopup(addPhotoPopup)
+            enableValidation();
+        })
     }
 
 })
