@@ -139,11 +139,54 @@ initialCards.forEach(cardParams => {
     renderPhoto(newPhoto)
 })
 
+const checkInputValidity = (inputList) => {
+    return inputList.some(input => !input.validity.valid)
+}
+
+const setButtonState = (inputList, button) => {
+    const invalidInput = checkInputValidity(inputList)
+    if (invalidInput) {
+        button.classList.add('form__button-submit_type_disabled')
+    } else {
+        button.classList.remove('form__button-submit_type_disabled')
+    }
+}
+
+const setInputListeners = (form) => {
+    const inputList = Array.from(form.querySelectorAll('.form__input'))
+    const buttonSubmit = form.querySelector('.form__button-submit')
+
+    setButtonState(inputList, buttonSubmit)
+    inputList.forEach(input => {
+        input.addEventListener('input', () => {
+            setButtonState(inputList, buttonSubmit)
+        })
+    })
+}
+
+
+const enableValidation = () => {
+    const formList = Array.from(document.querySelectorAll('.form'));
+
+    formList.forEach(form => {
+
+        if (form.name === 'form_profile') {
+            form.addEventListener('submit', submitEditingProfileForm)
+        }
+
+        if (form.name === 'form_image') {
+            form.addEventListener('submit', submitAddingPhotoForm)
+        }
+
+        const fieldSet = Array.from(form.querySelectorAll('.form__inputs'))
+        fieldSet.forEach(set => {
+            setInputListeners(form)
+        })
+
+    })
+}
+
 // LISTENERS
-editingProfilePopupForm.addEventListener('submit', submitEditingProfileForm)
-
-addPhotoPopupContainer.addEventListener('submit', submitAddingPhotoForm)
-
 openPopupButtons.forEach(btn => {
     const popupType = btn.dataset.actionType
 
@@ -151,12 +194,15 @@ openPopupButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             openPopup(editProfilePopup)
             fillEditForm()
+            enableValidation();
         })
     }
 
     if (popupType === 'ADD') {
         btn.addEventListener('click', () => openPopup(addPhotoPopup))
+        enableValidation();
     }
+
 })
 
 closePopupButtons.forEach(btn => {
@@ -169,3 +215,4 @@ closePopupButtons.forEach(btn => {
 })
 
 photosContainer.addEventListener('click', handlerPhotoAction)
+

@@ -56,7 +56,10 @@
                            name="userFullName"
                            type="text"
                            placeholder="Введите имя"
-                           required>
+                           minlength="2"
+                           maxlength="40"
+                           required
+                    >
 
                     <label class="form__label" for="input_user_description">Информация</label>
                     <input class="form__input form__input_field_user-description"
@@ -66,6 +69,8 @@
                            name="userDescription"
                            type="text"
                            placeholder="Введите описание"
+                           minlength="2"
+                           maxlength="200"
                            required>
 
                 </fieldset>
@@ -99,6 +104,8 @@
                    name="imageSign"
                    type="text"
                    placeholder="Название"
+                   minlength="2"
+                   maxlength="30"
                    required>
 
             <label class="form__label" for="input_image_src">Ссылка на картинку</label>
@@ -107,7 +114,7 @@
                    value=""
                    data-user-field="userSrc"
                    name="imageSrc"
-                   type="text"
+                   type="url"
                    placeholder="Ссылка на картинку"
                    required>
 
@@ -149,5 +156,6 @@
 </template>
 
 <script src="scripts/index.js"></script>
+<script src="scripts/helper.js"></script>
 </body>
 </html>
