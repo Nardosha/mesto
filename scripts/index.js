@@ -216,7 +216,7 @@ const enableValidation = () => {
 // LISTENERS
 document.body.addEventListener('click', e => {
     const clickTarget = e.target
-    if (clickTarget.classList.contains('popup_opened')) {
+    if (clickTarget?.classList.contains('popup_opened')) {
         closePopup(clickTarget)
     }
 })
@@ -224,7 +224,7 @@ document.body.addEventListener('click', e => {
 document.body.addEventListener('keyup', e => {
     const pressedKey = e.code
     const openedPopup = document.querySelector('.popup_opened')
-    if (pressedKey === 'Escape') {
+    if (pressedKey === 'Escape' && openedPopup) {
         closePopup(openedPopup)
     }
 })

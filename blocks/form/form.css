@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 45px;
+    gap: 26px;
     width: 100%;
     height: 100%;
     margin: 0;
@@ -11,6 +11,6 @@
 
 @media (min-width: 768px) {
     .form {
-        gap: 48px;
+        gap: 29px;
     }
 }

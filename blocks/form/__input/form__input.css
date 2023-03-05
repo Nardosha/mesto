@@ -23,13 +23,8 @@
     font-size: 12px;
     line-height: calc(15 / 12 * 100%);
     display: block;
+    min-height: 15px;
     width: 100%;
-    z-index: 10001;
-    position: absolute;
-    top: 35px;
-    left: 0;
-    min-height: 10px;
-    max-height: 20px;
     opacity: 0;
     transition: all .3s ease-in;
     padding: 0;
