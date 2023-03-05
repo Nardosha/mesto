@@ -1,3 +1,5 @@
+const popupOverlayList = document.querySelectorAll('.popup')
+
 // PROFILE
 const profileName = document.querySelector('.profile__full-name')
 const profileDescription = document.querySelector('.profile__description')
@@ -212,6 +214,21 @@ const enableValidation = () => {
 }
 
 // LISTENERS
+document.body.addEventListener('click', e => {
+    const clickTarget = e.target
+    if (clickTarget.classList.contains('popup_opened')) {
+        closePopup(clickTarget)
+    }
+})
+
+document.body.addEventListener('keyup', e => {
+    const pressedKey = e.code
+    const openedPopup = document.querySelector('.popup_opened')
+    if (pressedKey === 'Escape') {
+        closePopup(openedPopup)
+    }
+})
+
 openPopupButtons.forEach(btn => {
     const popupType = btn.dataset.actionType
 
