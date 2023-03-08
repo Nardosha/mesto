@@ -1,3 +1,5 @@
+const popupOverlayList = document.querySelectorAll('.popup')
+
 // PROFILE
 const profileName = document.querySelector('.profile__full-name')
 const profileDescription = document.querySelector('.profile__description')
@@ -56,10 +58,14 @@ const fillEditForm = () => {
 
 const openPopup = (popup) => {
     popup.classList.add('popup_opened')
+    document.addEventListener('keyup', closeByEscape)
+    document.addEventListener('click', closeByClick)
 }
 
 const closePopup = (popup) => {
     popup.classList.remove('popup_opened')
+    document.removeEventListener('keyup', closeByEscape)
+    document.addEventListener('click', closeByClick)
 }
 
 const renderPhoto = (photoNode) => {
@@ -101,6 +107,21 @@ const openPhotoPopup = (e) => {
     previewPhotoDescription.textContent = targetDescription
 
     openPopup(photoPopup)
+}
+
+const closeByEscape = (e) => {
+    const pressedKey = e.code
+    const openedPopup = document.querySelector('.popup_opened')
+    if (pressedKey === 'Escape' && openedPopup) {
+        closePopup(openedPopup)
+    }
+}
+
+const closeByClick = (e) => {
+    const clickTarget = e.target
+    if (clickTarget?.classList.contains('popup_opened')) {
+        closePopup(clickTarget)
+    }
 }
 
 const handlerPhotoAction = (e) => {
@@ -146,17 +167,23 @@ addPhotoPopupContainer.addEventListener('submit', submitAddingPhotoForm)
 
 openPopupButtons.forEach(btn => {
     const popupType = btn.dataset.actionType
+    const button = editProfilePopup.querySelector('.form__button-submit')
+
 
     if (popupType === 'EDIT') {
         btn.addEventListener('click', () => {
             openPopup(editProfilePopup)
             fillEditForm()
+            enableButtonSubmit(button, validationOptions.formButtonSubmitTypeDisabledClass)
         })
     }
 
     if (popupType === 'ADD') {
-        btn.addEventListener('click', () => openPopup(addPhotoPopup))
+        btn.addEventListener('click', () => {
+            openPopup(addPhotoPopup)
+        })
     }
+
 })
 
 closePopupButtons.forEach(btn => {
@@ -169,3 +196,5 @@ closePopupButtons.forEach(btn => {
 })
 
 photosContainer.addEventListener('click', handlerPhotoAction)
+
+enableValidation(validationOptions);

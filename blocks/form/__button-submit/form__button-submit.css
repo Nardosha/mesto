@@ -19,6 +19,14 @@
 
 .form__button-submit:hover {
     background-color: rgb(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+.form__button-submit_type_disabled {
+    color: #000;
+    border: 1px solid #000;
+    background: none;
+    opacity: 0.2;
 }
 
 @media (min-width: 768px) {
