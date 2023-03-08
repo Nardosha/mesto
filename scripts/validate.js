@@ -1,13 +1,13 @@
-const showError = (input, inputMessage, {formInputTypeErrorClass, formInputErrorActiveClass}) => {
+const showError = (input, errorTextContainer, {formInputTypeErrorClass, formInputErrorActiveClass}) => {
     input.classList.add(formInputTypeErrorClass)
-    inputMessage.classList.add(formInputErrorActiveClass)
-    inputMessage.textContent = input.validationMessage
+    errorTextContainer.classList.add(formInputErrorActiveClass)
+    errorTextContainer.textContent = input.validationMessage
 }
 
-const hideError = (input, inputMessage, {formInputTypeErrorClass, formInputErrorActiveClass}) => {
+const hideError = (input, errorTextContainer, {formInputTypeErrorClass, formInputErrorActiveClass}) => {
     input.classList.remove(formInputTypeErrorClass)
-    inputMessage.classList.remove(formInputErrorActiveClass)
-    inputMessage.textContent = ''
+    errorTextContainer.classList.remove(formInputErrorActiveClass)
+    errorTextContainer.textContent = ''
 }
 
 
@@ -16,12 +16,12 @@ const isInvalid = (inputList) => {
 }
 
 const setInputState = (form, input, isValidInput, options) => {
-    const inputMessage = form.querySelector(`.${input.id}-error`)
+    const errorTextContainer = form.querySelector(`#${input.id}-error`)
 
     if (!isValidInput) {
-        showError(input, inputMessage, options)
+        showError(input, errorTextContainer, options)
     } else {
-        hideError(input, inputMessage, options)
+        hideError(input, errorTextContainer, options)
     }
 }
 
