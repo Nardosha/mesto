@@ -36,7 +36,7 @@ const disableButtonSubmit = (button, disabledButtonClass) => {
 }
 
 const enableButtonSubmit = (button, disabledButtonClass) => {
-    button.setAttribute('disabled', false)
+    button.removeAttribute('disabled')
     button.classList.remove(disabledButtonClass)
 }
 

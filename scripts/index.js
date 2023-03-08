@@ -65,7 +65,7 @@ const openPopup = (popup) => {
 const closePopup = (popup) => {
     popup.classList.remove('popup_opened')
     document.removeEventListener('keyup', closeByEscape)
-    document.addEventListener('click', closeByClick)
+    document.removeEventListener('click', closeByClick)
 }
 
 const renderPhoto = (photoNode) => {
