@@ -31,10 +31,12 @@ const toggleInputState = (form, input, options) => {
 }
 
 const disableButtonSubmit = (button, disabledButtonClass) => {
+    button.setAttribute('disabled', true)
     button.classList.add(disabledButtonClass)
 }
 
 const enableButtonSubmit = (button, disabledButtonClass) => {
+    button.setAttribute('disabled', false)
     button.classList.remove(disabledButtonClass)
 }
 
