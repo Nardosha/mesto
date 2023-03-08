@@ -160,13 +160,6 @@ initialCards.forEach(cardParams => {
     renderPhoto(newPhoto)
 })
 
-const enableValidation = (options) => {
-    const formList = Array.from(document.querySelectorAll(options.formSelector));
-    formList.forEach(form => {
-        setEventListeners(form, options)
-    })
-}
-
 // LISTENERS
 editingProfilePopupForm.addEventListener('submit', submitEditingProfileForm)
 
@@ -174,11 +167,14 @@ addPhotoPopupContainer.addEventListener('submit', submitAddingPhotoForm)
 
 openPopupButtons.forEach(btn => {
     const popupType = btn.dataset.actionType
+    const button = editProfilePopup.querySelector('.form__button-submit')
+
 
     if (popupType === 'EDIT') {
         btn.addEventListener('click', () => {
             openPopup(editProfilePopup)
             fillEditForm()
+            enableButtonSubmit(button, validationOptions.formButtonSubmitTypeDisabledClass)
         })
     }
 

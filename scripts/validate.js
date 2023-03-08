@@ -41,16 +41,12 @@ const enableButtonSubmit = (button, disabledButtonClass) => {
 }
 
 const toggleButtonState = (inputList, button, disabledButtonClass) => {
-    const openedPopup = document.querySelector('.popup_opened')
-    if (!openedPopup) return
-
     if (isInvalid(inputList)) {
         disableButtonSubmit(button, disabledButtonClass)
     } else {
         enableButtonSubmit(button, disabledButtonClass)
     }
 }
-
 const setEventListeners = (form, options) => {
     const inputList = Array.from(form.querySelectorAll(options.formInputSelector))
     const buttonSubmit = form.querySelector(options.formButtonSubmitSelector)
@@ -62,5 +58,13 @@ const setEventListeners = (form, options) => {
             toggleInputState(form, input, options)
             toggleButtonState(inputList, buttonSubmit, options.formButtonSubmitTypeDisabledClass)
         })
+    })
+}
+
+const enableValidation = (options) => {
+    const formList = Array.from(document.querySelectorAll(options.formSelector));
+
+    formList.forEach(form => {
+        setEventListeners(form, options)
     })
 }
