@@ -12,25 +12,3 @@
     padding: 0 0 10px 0;
     margin: 0;
 }
-
-.form__input_type_error {
-    border-bottom: 1px solid red;
-}
-
-.form__input-error {
-    box-sizing: border-box;
-    color: red;
-    font-size: 12px;
-    line-height: calc(15 / 12 * 100%);
-    display: block;
-    min-height: 15px;
-    width: 100%;
-    opacity: 0;
-    transition: all .3s ease-in;
-    padding: 0;
-    margin: 0;
-}
-
-.form__input-error_active {
-    opacity: 1;
-}
