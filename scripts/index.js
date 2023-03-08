@@ -58,10 +58,14 @@ const fillEditForm = () => {
 
 const openPopup = (popup) => {
     popup.classList.add('popup_opened')
+    document.addEventListener('keyup', closeByEscape)
+    document.addEventListener('click', closeByClick)
 }
 
 const closePopup = (popup) => {
     popup.classList.remove('popup_opened')
+    document.removeEventListener('keyup', closeByEscape)
+    document.addEventListener('click', closeByClick)
 }
 
 const renderPhoto = (photoNode) => {
@@ -105,6 +109,21 @@ const openPhotoPopup = (e) => {
     openPopup(photoPopup)
 }
 
+const closeByEscape = (e) => {
+    const pressedKey = e.code
+    const openedPopup = document.querySelector('.popup_opened')
+    if (pressedKey === 'Escape' && openedPopup) {
+        closePopup(openedPopup)
+    }
+}
+
+const closeByClick = (e) => {
+    const clickTarget = e.target
+    if (clickTarget?.classList.contains('popup_opened')) {
+        closePopup(clickTarget)
+    }
+}
+
 const handlerPhotoAction = (e) => {
     const actionType = e.target?.dataset.action
 
@@ -141,93 +160,17 @@ initialCards.forEach(cardParams => {
     renderPhoto(newPhoto)
 })
 
-const checkInputValidity = (form, input) => {
-    const isValidInput = input.validity.valid
-    const inputMessage = form.querySelector(`.${input.id}-error`)
-
-    if (!isValidInput) {
-        showError(input, inputMessage)
-    } else {
-        hideError(input, inputMessage)
-    }
-}
-
-const isValid = (inputList) => {
-    return inputList.some(input => !input.validity.valid)
-}
-
-const showError = (input, inputMessage) => {
-    input.classList.add('form__input_type_error')
-    inputMessage.classList.add('form__input-error_active')
-    inputMessage.textContent = input.validationMessage
-}
-
-const hideError = (input, inputMessage) => {
-    input.classList.remove('form__input_type_error')
-    inputMessage.classList.remove('form__input-error_active')
-    inputMessage.textContent = ''
-}
-
-
-const setButtonState = (inputList, button) => {
-    if (isValid(inputList)) {
-        button.classList.add('form__button-submit_type_disabled')
-    } else {
-        button.classList.remove('form__button-submit_type_disabled')
-    }
-}
-
-const setInputListeners = (form) => {
-    const inputList = Array.from(form.querySelectorAll('.form__input'))
-    const buttonSubmit = form.querySelector('.form__button-submit')
-
-    setButtonState(inputList, buttonSubmit)
-
-    inputList.forEach(input => {
-        input.addEventListener('input', () => {
-            checkInputValidity(form, input, buttonSubmit)
-            setButtonState(inputList, buttonSubmit)
-        })
-    })
-}
-
-
-const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll('.form'));
-
+const enableValidation = (options) => {
+    const formList = Array.from(document.querySelectorAll(options.formSelector));
     formList.forEach(form => {
-
-        if (form.name === 'form_profile') {
-            form.addEventListener('submit', submitEditingProfileForm)
-        }
-
-        if (form.name === 'form_image') {
-            form.addEventListener('submit', submitAddingPhotoForm)
-        }
-
-        const fieldSet = Array.from(form.querySelectorAll('.form__inputs'))
-        fieldSet.forEach(set => {
-            setInputListeners(form)
-        })
-
+        setEventListeners(form, options)
     })
 }
 
 // LISTENERS
-document.body.addEventListener('click', e => {
-    const clickTarget = e.target
-    if (clickTarget?.classList.contains('popup_opened')) {
-        closePopup(clickTarget)
-    }
-})
+editingProfilePopupForm.addEventListener('submit', submitEditingProfileForm)
 
-document.body.addEventListener('keyup', e => {
-    const pressedKey = e.code
-    const openedPopup = document.querySelector('.popup_opened')
-    if (pressedKey === 'Escape' && openedPopup) {
-        closePopup(openedPopup)
-    }
-})
+addPhotoPopupContainer.addEventListener('submit', submitAddingPhotoForm)
 
 openPopupButtons.forEach(btn => {
     const popupType = btn.dataset.actionType
@@ -236,14 +179,12 @@ openPopupButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             openPopup(editProfilePopup)
             fillEditForm()
-            enableValidation();
         })
     }
 
     if (popupType === 'ADD') {
         btn.addEventListener('click', () => {
             openPopup(addPhotoPopup)
-            enableValidation();
         })
     }
 
@@ -260,3 +201,4 @@ closePopupButtons.forEach(btn => {
 
 photosContainer.addEventListener('click', handlerPhotoAction)
 
+enableValidation(validationOptions);
