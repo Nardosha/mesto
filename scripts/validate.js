@@ -30,14 +30,22 @@ const toggleInputState = (form, input, options) => {
     setInputState(form, input, isValidInput, options)
 }
 
+const disableButtonSubmit = (button, disabledButtonClass) => {
+    button.classList.add(disabledButtonClass)
+}
+
+const enableButtonSubmit = (button, disabledButtonClass) => {
+    button.classList.remove(disabledButtonClass)
+}
+
 const toggleButtonState = (inputList, button, disabledButtonClass) => {
     const openedPopup = document.querySelector('.popup_opened')
     if (!openedPopup) return
 
     if (isInvalid(inputList)) {
-        button.classList.add(disabledButtonClass)
+        disableButtonSubmit(button, disabledButtonClass)
     } else {
-        button.classList.remove(disabledButtonClass)
+        enableButtonSubmit(button, disabledButtonClass)
     }
 }
 
