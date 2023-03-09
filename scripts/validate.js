@@ -54,7 +54,7 @@ const setEventListeners = (form, options) => {
     toggleButtonState(inputList, buttonSubmit, options.formButtonSubmitTypeDisabledClass)
 
     inputList.forEach(input => {
-        input.addEventListener('input', (e) => {
+        input.addEventListener('input', () => {
             toggleInputState(form, input, options)
             toggleButtonState(inputList, buttonSubmit, options.formButtonSubmitTypeDisabledClass)
         })
