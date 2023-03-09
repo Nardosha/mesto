@@ -1,16 +1,16 @@
-const popupOverlayList = document.querySelectorAll('.popup')
-
 // PROFILE
 const profileName = document.querySelector('.profile__full-name')
 const profileDescription = document.querySelector('.profile__description')
 
 // EDIT PROFILE POPUP
+const editingProfileButton = document.querySelector('.profile__edit-button')
 const editProfilePopup = document.querySelector('[data-popup-type="EDIT"]')
 const editingProfilePopupForm = editProfilePopup.querySelector('.popup__form')
 const inputName = editingProfilePopupForm.querySelector('.form__input_field_user-full-name')
 const inputDescription = editingProfilePopupForm.querySelector('.form__input_field_user-description')
 
 // ADD PHOTO POPUP
+const addPhotoButton = document.querySelector('.profile__add-button')
 const addPhotoPopup = document.querySelector('[data-popup-type="ADD"]')
 const addPhotoPopupContainer = addPhotoPopup.querySelector('.popup__form')
 const inputPhotoDescription = document.querySelector('.form__input_field_image-description')
@@ -19,7 +19,6 @@ const photoTemplate = document.querySelector('.photo-template').content
 
 const photosContainer = document.querySelector('.content-photos__list')
 const closePopupButtons = document.querySelectorAll('.popup__button-close')
-const openPopupButtons = document.querySelectorAll('[data-action="OPEN"]')
 const photoPopup = document.querySelector('[data-popup-type="SHOW"]')
 const previewPhoto = photoPopup.querySelector('.popup-show-photo__photo')
 const previewPhotoDescription = photoPopup.querySelector('.popup-show-photo__description')
@@ -59,40 +58,37 @@ const fillEditForm = () => {
 const openPopup = (popup) => {
     popup.classList.add('popup_opened')
     document.addEventListener('keyup', closeByEscape)
-    document.addEventListener('click', closeByClick)
+    document.addEventListener('mousedown', closeByClick)
 }
 
 const closePopup = (popup) => {
     popup.classList.remove('popup_opened')
     document.removeEventListener('keyup', closeByEscape)
-    document.removeEventListener('click', closeByClick)
+    document.removeEventListener('mousedown', closeByClick)
 }
 
-const renderPhoto = (photoNode) => {
-    photosContainer.prepend(photoNode)
+const closeByEscape = (e) => {
+    const pressedKey = e.code
+
+    if (pressedKey === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened')
+        openedPopup && closePopup(openedPopup)
+    }
 }
 
-const createNewPhoto = (photo) => {
-    const photoElement = photoTemplate.cloneNode(true)
-    photoElement.querySelector('.photo-item__description').textContent = photo.name
-    photoElement.querySelector('.photo-item__img').src = photo.link
-    photoElement.querySelector('.photo-item__img').alt = photo.name
+const closeByClick = (e) => {
+    const clickTarget = e.target
 
-    return photoElement
-}
-
-const submitEditingProfileForm = (e) => {
-    e.preventDefault()
-    profileName.textContent = inputName.value
-    profileDescription.textContent = inputDescription.value
-    closePopup(editProfilePopup)
+    if (clickTarget?.classList.contains('popup_opened')) {
+        closePopup(clickTarget)
+    }
 }
 
 const toggleLikeButton = (e) => {
     e.target.classList.toggle('photo-item__button-like_active')
 }
 
-const deleteHandler = (e) => {
+const handlerDelete = (e) => {
     const photoNode = e.target.closest('.photo-item')
     photoNode.remove()
 }
@@ -109,40 +105,52 @@ const openPhotoPopup = (e) => {
     openPopup(photoPopup)
 }
 
-const closeByEscape = (e) => {
-    const pressedKey = e.code
-    const openedPopup = document.querySelector('.popup_opened')
-    if (pressedKey === 'Escape' && openedPopup) {
-        closePopup(openedPopup)
-    }
+const addEventListeners = (photoNode) => {
+    const buttonLike = photoNode.querySelector('.photo-item__button-like')
+    const buttonDelete = photoNode.querySelector('.photo-item__button-delete')
+    const image = photoNode.querySelector('.photo-item__img')
+
+    buttonLike.addEventListener('click', toggleLikeButton)
+    buttonDelete.addEventListener('click', handlerDelete)
+    image.addEventListener('click', openPhotoPopup)
 }
 
-const closeByClick = (e) => {
-    const clickTarget = e.target
-    if (clickTarget?.classList.contains('popup_opened')) {
-        closePopup(clickTarget)
-    }
+const renderPhoto = (photoNode) => {
+    addEventListeners(photoNode)
+    photosContainer.prepend(photoNode)
 }
 
-const handlerPhotoAction = (e) => {
-    const actionType = e.target?.dataset.action
+const createNewPhoto = (photo) => {
+    const photoElement = photoTemplate.cloneNode(true)
+    const imageDescription = photoElement.querySelector('.photo-item__description');
+    const image = photoElement.querySelector('.photo-item__img');
 
-    if (actionType === 'DELETE') {
-        deleteHandler(e)
-    }
+    imageDescription.textContent = photo.name
+    image.src = photo.link
+    image.alt = photo.name
 
-    if (actionType === 'LIKE') {
-        toggleLikeButton(e)
-    }
-
-    if (actionType === 'PREVIEW') {
-        openPhotoPopup(e)
-    }
-
+    return photoElement
 }
 
-submitAddingPhotoForm = (e) => {
+const openEditProfilePopup = () => {
+    openPopup(editProfilePopup)
+    fillEditForm()
+}
+
+const openAddPhotoPopup = () => {
+    openPopup(addPhotoPopup)
+}
+
+const submitEditingProfileForm = (e) => {
     e.preventDefault()
+    profileName.textContent = inputName.value
+    profileDescription.textContent = inputDescription.value
+    closePopup(editProfilePopup)
+}
+
+const submitAdjustingNewPhoto = (e) => {
+    e.preventDefault()
+    const currentForm = e.target
 
     const newPhotoParams = {
         name: inputPhotoDescription.value,
@@ -151,8 +159,17 @@ submitAddingPhotoForm = (e) => {
     const newPhoto = createNewPhoto(newPhotoParams)
 
     renderPhoto(newPhoto)
+    currentForm.reset()
+
+    const buttonSubmit = Array.from(currentForm.elements)
+        .find(el => el.classList.contains(validationOptions.formButtonSubmitClass))
+
+    const inputList = Array.from(currentForm.elements)
+        .filter(el => el.classList.contains(validationOptions.formInputClass))
+
+
+    toggleButtonState(inputList, buttonSubmit, validationOptions.formButtonSubmitTypeDisabledClass)
     closePopup(addPhotoPopup)
-    e.target.reset()
 }
 
 initialCards.forEach(cardParams => {
@@ -163,28 +180,11 @@ initialCards.forEach(cardParams => {
 // LISTENERS
 editingProfilePopupForm.addEventListener('submit', submitEditingProfileForm)
 
-addPhotoPopupContainer.addEventListener('submit', submitAddingPhotoForm)
+addPhotoPopupContainer.addEventListener('submit', submitAdjustingNewPhoto)
 
-openPopupButtons.forEach(btn => {
-    const popupType = btn.dataset.actionType
-    const button = editProfilePopup.querySelector('.form__button-submit')
+editingProfileButton.addEventListener('click', openEditProfilePopup)
 
-
-    if (popupType === 'EDIT') {
-        btn.addEventListener('click', () => {
-            openPopup(editProfilePopup)
-            fillEditForm()
-            enableButtonSubmit(button, validationOptions.formButtonSubmitTypeDisabledClass)
-        })
-    }
-
-    if (popupType === 'ADD') {
-        btn.addEventListener('click', () => {
-            openPopup(addPhotoPopup)
-        })
-    }
-
-})
+addPhotoButton.addEventListener('click', openAddPhotoPopup)
 
 closePopupButtons.forEach(btn => {
     const popup = btn.closest('.popup')
@@ -194,7 +194,5 @@ closePopupButtons.forEach(btn => {
         btn.addEventListener('click', () => closePopup(popup))
     }
 })
-
-photosContainer.addEventListener('click', handlerPhotoAction)
 
 enableValidation(validationOptions);
