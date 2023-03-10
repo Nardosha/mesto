@@ -88,7 +88,7 @@ const toggleLikeButton = (e) => {
     e.target.classList.toggle('photo-item__button-like_active')
 }
 
-const handlerDelete = (e) => {
+const handleDelete = (e) => {
     const photoNode = e.target.closest('.photo-item')
     photoNode.remove()
 }
@@ -111,12 +111,11 @@ const addEventListeners = (photoNode) => {
     const image = photoNode.querySelector('.photo-item__img')
 
     buttonLike.addEventListener('click', toggleLikeButton)
-    buttonDelete.addEventListener('click', handlerDelete)
+    buttonDelete.addEventListener('click', handleDelete)
     image.addEventListener('click', openPhotoPopup)
 }
 
 const renderPhoto = (photoNode) => {
-    addEventListeners(photoNode)
     photosContainer.prepend(photoNode)
 }
 
@@ -129,6 +128,7 @@ const createNewPhoto = (photo) => {
     image.src = photo.link
     image.alt = photo.name
 
+    addEventListeners(photoElement)
     return photoElement
 }
 
@@ -150,7 +150,10 @@ const submitEditingProfileForm = (e) => {
 
 const submitAdjustingNewPhoto = (e) => {
     e.preventDefault()
+
     const currentForm = e.target
+    const buttonSubmit = e.submitter
+    const inputList = Array.from(currentForm.elements)
 
     const newPhotoParams = {
         name: inputPhotoDescription.value,
@@ -160,13 +163,6 @@ const submitAdjustingNewPhoto = (e) => {
 
     renderPhoto(newPhoto)
     currentForm.reset()
-
-    const buttonSubmit = Array.from(currentForm.elements)
-        .find(el => el.classList.contains(validationOptions.formButtonSubmitClass))
-
-    const inputList = Array.from(currentForm.elements)
-        .filter(el => el.classList.contains(validationOptions.formInputClass))
-
 
     toggleButtonState(inputList, buttonSubmit, validationOptions.formButtonSubmitTypeDisabledClass)
     closePopup(addPhotoPopup)
