@@ -1,4 +1,4 @@
-const validationOptions = {
+export const validationOptions = {
     popupOpenedSelector: '.popup_opened',
     popupForm: '.popup__form',
     formSelector: '.form',

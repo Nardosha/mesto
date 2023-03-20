@@ -1,3 +1,6 @@
+import {enableValidation, toggleButtonState} from './validate.js'
+import { validationOptions } from './variables.js'
+
 // PROFILE
 const profileName = document.querySelector('.profile__full-name')
 const profileDescription = document.querySelector('.profile__description')
