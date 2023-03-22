@@ -1,6 +1,6 @@
-import {enableValidation, toggleButtonState} from './validate.js'
-import {cardOptions, validationOptions} from './variables.js'
 import {Card} from './Card.js'
+import {FormValidator} from "./FormValidator.js";
+
 
 // PROFILE
 const profileName = document.querySelector('.profile__full-name')
@@ -25,6 +25,32 @@ const closePopupButtons = document.querySelectorAll('.popup__button-close')
 const photoPopup = document.querySelector('[data-popup-type="SHOW"]')
 const previewPhoto = photoPopup.querySelector('.popup-show-photo__photo')
 const previewPhotoDescription = photoPopup.querySelector('.popup-show-photo__description')
+
+export const validationOptions = {
+    popupOpenedSelector: '.popup_opened',
+    popupForm: '.popup__form',
+    formSelector: '.form',
+    formInputsSelector: '.form__inputs',
+    formInputSelector: '.form__input',
+    formInputClass: 'form__input',
+    formInputTypeErrorClass: 'form__input_type_error',
+    formInputErrorActiveClass: 'form__input-error_active',
+    formButtonSubmitSelector: '.form__button-submit',
+    formButtonSubmitClass: 'form__button-submit',
+    formButtonSubmitTypeDisabledClass: 'form__button-submit_type_disabled',
+}
+
+export const cardOptions = {
+    elementSelector: '.photo-item',
+    templateSelector: '.photo-template',
+    imageSelector: '.photo-item__img',
+    descriptionSelector: '.photo-item__description',
+    buttonLikeSelector: '.photo-item__button-like',
+    buttonLikeActiveClass: 'photo-item__button-like_active',
+    buttonDeleteSelector: '.photo-item__button-delete',
+}
+
+const formList = Array.from(document.querySelectorAll(validationOptions.formSelector));
 
 const initialCards = [
     {
@@ -53,11 +79,8 @@ const initialCards = [
     }
 ];
 
-const fillEditForm = () => {
-    inputName.value = profileName.textContent
-    inputDescription.value = profileDescription.textContent
-}
 
+// POPUP
 export const openPopup = (popup) => {
     popup.classList.add('popup_opened')
     document.addEventListener('keyup', closeByEscape)
@@ -87,6 +110,27 @@ const closeByClick = (e) => {
     }
 }
 
+
+// PROFILE
+const fillEditForm = () => {
+    inputName.value = profileName.textContent
+    inputDescription.value = profileDescription.textContent
+}
+
+const openProfileFormPopup = () => {
+    openPopup(editProfilePopup)
+    fillEditForm()
+}
+
+const submitProfileForm = (e) => {
+    e.preventDefault()
+    profileName.textContent = inputName.value
+    profileDescription.textContent = inputDescription.value
+    closePopup(editProfilePopup)
+}
+
+
+// PHOTO
 export const openPhotoPopup = (e) => {
     const targetPhoto = e.target.closest('.photo-item')
     const targetSrc = targetPhoto.querySelector('.photo-item__img').src
@@ -103,28 +147,16 @@ const renderPhoto = (photoNode) => {
     photosContainer.prepend(photoNode)
 }
 
-const openEditProfilePopup = () => {
-    openPopup(editProfilePopup)
-    fillEditForm()
-}
-
-const openAddPhotoPopup = () => {
+const _openCardFormPopup = () => {
     openPopup(addPhotoPopup)
 }
 
-const submitEditingProfileForm = (e) => {
-    e.preventDefault()
-    profileName.textContent = inputName.value
-    profileDescription.textContent = inputDescription.value
-    closePopup(editProfilePopup)
-}
-
-const submitAdjustingNewPhoto = (e) => {
+const submitCardForm = (e) => {
     e.preventDefault()
 
     const currentForm = e.target
-    const buttonSubmit = e.submitter
-    const inputList = Array.from(currentForm.elements)
+    const validatedForm = new FormValidator(validationOptions, currentForm)
+    validatedForm.enableValidation()
 
     const newPhotoParams = {
         name: inputPhotoDescription.value,
@@ -133,11 +165,10 @@ const submitAdjustingNewPhoto = (e) => {
     }
     const newCard = new Card(newPhotoParams)
     const cardElement = newCard.generateCardElement()
-
     renderPhoto(cardElement)
+
     currentForm.reset()
 
-    toggleButtonState(inputList, buttonSubmit, validationOptions.formButtonSubmitTypeDisabledClass)
     closePopup(addPhotoPopup)
 }
 
@@ -148,14 +179,15 @@ initialCards.forEach(cardParams => {
     renderPhoto(cardElement)
 })
 
+
 // LISTENERS
-editingProfilePopupForm.addEventListener('submit', submitEditingProfileForm)
+editingProfilePopupForm.addEventListener('submit', submitProfileForm)
 
-addPhotoPopupContainer.addEventListener('submit', submitAdjustingNewPhoto)
+addPhotoPopupContainer.addEventListener('submit', submitCardForm)
 
-editingProfileButton.addEventListener('click', openEditProfilePopup)
+editingProfileButton.addEventListener('click', openProfileFormPopup)
 
-addPhotoButton.addEventListener('click', openAddPhotoPopup)
+addPhotoButton.addEventListener('click', _openCardFormPopup)
 
 closePopupButtons.forEach(btn => {
     const popup = btn.closest('.popup')
@@ -166,4 +198,9 @@ closePopupButtons.forEach(btn => {
     }
 })
 
-enableValidation(validationOptions);
+
+// VALIDATION
+formList.forEach(form => {
+    const validatedForm = new FormValidator(validationOptions, form)
+    validatedForm.enableValidation()
+})
