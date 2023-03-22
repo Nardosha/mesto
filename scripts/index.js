@@ -1,5 +1,6 @@
-import {enableValidation, toggleButtonState} from './validate.js'
+import { enableValidation, toggleButtonState } from './validate.js'
 import { validationOptions } from './variables.js'
+import { Card } from './Card.js'
 
 // PROFILE
 const profileName = document.querySelector('.profile__full-name')
@@ -58,13 +59,13 @@ const fillEditForm = () => {
     inputDescription.value = profileDescription.textContent
 }
 
-const openPopup = (popup) => {
+export const openPopup = (popup) => {
     popup.classList.add('popup_opened')
     document.addEventListener('keyup', closeByEscape)
     document.addEventListener('mousedown', closeByClick)
 }
 
-const closePopup = (popup) => {
+export const closePopup = (popup) => {
     popup.classList.remove('popup_opened')
     document.removeEventListener('keyup', closeByEscape)
     document.removeEventListener('mousedown', closeByClick)
@@ -96,7 +97,7 @@ const handleDelete = (e) => {
     photoNode.remove()
 }
 
-const openPhotoPopup = (e) => {
+export const openPhotoPopup = (e) => {
     const targetPhoto = e.target.closest('.photo-item')
     const targetSrc = targetPhoto.querySelector('.photo-item__img').src
     const targetDescription = targetPhoto.querySelector('.photo-item__description').textContent
@@ -172,8 +173,10 @@ const submitAdjustingNewPhoto = (e) => {
 }
 
 initialCards.forEach(cardParams => {
-    const newPhoto = createNewPhoto(cardParams)
-    renderPhoto(newPhoto)
+    const card = new Card({...cardParams, selector: '.photo-template'})
+    const cardElement = card.generateCardElement()
+
+    renderPhoto(cardElement)
 })
 
 // LISTENERS
