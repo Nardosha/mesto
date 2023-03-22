@@ -147,16 +147,12 @@ const renderPhoto = (photoNode) => {
     photosContainer.prepend(photoNode)
 }
 
-const _openCardFormPopup = () => {
+const openCardFormPopup = () => {
     openPopup(addPhotoPopup)
 }
 
 const submitCardForm = (e) => {
     e.preventDefault()
-
-    const currentForm = e.target
-    const validatedForm = new FormValidator(validationOptions, currentForm)
-    validatedForm.enableValidation()
 
     const newPhotoParams = {
         name: inputPhotoDescription.value,
@@ -167,7 +163,11 @@ const submitCardForm = (e) => {
     const cardElement = newCard.generateCardElement()
     renderPhoto(cardElement)
 
+    const currentForm = e.target
     currentForm.reset()
+
+    const validatedForm = new FormValidator(validationOptions, currentForm)
+    validatedForm.enableValidation()
 
     closePopup(addPhotoPopup)
 }
@@ -187,7 +187,7 @@ addPhotoPopupContainer.addEventListener('submit', submitCardForm)
 
 editingProfileButton.addEventListener('click', openProfileFormPopup)
 
-addPhotoButton.addEventListener('click', _openCardFormPopup)
+addPhotoButton.addEventListener('click', openCardFormPopup)
 
 closePopupButtons.forEach(btn => {
     const popup = btn.closest('.popup')
