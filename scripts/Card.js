@@ -1,4 +1,5 @@
 import { openPhotoPopup } from './index.js'
+import { cardOptions } from "./variables.js";
 
 export class Card {
     constructor({name, link, selector}) {
@@ -6,23 +7,22 @@ export class Card {
         this.link = link
         this._isLiked = false
         this.templateSelector = selector
-        this._cardElement = null
     }
 
     _getTemplate() {
         return document
             .querySelector(this.templateSelector)
             .content
-            .querySelector('.photo-item')
+            .querySelector(cardOptions.elementSelector)
             .cloneNode(true)
     }
 
     _setCardElement() {
         this._cardElement = this._getTemplate()
-        this._imageElement = this._cardElement.querySelector('.photo-item__img')
-        this.descriptionElement = this._cardElement.querySelector('.photo-item__description')
-        this._buttonLikeElement = this._cardElement.querySelector('.photo-item__button-like')
-        this._buttonDeleteElement = this._cardElement.querySelector('.photo-item__button-delete')
+        this._imageElement = this._cardElement.querySelector(cardOptions.imageSelector)
+        this.descriptionElement = this._cardElement.querySelector(cardOptions.descriptionSelector)
+        this._buttonLikeElement = this._cardElement.querySelector(cardOptions.buttonLikeSelector)
+        this._buttonDeleteElement = this._cardElement.querySelector(cardOptions.buttonDeleteSelector)
     }
 
     generateCardElement() {
@@ -43,7 +43,7 @@ export class Card {
     }
 
     _toggleLike() {
-        this._buttonLikeElement.classList.toggle('photo-item__button-like_active')
+        this._buttonLikeElement.classList.toggle(cardOptions.buttonLikeActiveClass)
         this._isLiked = !this._isLiked
     }
 

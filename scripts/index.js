@@ -1,6 +1,6 @@
-import { enableValidation, toggleButtonState } from './validate.js'
-import { validationOptions } from './variables.js'
-import { Card } from './Card.js'
+import {enableValidation, toggleButtonState} from './validate.js'
+import {cardOptions, validationOptions} from './variables.js'
+import {Card} from './Card.js'
 
 // PROFILE
 const profileName = document.querySelector('.profile__full-name')
@@ -19,7 +19,6 @@ const addPhotoPopup = document.querySelector('[data-popup-type="ADD"]')
 const addPhotoPopupContainer = addPhotoPopup.querySelector('.popup__form')
 const inputPhotoDescription = document.querySelector('.form__input_field_image-description')
 const inputPhotoSrc = document.querySelector('.form__input_field_image-src')
-const photoTemplate = document.querySelector('.photo-template').content
 
 const photosContainer = document.querySelector('.content-photos__list')
 const closePopupButtons = document.querySelectorAll('.popup__button-close')
@@ -88,15 +87,6 @@ const closeByClick = (e) => {
     }
 }
 
-const toggleLikeButton = (e) => {
-    e.target.classList.toggle('photo-item__button-like_active')
-}
-
-const handleDelete = (e) => {
-    const photoNode = e.target.closest('.photo-item')
-    photoNode.remove()
-}
-
 export const openPhotoPopup = (e) => {
     const targetPhoto = e.target.closest('.photo-item')
     const targetSrc = targetPhoto.querySelector('.photo-item__img').src
@@ -109,31 +99,8 @@ export const openPhotoPopup = (e) => {
     openPopup(photoPopup)
 }
 
-const addEventListeners = (photoNode) => {
-    const buttonLike = photoNode.querySelector('.photo-item__button-like')
-    const buttonDelete = photoNode.querySelector('.photo-item__button-delete')
-    const image = photoNode.querySelector('.photo-item__img')
-
-    buttonLike.addEventListener('click', toggleLikeButton)
-    buttonDelete.addEventListener('click', handleDelete)
-    image.addEventListener('click', openPhotoPopup)
-}
-
 const renderPhoto = (photoNode) => {
     photosContainer.prepend(photoNode)
-}
-
-const createNewPhoto = (photo) => {
-    const photoElement = photoTemplate.cloneNode(true)
-    const imageDescription = photoElement.querySelector('.photo-item__description');
-    const image = photoElement.querySelector('.photo-item__img');
-
-    imageDescription.textContent = photo.name
-    image.src = photo.link
-    image.alt = photo.name
-
-    addEventListeners(photoElement)
-    return photoElement
 }
 
 const openEditProfilePopup = () => {
@@ -161,11 +128,13 @@ const submitAdjustingNewPhoto = (e) => {
 
     const newPhotoParams = {
         name: inputPhotoDescription.value,
-        link: inputPhotoSrc.value
+        link: inputPhotoSrc.value,
+        selector: cardOptions.templateSelector
     }
-    const newPhoto = createNewPhoto(newPhotoParams)
+    const newCard = new Card(newPhotoParams)
+    const cardElement = newCard.generateCardElement()
 
-    renderPhoto(newPhoto)
+    renderPhoto(cardElement)
     currentForm.reset()
 
     toggleButtonState(inputList, buttonSubmit, validationOptions.formButtonSubmitTypeDisabledClass)
@@ -173,7 +142,7 @@ const submitAdjustingNewPhoto = (e) => {
 }
 
 initialCards.forEach(cardParams => {
-    const card = new Card({...cardParams, selector: '.photo-template'})
+    const card = new Card({...cardParams, selector: cardOptions.templateSelector})
     const cardElement = card.generateCardElement()
 
     renderPhoto(cardElement)
