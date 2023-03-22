@@ -1,3 +1,5 @@
+import { FormValidator } from "./FormValidator.js";
+
 const showError = (input, errorTextContainer, {formInputTypeErrorClass, formInputErrorActiveClass}) => {
     input.classList.add(formInputTypeErrorClass)
     errorTextContainer.classList.add(formInputErrorActiveClass)
@@ -65,7 +67,9 @@ const enableValidation = (options) => {
     const formList = Array.from(document.querySelectorAll(options.formSelector));
 
     formList.forEach(form => {
-        setEventListeners(form, options)
+        const validatedForm  = new FormValidator(options, form)
+        validatedForm.enableValidation()
+        // setEventListeners(form, options)
     })
 }
 
