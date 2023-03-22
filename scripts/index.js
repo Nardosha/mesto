@@ -1,3 +1,7 @@
+import {Card} from './Card.js'
+import {FormValidator} from "./FormValidator.js";
+
+
 // PROFILE
 const profileName = document.querySelector('.profile__full-name')
 const profileDescription = document.querySelector('.profile__description')
@@ -15,13 +19,38 @@ const addPhotoPopup = document.querySelector('[data-popup-type="ADD"]')
 const addPhotoPopupContainer = addPhotoPopup.querySelector('.popup__form')
 const inputPhotoDescription = document.querySelector('.form__input_field_image-description')
 const inputPhotoSrc = document.querySelector('.form__input_field_image-src')
-const photoTemplate = document.querySelector('.photo-template').content
 
 const photosContainer = document.querySelector('.content-photos__list')
 const closePopupButtons = document.querySelectorAll('.popup__button-close')
 const photoPopup = document.querySelector('[data-popup-type="SHOW"]')
 const previewPhoto = photoPopup.querySelector('.popup-show-photo__photo')
 const previewPhotoDescription = photoPopup.querySelector('.popup-show-photo__description')
+
+export const validationOptions = {
+    popupOpenedSelector: '.popup_opened',
+    popupForm: '.popup__form',
+    formSelector: '.form',
+    formInputsSelector: '.form__inputs',
+    formInputSelector: '.form__input',
+    formInputClass: 'form__input',
+    formInputTypeErrorClass: 'form__input_type_error',
+    formInputErrorActiveClass: 'form__input-error_active',
+    formButtonSubmitSelector: '.form__button-submit',
+    formButtonSubmitClass: 'form__button-submit',
+    formButtonSubmitTypeDisabledClass: 'form__button-submit_type_disabled',
+}
+
+export const cardOptions = {
+    elementSelector: '.photo-item',
+    templateSelector: '.photo-template',
+    imageSelector: '.photo-item__img',
+    descriptionSelector: '.photo-item__description',
+    buttonLikeSelector: '.photo-item__button-like',
+    buttonLikeActiveClass: 'photo-item__button-like_active',
+    buttonDeleteSelector: '.photo-item__button-delete',
+}
+
+const formList = Array.from(document.querySelectorAll(validationOptions.formSelector));
 
 const initialCards = [
     {
@@ -50,18 +79,15 @@ const initialCards = [
     }
 ];
 
-const fillEditForm = () => {
-    inputName.value = profileName.textContent
-    inputDescription.value = profileDescription.textContent
-}
 
-const openPopup = (popup) => {
+// POPUP
+export const openPopup = (popup) => {
     popup.classList.add('popup_opened')
     document.addEventListener('keyup', closeByEscape)
     document.addEventListener('mousedown', closeByClick)
 }
 
-const closePopup = (popup) => {
+export const closePopup = (popup) => {
     popup.classList.remove('popup_opened')
     document.removeEventListener('keyup', closeByEscape)
     document.removeEventListener('mousedown', closeByClick)
@@ -84,16 +110,28 @@ const closeByClick = (e) => {
     }
 }
 
-const toggleLikeButton = (e) => {
-    e.target.classList.toggle('photo-item__button-like_active')
+
+// PROFILE
+const fillEditForm = () => {
+    inputName.value = profileName.textContent
+    inputDescription.value = profileDescription.textContent
 }
 
-const handleDelete = (e) => {
-    const photoNode = e.target.closest('.photo-item')
-    photoNode.remove()
+const openProfileFormPopup = () => {
+    openPopup(editProfilePopup)
+    fillEditForm()
 }
 
-const openPhotoPopup = (e) => {
+const submitProfileForm = (e) => {
+    e.preventDefault()
+    profileName.textContent = inputName.value
+    profileDescription.textContent = inputDescription.value
+    closePopup(editProfilePopup)
+}
+
+
+// PHOTO
+export const openPhotoPopup = (e) => {
     const targetPhoto = e.target.closest('.photo-item')
     const targetSrc = targetPhoto.querySelector('.photo-item__img').src
     const targetDescription = targetPhoto.querySelector('.photo-item__description').textContent
@@ -105,82 +143,51 @@ const openPhotoPopup = (e) => {
     openPopup(photoPopup)
 }
 
-const addEventListeners = (photoNode) => {
-    const buttonLike = photoNode.querySelector('.photo-item__button-like')
-    const buttonDelete = photoNode.querySelector('.photo-item__button-delete')
-    const image = photoNode.querySelector('.photo-item__img')
-
-    buttonLike.addEventListener('click', toggleLikeButton)
-    buttonDelete.addEventListener('click', handleDelete)
-    image.addEventListener('click', openPhotoPopup)
-}
-
 const renderPhoto = (photoNode) => {
     photosContainer.prepend(photoNode)
 }
 
-const createNewPhoto = (photo) => {
-    const photoElement = photoTemplate.cloneNode(true)
-    const imageDescription = photoElement.querySelector('.photo-item__description');
-    const image = photoElement.querySelector('.photo-item__img');
-
-    imageDescription.textContent = photo.name
-    image.src = photo.link
-    image.alt = photo.name
-
-    addEventListeners(photoElement)
-    return photoElement
-}
-
-const openEditProfilePopup = () => {
-    openPopup(editProfilePopup)
-    fillEditForm()
-}
-
-const openAddPhotoPopup = () => {
+const openCardFormPopup = () => {
     openPopup(addPhotoPopup)
 }
 
-const submitEditingProfileForm = (e) => {
+const submitCardForm = (e) => {
     e.preventDefault()
-    profileName.textContent = inputName.value
-    profileDescription.textContent = inputDescription.value
-    closePopup(editProfilePopup)
-}
-
-const submitAdjustingNewPhoto = (e) => {
-    e.preventDefault()
-
-    const currentForm = e.target
-    const buttonSubmit = e.submitter
-    const inputList = Array.from(currentForm.elements)
 
     const newPhotoParams = {
         name: inputPhotoDescription.value,
-        link: inputPhotoSrc.value
+        link: inputPhotoSrc.value,
+        selector: cardOptions.templateSelector
     }
-    const newPhoto = createNewPhoto(newPhotoParams)
+    const newCard = new Card(newPhotoParams)
+    const cardElement = newCard.generateCardElement()
+    renderPhoto(cardElement)
 
-    renderPhoto(newPhoto)
+    const currentForm = e.target
     currentForm.reset()
 
-    toggleButtonState(inputList, buttonSubmit, validationOptions.formButtonSubmitTypeDisabledClass)
+    const validatedForm = new FormValidator(validationOptions, currentForm)
+    validatedForm.enableValidation()
+
     closePopup(addPhotoPopup)
 }
 
 initialCards.forEach(cardParams => {
-    const newPhoto = createNewPhoto(cardParams)
-    renderPhoto(newPhoto)
+    const card = new Card({...cardParams, selector: cardOptions.templateSelector})
+    const cardElement = card.generateCardElement()
+
+    renderPhoto(cardElement)
 })
 
+
 // LISTENERS
-editingProfilePopupForm.addEventListener('submit', submitEditingProfileForm)
+editingProfilePopupForm.addEventListener('submit', submitProfileForm)
 
-addPhotoPopupContainer.addEventListener('submit', submitAdjustingNewPhoto)
+addPhotoPopupContainer.addEventListener('submit', submitCardForm)
 
-editingProfileButton.addEventListener('click', openEditProfilePopup)
+editingProfileButton.addEventListener('click', openProfileFormPopup)
 
-addPhotoButton.addEventListener('click', openAddPhotoPopup)
+addPhotoButton.addEventListener('click', openCardFormPopup)
 
 closePopupButtons.forEach(btn => {
     const popup = btn.closest('.popup')
@@ -191,4 +198,9 @@ closePopupButtons.forEach(btn => {
     }
 })
 
-enableValidation(validationOptions);
+
+// VALIDATION
+formList.forEach(form => {
+    const validatedForm = new FormValidator(validationOptions, form)
+    validatedForm.enableValidation()
+})
