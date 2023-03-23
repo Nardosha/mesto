@@ -1,13 +1,13 @@
 export class FormValidator {
     constructor(options, formElement) {
-        this._formElement = formElement
+        this.formElement = formElement
         this._options = options
         this._isValidInputs = true
     }
 
     _setFormElements() {
-        this._inputList = Array.from(this._formElement.querySelectorAll(this._options.formInputSelector))
-        this._buttonSubmit = this._formElement.querySelector(this._options.formButtonSubmitSelector)
+        this._inputList = Array.from(this.formElement.querySelectorAll(this._options.formInputSelector))
+        this._buttonSubmit = this.formElement.querySelector(this._options.formButtonSubmitSelector)
 
     }
 
@@ -38,7 +38,7 @@ export class FormValidator {
     }
 
     _setInputState(input, isValidInput) {
-        const errorTextContainer = this._formElement.querySelector(`#${input.id}-error`)
+        const errorTextContainer = this.formElement.querySelector(`#${input.id}-error`)
 
         if (!isValidInput) {
             this._showError(input, errorTextContainer)
@@ -63,11 +63,16 @@ export class FormValidator {
 
     _toggleButtonState() {
         this._isValidInputs = this._validateInputs()
+
         if (this._isValidInputs) {
             this._disableButtonSubmit()
         } else {
             this._enableButtonSubmit()
         }
+    }
+
+    resetValidation() {
+        this._toggleButtonState()
     }
 
     enableValidation() {
