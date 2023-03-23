@@ -16,7 +16,7 @@ const inputDescription = editingProfilePopupForm.querySelector('.form__input_fie
 // ADD PHOTO POPUP
 const addPhotoButton = document.querySelector('.profile__add-button')
 const addPhotoPopup = document.querySelector('[data-popup-type="ADD"]')
-const addPhotoPopupContainer = addPhotoPopup.querySelector('.popup__form')
+const cardForm = addPhotoPopup.querySelector('.popup__form')
 const inputPhotoDescription = document.querySelector('.form__input_field_image-description')
 const inputPhotoSrc = document.querySelector('.form__input_field_image-src')
 
@@ -25,6 +25,8 @@ const closePopupButtons = document.querySelectorAll('.popup__button-close')
 const photoPopup = document.querySelector('[data-popup-type="SHOW"]')
 const previewPhoto = photoPopup.querySelector('.popup-show-photo__photo')
 const previewPhotoDescription = photoPopup.querySelector('.popup-show-photo__description')
+
+const validatedForms = {}
 
 export const validationOptions = {
     popupOpenedSelector: '.popup_opened',
@@ -49,8 +51,6 @@ export const cardOptions = {
     buttonLikeActiveClass: 'photo-item__button-like_active',
     buttonDeleteSelector: '.photo-item__button-delete',
 }
-
-const formList = Array.from(document.querySelectorAll(validationOptions.formSelector));
 
 const initialCards = [
     {
@@ -169,15 +169,14 @@ const submitCardForm = (e) => {
     const currentForm = e.target
     currentForm.reset()
 
-    const validatedForm = new FormValidator(validationOptions, currentForm)
-    validatedForm.enableValidation()
+    const formName = currentForm.getAttribute('name')
+    validatedForms[formName].resetValidation()
 
     closePopup(addPhotoPopup)
 }
 
 initialCards.forEach(cardParams => {
     const cardElement = creatCard({...cardParams, selector: cardOptions.templateSelector})
-
     renderPhoto(cardElement)
 })
 
@@ -185,7 +184,7 @@ initialCards.forEach(cardParams => {
 // LISTENERS
 editingProfilePopupForm.addEventListener('submit', submitProfileForm)
 
-addPhotoPopupContainer.addEventListener('submit', submitCardForm)
+cardForm.addEventListener('submit', submitCardForm)
 
 editingProfileButton.addEventListener('click', openProfileFormPopup)
 
@@ -202,7 +201,21 @@ closePopupButtons.forEach(btn => {
 
 
 // VALIDATION
-formList.forEach(form => {
-    const validatedForm = new FormValidator(validationOptions, form)
-    validatedForm.enableValidation()
-})
+const enableValidations = (config) => {
+    const formList = Array.from(document.querySelectorAll(validationOptions.formSelector));
+
+    formList.forEach(form => {
+        const validatedForm = new FormValidator(validationOptions, form)
+
+        const validatedFormName = validatedForm.formElement.getAttribute('name')
+
+        if (!validatedForms[validatedFormName]) {
+            validatedForms[validatedFormName] = validatedForm
+        }
+
+
+        validatedForm.enableValidation()
+    })
+}
+
+enableValidations(validationOptions)
