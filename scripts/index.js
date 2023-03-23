@@ -143,6 +143,11 @@ export const openPhotoPopup = (e) => {
     openPopup(photoPopup)
 }
 
+const creatCard = (cardParams) => {
+    const newCard = new Card(cardParams)
+    return newCard.generateCardElement()
+}
+
 const renderPhoto = (photoNode) => {
     photosContainer.prepend(photoNode)
 }
@@ -154,13 +159,11 @@ const openCardFormPopup = () => {
 const submitCardForm = (e) => {
     e.preventDefault()
 
-    const newPhotoParams = {
+    const cardElement = creatCard({
         name: inputPhotoDescription.value,
         link: inputPhotoSrc.value,
         selector: cardOptions.templateSelector
-    }
-    const newCard = new Card(newPhotoParams)
-    const cardElement = newCard.generateCardElement()
+    })
     renderPhoto(cardElement)
 
     const currentForm = e.target
@@ -173,8 +176,7 @@ const submitCardForm = (e) => {
 }
 
 initialCards.forEach(cardParams => {
-    const card = new Card({...cardParams, selector: cardOptions.templateSelector})
-    const cardElement = card.generateCardElement()
+    const cardElement = creatCard({...cardParams, selector: cardOptions.templateSelector})
 
     renderPhoto(cardElement)
 })
