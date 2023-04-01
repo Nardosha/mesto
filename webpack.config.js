@@ -5,9 +5,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     entry: './scripts/index.js',
     output: {
-        filename: '[name].[hash:5].js',
-        path: path.join(__dirname, '/build'),
-        clean: true
+        filename: '[name].[hash:5].js', // название файла с уникальным хэшом
+        path: path.join(__dirname, '/build'), // складываем "filename" в папку build
+        clean: true // удалять старые файлы пееред новым билдом
     },
     devServer: {
         static: {
@@ -17,37 +17,37 @@ module.exports = {
         port: 9000
     },
     plugins: [
-        new HtmlWebpackPlugin({template: './index.html'}),
-        new MiniCssExtractPlugin({filename: 'style.[hash:5].css'}),
+        new HtmlWebpackPlugin({template: './index.html'}), // HTML плагин с указанием адреса html шаблона
+        new MiniCssExtractPlugin({filename: 'style.[hash:5].css'}), // CSS плагин с конфигом названия файла
     ],
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
+            { // правило для babel-loader:
+                test: /\.js$/, // для всех файлов с расширением .js
+                exclude: /node_modules/, // кроме папки node_modules
+                use: { // использовать
+                    loader: 'babel-loader', //babel-loader
+                    options: { // с опциями:
+                        presets: [ // пресет
                             ['@babel/preset-env', {targets: "defaults"}]
                         ]
                     }
                 }
             },
-            {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 1
+            {//правило для css:
+                test: /\.css$/i, // для всех файлов с расширением .css
+                use: [MiniCssExtractPlugin.loader, { // использовать
+                    loader: 'css-loader', // лоадер - css-loader
+                    options: { // с опциями:
+                        importLoaders: 1 // также использовать еще 1 лоадер (postcss-loader)
                     }
-                }, 'postcss-loader']
+                }, 'postcss-loader'] //лоадер- css-loader
             },
-            {
-                test: /\.(png|jpg)$/,
-                type: 'asset/resource',
+            {//правило для assets:
+                test: /\.(png|jpg)$/,// для всех файлов с расширением .png и .jpg
+                type: 'asset/resource', // лоадер - asset/resource
                 generator: {
-                    filename: 'img/[name].[hash:5][ext]'
+                    filename: 'img/[name].[hash:5][ext]' // положить все ассеты в папку img с названием [name] и хэшом и расширением [ext]
                 }
             }
         ]
