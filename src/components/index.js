@@ -170,11 +170,14 @@ const submitCardForm = (e) => {
 const imageList = new Section({
         items: initialCards,
         renderer: (cardParams) => {
-            const card = new Card({...cardParams, selector: cardOptions.templateSelector, handleCardClick: (event) => {
-                    const targetPhoto = event.target.closest('.photo-item')
-                    const popup = new PopupWithImage('.popup-show-photo', targetPhoto)
+            const card = new Card({
+                ...cardParams,
+                selector: cardOptions.templateSelector,
+                handleCardClick: ({target}) => {
+                    const popup = new PopupWithImage('.popup-show-photo', target)
                     popup.open()
-                }})
+                }
+            })
             const cardElement = card.generateCardElement()
             imageList.addItem(cardElement)
         }
