@@ -4,23 +4,21 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     devtool: 'source-map',
-    entry: './scripts/index.js',
+    entry: './src/components/index.js',
     output: {
         filename: '[name].[hash:5].js',
-        path: path.join(__dirname, 'build'),
+        path: path.join(__dirname, 'dist'),
         clean: true
     },
     devServer: {
-        static: {
-            directory: path.join(__dirname, 'build')
-        },
+        static: path.resolve(__dirname, './dist'),
         compress: true,
-        port: 9000,
-        hot: true,
-        open: true
+        port: 8080,
+        open: true,
+        hot: true
     },
     plugins: [
-        new HtmlWebpackPlugin({template: './index.html'}),
+        new HtmlWebpackPlugin({template: './src/index.html'}),
         new MiniCssExtractPlugin({filename: 'style.[hash:5].css'}),
     ],
     module: {
@@ -33,13 +31,13 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/i,
+                test: /\.css$/,
                 use: [MiniCssExtractPlugin.loader, {
-                    loader: 'css-loader',
-                    options: { // с опциями:
-                        importLoaders: 1
-                    }
-                }, 'postcss-loader']
+                    loader: "css-loader",
+                    options: { importLoaders: 1 }
+                },
+                    'postcss-loader'
+                ]
             },
             {
                 test: /\.(png|jpg|svg)$/,

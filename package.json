@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Nardosha/mesto#readme",
   "dependencies": {
+    "core-js": "^3.29.1",
     "webpack-cli": "^5.0.1"
   },
   "devDependencies": {
