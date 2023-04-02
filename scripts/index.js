@@ -1,5 +1,6 @@
 import {Card} from './Card.js'
 import {FormValidator} from "./FormValidator.js";
+import  '../pages/index.css'
 
 
 // PROFILE
@@ -202,6 +203,7 @@ closePopupButtons.forEach(btn => {
 
 // VALIDATION
 const enableValidations = (config) => {
+    console.log('lalallala')
     const formList = Array.from(document.querySelectorAll(validationOptions.formSelector));
 
     formList.forEach(form => {

@@ -9,13 +9,13 @@
 <body class="root">
     <div class="wrapper">
         <header class="header">
-            <img class="header__logo" src="images/logo.svg" alt="Логотип Mesto">
+            <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Mesto">
         </header>
 
         <main class="page">
             <section class="profile">
                 <div class="profile__info-container">
-                    <img class="profile__avatar" src="images/page/avatar.jpg" alt="Фотография пользователя">
+                    <img class="profile__avatar" src="<%=require('./images/page/avatar.jpg')%>" alt="Фотография пользователя">
                     <div class="profile__settings">
                         <h1 class="profile__full-name" data-user-field="userFullName">Жак-Ив Кусто</h1>
                         <p class="profile__description" data-user-field="userDescription">Исследователь океана</p>
@@ -155,7 +155,7 @@
             <button class="button photo-item__button-delete" type="button" aria-label="Удалить"
                     data-action="DELETE"></button>
             <img class="photo-item__img"
-                 src="images/page/content-photos/content-photos_item-1.jpg"
+                 src="<%=require('./images/page/content-photos/content-photos_item-1.jpg')%>"
                  alt="Описание фото"
                  data-action="PREVIEW"
             >
