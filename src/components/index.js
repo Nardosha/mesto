@@ -1,6 +1,7 @@
 import {Card} from './Card.js'
+import Popup from './Popup.js'
 import {FormValidator} from "./FormValidator.js";
-import  '../pages/index.css'
+import '../pages/index.css'
 
 
 // PROFILE
@@ -89,6 +90,7 @@ export const openPopup = (popup) => {
 }
 
 export const closePopup = (popup) => {
+    console.log('closePopup', popup)
     popup.classList.remove('popup_opened')
     document.removeEventListener('keyup', closeByEscape)
     document.removeEventListener('mousedown', closeByClick)
@@ -153,9 +155,9 @@ const renderPhoto = (photoNode) => {
     photosContainer.prepend(photoNode)
 }
 
-const openCardFormPopup = () => {
-    openPopup(addPhotoPopup)
-}
+// const openCardFormPopup = () => {
+//     openPopup(addPhotoPopup)
+// }
 
 const submitCardForm = (e) => {
     e.preventDefault()
@@ -187,19 +189,15 @@ editingProfilePopupForm.addEventListener('submit', submitProfileForm)
 
 cardForm.addEventListener('submit', submitCardForm)
 
-editingProfileButton.addEventListener('click', openProfileFormPopup)
-
-addPhotoButton.addEventListener('click', openCardFormPopup)
-
-closePopupButtons.forEach(btn => {
-    const popup = btn.closest('.popup')
-    const actionType = btn.dataset.action
-
-    if (actionType === 'CLOSE') {
-        btn.addEventListener('click', () => closePopup(popup))
-    }
+editingProfileButton.addEventListener('click', (e) => {
+    const editPopup = new Popup('.popup_edit')
+    editPopup.open()
 })
 
+addPhotoButton.addEventListener('click', () => {
+    const addImagePopup = new Popup('.popup_add-photo')
+    addImagePopup.open()
+})
 
 // VALIDATION
 const enableValidations = (config) => {
