@@ -203,7 +203,6 @@ closePopupButtons.forEach(btn => {
 
 // VALIDATION
 const enableValidations = (config) => {
-    console.log('lalallala')
     const formList = Array.from(document.querySelectorAll(validationOptions.formSelector));
 
     formList.forEach(form => {
