@@ -2,6 +2,8 @@ import {Card} from './Card.js'
 import Popup from './Popup.js'
 import {FormValidator} from "./FormValidator.js";
 import '../pages/index.css'
+import PopupWithImage from "./PopupWithImage";
+import Section from "./Section.js";
 
 
 // PROFILE
@@ -90,7 +92,6 @@ export const openPopup = (popup) => {
 }
 
 export const closePopup = (popup) => {
-    console.log('closePopup', popup)
     popup.classList.remove('popup_opened')
     document.removeEventListener('keyup', closeByEscape)
     document.removeEventListener('mousedown', closeByClick)
@@ -134,18 +135,6 @@ const submitProfileForm = (e) => {
 
 
 // PHOTO
-export const openPhotoPopup = (e) => {
-    const targetPhoto = e.target.closest('.photo-item')
-    const targetSrc = targetPhoto.querySelector('.photo-item__img').src
-    const targetDescription = targetPhoto.querySelector('.photo-item__description').textContent
-
-    previewPhoto.src = targetSrc
-    previewPhoto.alt = targetDescription
-    previewPhotoDescription.textContent = targetDescription
-
-    openPopup(photoPopup)
-}
-
 const creatCard = (cardParams) => {
     const newCard = new Card(cardParams)
     return newCard.generateCardElement()
@@ -178,11 +167,21 @@ const submitCardForm = (e) => {
     closePopup(addPhotoPopup)
 }
 
-initialCards.forEach(cardParams => {
-    const cardElement = creatCard({...cardParams, selector: cardOptions.templateSelector})
-    renderPhoto(cardElement)
-})
+const imageList = new Section({
+        items: initialCards,
+        renderer: (cardParams) => {
+            const card = new Card({...cardParams, selector: cardOptions.templateSelector, handleCardClick: (event) => {
+                    const targetPhoto = event.target.closest('.photo-item')
+                    const popup = new PopupWithImage('.popup-show-photo', targetPhoto)
+                    popup.open()
+                }})
+            const cardElement = card.generateCardElement()
+            imageList.addItem(cardElement)
+        }
+    },
+    '.content-photos__list')
 
+imageList.renderItems()
 
 // LISTENERS
 editingProfilePopupForm.addEventListener('submit', submitProfileForm)

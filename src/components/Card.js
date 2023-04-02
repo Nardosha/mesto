@@ -1,11 +1,12 @@
 import { openPhotoPopup, cardOptions } from './index.js'
 
 export class Card {
-    constructor({name, link, selector}) {
+    constructor({name, link, selector, handleCardClick}) {
         this.description = name
         this.link = link
         this._isLiked = false
         this.templateSelector = selector
+        this._handleCardClick = handleCardClick
     }
 
     _getTemplate() {
@@ -38,7 +39,7 @@ export class Card {
     _setEventListeners() {
         this._buttonLikeElement.addEventListener('click', () => this._toggleLike())
         this._buttonDeleteElement.addEventListener('click', () => this._handleDelete())
-        this._imageElement.addEventListener('click', openPhotoPopup)
+        this._imageElement.addEventListener('click', this._handleCardClick.bind(this))
     }
 
     _toggleLike() {

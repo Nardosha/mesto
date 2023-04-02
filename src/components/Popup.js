@@ -1,5 +1,3 @@
-import { closePopup } from "./index";
-
 export default class Popup {
     constructor(selector) {
         this._element = document.querySelector(selector)
@@ -20,13 +18,13 @@ export default class Popup {
         if (pressedKey !== 'Escape') return
 
         const openedPopup = document.querySelector('.popup_opened')
-        openedPopup && closePopup(openedPopup)
+        openedPopup && this.close()
     }
 
     _closeByClick({target: clickTarget}) {
         if (!clickTarget?.classList.contains('popup_opened')) return
 
-        closePopup(clickTarget)
+        this.close()
     }
 
     _setEventListeners() {
