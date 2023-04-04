@@ -4,6 +4,7 @@ import {FormValidator} from "./FormValidator.js";
 import '../pages/index.css'
 import PopupWithImage from "./PopupWithImage";
 import Section from "./Section.js";
+import PopupWithForm from "./PopupWithForm";
 
 
 // PROFILE
@@ -77,45 +78,29 @@ const initialCards = [
     }
 ];
 
-
-// POPUP
-export const closePopup = (popup) => {
-    popup.classList.remove('popup_opened')
-    document.removeEventListener('keyup', closeByEscape)
-    document.removeEventListener('mousedown', closeByClick)
-}
-
-const closeByEscape = (e) => {
-    const pressedKey = e.code
-
-    if (pressedKey === 'Escape') {
-        const openedPopup = document.querySelector('.popup_opened')
-        openedPopup && closePopup(openedPopup)
-    }
-}
-
-const closeByClick = (e) => {
-    const clickTarget = e.target
-
-    if (clickTarget?.classList.contains('popup_opened')) {
-        closePopup(clickTarget)
-    }
-}
-
-
 // PROFILE
 const fillEditForm = () => {
+    console.log('fillEditForm')
     inputName.value = profileName.textContent
     inputDescription.value = profileDescription.textContent
 }
 
-const submitProfileForm = (e) => {
-    e.preventDefault()
-    profileName.textContent = inputName.value
-    profileDescription.textContent = inputDescription.value
-    closePopup(editProfilePopup)
-}
+const popupProfileEdit = () => {
+    console.log('popupProfileEdit')
+    fillEditForm();
 
+    const editPopup = new PopupWithForm({
+        selector: '.popup_edit',
+        handleSubmit: (formData) => {
+            console.log('submitHandler')
+            profileName.textContent = formData.userFullName
+            profileDescription.textContent = formData.userDescription
+            editPopup.close()
+        }
+    })
+
+    editPopup.open()
+}
 
 // PHOTO
 const creatCard = (cardParams) => {
@@ -123,7 +108,7 @@ const creatCard = (cardParams) => {
         ...cardParams,
         selector: cardOptions.templateSelector,
         handleCardClick: ({target}) => {
-            const popup = new PopupWithImage('.popup-show-photo', target)
+            const popup = new PopupWithImage({selector: '.popup-show-photo', targetCard: target})
             popup.open()
         }
     })
@@ -144,27 +129,22 @@ const submitCardForm = (e) => {
 
     const formName = currentForm.getAttribute('name')
     validatedForms[formName].resetValidation()
-
-    closePopup(addPhotoPopup)
 }
 
-const imageList = new Section({
+const imageList = new Section(
+    {
         items: initialCards,
         renderer: (cardParams) => creatCard(cardParams)
     },
-    '.content-photos__list')
+    '.content-photos__list'
+)
 
 imageList.renderItems()
 
 // LISTENERS
-editingProfilePopupForm.addEventListener('submit', submitProfileForm)
-
 cardForm.addEventListener('submit', submitCardForm)
 
-editingProfileButton.addEventListener('click', (e) => {
-    const editPopup = new Popup('.popup_edit')
-    editPopup.open()
-})
+editingProfileButton.addEventListener('click', popupProfileEdit)
 
 addPhotoButton.addEventListener('click', () => {
     const addImagePopup = new Popup('.popup_add-photo')

@@ -5,6 +5,7 @@ export default class Popup {
     }
 
     open() {
+        console.log('open')
         this._element.classList.add('popup_opened');
         this._setEventListeners();
     }

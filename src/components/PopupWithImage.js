@@ -1,7 +1,7 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithImage extends Popup {
-    constructor(selector, targetCard) {
+    constructor({selector, targetCard}) {
         super(selector)
         this._targetCard = targetCard.closest('.photo-item')
         this._targetSrc = this._targetCard.querySelector('.photo-item__img').src
