@@ -1,4 +1,4 @@
-import { openPhotoPopup, cardOptions } from './index.js'
+import { cardOptions } from './index.js'
 
 export class Card {
     constructor({name, link, selector, handleCardClick}) {

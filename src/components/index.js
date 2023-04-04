@@ -24,12 +24,6 @@ const cardForm = addPhotoPopup.querySelector('.popup__form')
 const inputPhotoDescription = document.querySelector('.form__input_field_image-description')
 const inputPhotoSrc = document.querySelector('.form__input_field_image-src')
 
-const photosContainer = document.querySelector('.content-photos__list')
-const closePopupButtons = document.querySelectorAll('.popup__button-close')
-const photoPopup = document.querySelector('[data-popup-type="SHOW"]')
-const previewPhoto = photoPopup.querySelector('.popup-show-photo__photo')
-const previewPhotoDescription = photoPopup.querySelector('.popup-show-photo__description')
-
 const validatedForms = {}
 
 export const validationOptions = {
@@ -85,12 +79,6 @@ const initialCards = [
 
 
 // POPUP
-export const openPopup = (popup) => {
-    popup.classList.add('popup_opened')
-    document.addEventListener('keyup', closeByEscape)
-    document.addEventListener('mousedown', closeByClick)
-}
-
 export const closePopup = (popup) => {
     popup.classList.remove('popup_opened')
     document.removeEventListener('keyup', closeByEscape)
@@ -121,11 +109,6 @@ const fillEditForm = () => {
     inputDescription.value = profileDescription.textContent
 }
 
-const openProfileFormPopup = () => {
-    openPopup(editProfilePopup)
-    fillEditForm()
-}
-
 const submitProfileForm = (e) => {
     e.preventDefault()
     profileName.textContent = inputName.value
@@ -136,27 +119,25 @@ const submitProfileForm = (e) => {
 
 // PHOTO
 const creatCard = (cardParams) => {
-    const newCard = new Card(cardParams)
-    return newCard.generateCardElement()
+    const card = new Card({
+        ...cardParams,
+        selector: cardOptions.templateSelector,
+        handleCardClick: ({target}) => {
+            const popup = new PopupWithImage('.popup-show-photo', target)
+            popup.open()
+        }
+    })
+    const cardElement = card.generateCardElement()
+    imageList.addItem(cardElement)
 }
-
-const renderPhoto = (photoNode) => {
-    photosContainer.prepend(photoNode)
-}
-
-// const openCardFormPopup = () => {
-//     openPopup(addPhotoPopup)
-// }
 
 const submitCardForm = (e) => {
     e.preventDefault()
 
-    const cardElement = creatCard({
+    creatCard({
         name: inputPhotoDescription.value,
         link: inputPhotoSrc.value,
-        selector: cardOptions.templateSelector
     })
-    renderPhoto(cardElement)
 
     const currentForm = e.target
     currentForm.reset()
@@ -169,18 +150,7 @@ const submitCardForm = (e) => {
 
 const imageList = new Section({
         items: initialCards,
-        renderer: (cardParams) => {
-            const card = new Card({
-                ...cardParams,
-                selector: cardOptions.templateSelector,
-                handleCardClick: ({target}) => {
-                    const popup = new PopupWithImage('.popup-show-photo', target)
-                    popup.open()
-                }
-            })
-            const cardElement = card.generateCardElement()
-            imageList.addItem(cardElement)
-        }
+        renderer: (cardParams) => creatCard(cardParams)
     },
     '.content-photos__list')
 
