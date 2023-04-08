@@ -9,7 +9,6 @@ export default class PopupWithForm extends Popup {
     }
 
     _getInputValues() {
-        console.log('getInputValues')
         this._inputList = Array.from(this._element.querySelectorAll('.form__input'))
         this._inputValues = {}
 
@@ -23,17 +22,23 @@ export default class PopupWithForm extends Popup {
         return this._inputValues;
     }
 
-
-    _setEventListeners() {
-        super._setEventListeners();
-
-        this._form.addEventListener('submit', (e) => {
-            e.preventDefault()
-            const formData = this._getInputValues()
-            console.log('formData in cb', formData)
-            this._handlerSubmit(formData)
-        })
+    _submitForm(e) {
+        e.preventDefault()
+        const formData = this._getInputValues()
+        this._handlerSubmit(formData)
     }
+
+
+    setEventListeners() {
+        super.setEventListeners();
+        this._form.addEventListener('submit', this._submitForm.bind(this))
+
+    }
+
+    // _removeEventListeners() {
+    //     this._form.removeEventListener('submit', this._submitForm.bind(this))
+    //     super._removeEventListeners()
+    // }
 
     close() {
         this._form.reset();

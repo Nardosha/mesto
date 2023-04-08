@@ -1,7 +1,7 @@
-import { cardOptions } from './index.js'
+import { cardOptions } from '../utils/constants.js'
 
 export class Card {
-    constructor({name, link, selector, handleCardClick}) {
+    constructor({name, link}, selector, handleCardClick) {
         this.description = name
         this.link = link
         this._isLiked = false
@@ -9,21 +9,6 @@ export class Card {
         this._handleCardClick = handleCardClick
     }
 
-    _getTemplate() {
-        return document
-            .querySelector(this.templateSelector)
-            .content
-            .querySelector(cardOptions.elementSelector)
-            .cloneNode(true)
-    }
-
-    _setCardElement() {
-        this._cardElement = this._getTemplate()
-        this._imageElement = this._cardElement.querySelector(cardOptions.imageSelector)
-        this.descriptionElement = this._cardElement.querySelector(cardOptions.descriptionSelector)
-        this._buttonLikeElement = this._cardElement.querySelector(cardOptions.buttonLikeSelector)
-        this._buttonDeleteElement = this._cardElement.querySelector(cardOptions.buttonDeleteSelector)
-    }
 
     generateCardElement() {
         this._setCardElement()
@@ -36,9 +21,25 @@ export class Card {
         return this._cardElement
     }
 
+    _setCardElement() {
+        this._cardElement = this._getTemplate()
+        this._imageElement = this._cardElement.querySelector(cardOptions.imageSelector)
+        this.descriptionElement = this._cardElement.querySelector(cardOptions.descriptionSelector)
+        this._buttonLikeElement = this._cardElement.querySelector(cardOptions.buttonLikeSelector)
+        this._buttonDeleteElement = this._cardElement.querySelector(cardOptions.buttonDeleteSelector)
+    }
+
+    _getTemplate() {
+        return document
+            .querySelector(this.templateSelector)
+            .content
+            .querySelector(cardOptions.elementSelector)
+            .cloneNode(true)
+    }
+
     _setEventListeners() {
-        this._buttonLikeElement.addEventListener('click', () => this._toggleLike())
-        this._buttonDeleteElement.addEventListener('click', () => this._handleDelete())
+        this._buttonLikeElement.addEventListener('click', this._toggleLike)
+        this._buttonDeleteElement.addEventListener('click', this._handleDelete)
         this._imageElement.addEventListener('click', this._handleCardClick.bind(this))
     }
 

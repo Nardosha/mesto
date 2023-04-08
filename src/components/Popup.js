@@ -5,14 +5,11 @@ export default class Popup {
     }
 
     open() {
-        console.log('open')
         this._element.classList.add('popup_opened');
-        this._setEventListeners();
     }
 
     close() {
         this._element.classList.remove('popup_opened');
-        this._removeEventListeners()
     }
 
     _handleEscClose({code: pressedKey}) {
@@ -28,14 +25,15 @@ export default class Popup {
         this.close()
     }
 
-    _setEventListeners() {
+    setEventListeners() {
         this._closeButton.addEventListener('click', this.close.bind(this))
         document.addEventListener('keyup', this._handleEscClose.bind(this))
         document.addEventListener('mousedown', this._closeByClick.bind(this))
     }
 
-    _removeEventListeners() {
-        document.removeEventListener('keyup', this._handleEscClose.bind(this))
-        document.removeEventListener('mousedown', this._closeByClick.bind(this))
-    }
+    // _removeEventListeners() {
+    //     this._closeButton.removeEventListener('click', this.close.bind(this))
+    //     document.removeEventListener('keyup', this._handleEscClose.bind(this))
+    //     document.removeEventListener('mousedown', this._closeByClick.bind(this))
+    // }
 }
