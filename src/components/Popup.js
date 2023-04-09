@@ -17,9 +17,7 @@ export default class Popup {
 
     _handleEscClose({code: pressedKey}) {
         if (pressedKey !== 'Escape') return
-
-        const openedPopup = document.querySelector(popupOptions.openedPopupSelector);
-        openedPopup && this.close();
+        this.close()
     }
 
     _closeByClick({target: clickTarget}) {

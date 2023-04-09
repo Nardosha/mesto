@@ -83,9 +83,6 @@ const openProfileFormPopup = () => {
 const submitImageForm = (formData) => {
     createCard(formData)
     formImagePopup.close()
-
-    const formName = formImagePopup.getFormName()
-    validatedForms[formName].resetValidation()
 }
 
 const submitProfileForm = (formData) => {
@@ -125,5 +122,7 @@ enableValidations(validationOptions)
 editingProfileButton.addEventListener('click', openProfileFormPopup)
 
 addPhotoButton.addEventListener('click', () => {
+    const formName = formImagePopup.getFormName()
+    validatedForms[formName].resetValidation()
     formImagePopup.open()
 })
