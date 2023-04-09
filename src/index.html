@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css">
     <title>Mesto</title>
 </head>
 <body class="root">
     <div class="wrapper">
         <header class="header">
-            <img class="header__logo" src="images/logo.svg" alt="Логотип Mesto">
+            <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Mesto">
         </header>
 
         <main class="page">
             <section class="profile">
                 <div class="profile__info-container">
-                    <img class="profile__avatar" src="images/page/avatar.jpg" alt="Фотография пользователя">
+                    <img class="profile__avatar" src="<%=require('./images/page/avatar.jpg')%>" alt="Фотография пользователя">
                     <div class="profile__settings">
                         <h1 class="profile__full-name" data-user-field="userFullName">Жак-Ив Кусто</h1>
                         <p class="profile__description" data-user-field="userDescription">Исследователь океана</p>
@@ -37,7 +36,7 @@
         </footer>
     </div>
 
-    <dialog class="popup" data-popup-type="EDIT" open>
+    <dialog class="popup popup_edit" data-popup-type="EDIT" open>
         <div class="popup__container">
             <button class="button popup__button-close"
                     type="button"
@@ -54,7 +53,7 @@
                                id="input_user_full_name"
                                value=""
                                data-user-field="userFullName"
-                               name="userFullName"
+                               name="name"
                                type="text"
                                placeholder="Введите имя"
                                minlength="2"
@@ -69,7 +68,7 @@
                                id="input_user_description"
                                value=""
                                data-user-field="userDescription"
-                               name="userDescription"
+                               name="description"
                                type="text"
                                placeholder="Введите описание"
                                minlength="2"
@@ -89,7 +88,7 @@
         </div>
     </dialog>
 
-    <dialog class="popup" data-popup-type="ADD" open>
+    <dialog class="popup popup_add-photo" data-popup-type="ADD" open>
         <div class="popup__container">
             <button class="button popup__button-close"
                     type="button"
@@ -105,8 +104,8 @@
                         <input class="form__input form__input_field_image-description"
                                id="input_image_description"
                                value=""
-                               data-user-field="imageSign"
-                               name="imageSign"
+                               data-user-field="name"
+                               name="name"
                                type="text"
                                placeholder="Название"
                                minlength="2"
@@ -119,8 +118,8 @@
                         <input class="form__input form__input_field_image-src"
                                id="input_image_src"
                                value=""
-                               data-user-field="userSrc"
-                               name="imageSrc"
+                               data-user-field="link"
+                               name="link"
                                type="url"
                                placeholder="Ссылка на картинку"
                                required>
@@ -155,7 +154,7 @@
             <button class="button photo-item__button-delete" type="button" aria-label="Удалить"
                     data-action="DELETE"></button>
             <img class="photo-item__img"
-                 src="images/page/content-photos/content-photos_item-1.jpg"
+                 src="<%=require('./images/page/content-photos/content-photos_item-1.jpg')%>"
                  alt="Описание фото"
                  data-action="PREVIEW"
             >
@@ -165,7 +164,5 @@
             </div>
         </li>
     </template>
-
-    <script type="module" src="scripts/index.js"></script>
 </body>
 </html>
