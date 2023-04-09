@@ -10,7 +10,6 @@ import {
     initialCards,
     editingProfileButton,
     addPhotoButton,
-    profileFormSelectors,
     popupWithImageOptions,
     profileOptions,
     popupWithFormOptions,
@@ -45,17 +44,18 @@ const imagePopup = new PopupWithImage(
 
 imagePopup.setEventListeners()
 
-const createCard = ({name, link}) => {
-    const card = new Card({
-            name,
-            link,
-        },
+const getCard = ({ name, link }) => {
+    const card = new Card({ name, link },
         cardOptions.templateSelector,
         () => {
-            imagePopup.open({name, link})
+            imagePopup.open({ name, link })
         }
     )
-    const cardElement = card.generateCardElement()
+    return card.generateCardElement()
+}
+
+const createCard = (formData) => {
+    const cardElement = getCard(formData)
     imagesSection.addItem(cardElement)
 }
 
@@ -66,35 +66,31 @@ const userProfile = new UserInfo(
     profileOptions.profileDescriptionSelector
 )
 
-
-const fillEditForm = ({name, description}) => {
-    profileFormSelectors.inputName.value = name
-    profileFormSelectors.inputDescription.value = description
-}
-
 // FORMS
 const openProfileFormPopup = () => {
-    const currentUserInfo = userProfile.getUserInfo()
-    fillEditForm(currentUserInfo);
-    formProfilePopup.open()
+    const formName = formProfilePopup.getFormName();
+    validatedForms[formName].resetValidation();
+
+    const currentUserInfo = userProfile.getUserInfo();
+    formProfilePopup.setInputValues(currentUserInfo);
+
+    formProfilePopup.open();
 }
 
 const submitImageForm = (formData) => {
     createCard(formData)
-    formImagePopup.close()
-
-    const formName = formImagePopup.getFormName()
-    validatedForms[formName].resetValidation()
+    formImagePopup.close();
 }
 
 const submitProfileForm = (formData) => {
     userProfile.setUserInfo(formData)
-    formProfilePopup.close()
+    formProfilePopup.close();
 }
 
 const formImagePopup = new PopupWithForm(
     popupWithFormOptions.formAddImagePopupSelector,
-    submitImageForm)
+    submitImageForm
+)
 
 formImagePopup.setEventListeners()
 
@@ -124,5 +120,7 @@ enableValidations(validationOptions)
 editingProfileButton.addEventListener('click', openProfileFormPopup)
 
 addPhotoButton.addEventListener('click', () => {
+    const formName = formImagePopup.getFormName()
+    validatedForms[formName].resetValidation()
     formImagePopup.open()
 })
