@@ -2,16 +2,21 @@ import { popupOptions } from "../utils/constants";
 
 export default class Popup {
     constructor(selector) {
-        this._element = document.querySelector(selector)
-        this._closeButton = this._element.querySelector(popupOptions.closeButtonSelector)
+        this._popup = document.querySelector(selector);
+        this._closeButton = this._popup.querySelector(popupOptions.closeButtonSelector);
+        this._handleEscClose = this._handleEscClose.bind(this);
+        this._closeByClick = this._closeByClick.bind(this);
     }
 
     open() {
-        this._element.classList.add(popupOptions.openedPopupClass);
+        this._popup.classList.add(popupOptions.openedPopupClass);
+
+        this._popup.addEventListener('mousedown', this._closeByClick);
+        document.addEventListener('keyup', this._handleEscClose);
     }
 
     close() {
-        this._element.classList.remove(popupOptions.openedPopupClass);
+        this._popup.classList.remove(popupOptions.openedPopupClass);
         this._removeEventListeners();
     }
 
@@ -28,12 +33,10 @@ export default class Popup {
 
     setEventListeners() {
         this._closeButton.addEventListener('click', this.close.bind(this));
-        document.addEventListener('keyup', this._handleEscClose.bind(this));
-        document.addEventListener('mousedown', this._closeByClick.bind(this));
     }
 
     _removeEventListeners() {
+        this._popup.removeEventListener('mousedown', this._closeByClick);
         document.removeEventListener('keyup', this._handleEscClose);
-        document.removeEventListener('mousedown', this._closeByClick);
     }
 }
