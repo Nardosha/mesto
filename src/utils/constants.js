@@ -48,3 +48,14 @@ export const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+
+export const editingProfileButton = document.querySelector('.profile__edit-button')
+export const addPhotoButton = document.querySelector('.profile__add-button')
+
+const editProfilePopup = document.querySelector('[data-popup-type="EDIT"]')
+const editingProfilePopupForm = editProfilePopup.querySelector('.popup__form')
+
+export const profileFormSelectors = {
+    inputName: editingProfilePopupForm.querySelector('.form__input_field_user-full-name'),
+    inputDescription: editingProfilePopupForm.querySelector('.form__input_field_user-description')
+}

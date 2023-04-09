@@ -1,19 +1,20 @@
 import {Card} from './Card.js'
 import {FormValidator} from "./FormValidator.js";
-import '../pages/index.css'
 import PopupWithImage from "./PopupWithImage";
 import Section from "./Section.js";
 import PopupWithForm from "./PopupWithForm.js";
-import {validationOptions, cardOptions, initialCards} from "../utils/constants.js"
 import UserInfo from "./UserInfo";
+import {
+    validationOptions,
+    cardOptions,
+    initialCards,
+    editingProfileButton,
+    addPhotoButton,
+    profileFormSelectors
+} from "../utils/constants.js"
+import '../pages/index.css'
 
-const editingProfileButton = document.querySelector('.profile__edit-button')
-const editProfilePopup = document.querySelector('[data-popup-type="EDIT"]')
-const editingProfilePopupForm = editProfilePopup.querySelector('.popup__form')
-const inputName = editingProfilePopupForm.querySelector('.form__input_field_user-full-name')
-const inputDescription = editingProfilePopupForm.querySelector('.form__input_field_user-description')
-const addPhotoButton = document.querySelector('.profile__add-button')
-
+// VALIDATION
 const validatedForms = {}
 
 const enableValidations = (config) => {
@@ -60,10 +61,11 @@ const userProfile = new UserInfo(
 
 
 const fillEditForm = ({name, description}) => {
-    inputName.value = name
-    inputDescription.value = description
+    profileFormSelectors.inputName.value = name
+    profileFormSelectors.inputDescription.value = description
 }
 
+// FORMS
 const formImagePopup = new PopupWithForm('.popup_add-photo',
     formData => {
         createCard(formData)
@@ -71,7 +73,6 @@ const formImagePopup = new PopupWithForm('.popup_add-photo',
     })
 
 formImagePopup.setEventListeners()
-
 
 
 const formProfilePopup = new PopupWithForm('.popup_edit',
@@ -100,7 +101,6 @@ enableValidations(validationOptions)
 
 // LISTENERS
 editingProfileButton.addEventListener('click', () => {
-
     const currentUserInfo = userProfile.getUserInfo()
     fillEditForm(currentUserInfo);
     formProfilePopup.open()
