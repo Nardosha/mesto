@@ -45,17 +45,18 @@ const imagePopup = new PopupWithImage(
 
 imagePopup.setEventListeners()
 
-const createCard = ({name, link}) => {
-    const card = new Card({
-            name,
-            link,
-        },
+const getCard = ({name, link}) => {
+    const card = new Card({ name, link },
         cardOptions.templateSelector,
         () => {
-            imagePopup.open({name, link})
+            imagePopup.open({ name, link })
         }
     )
-    const cardElement = card.generateCardElement()
+    return card.generateCardElement()
+}
+
+const createCard = (formData) => {
+    const cardElement = getCard(formData)
     imagesSection.addItem(cardElement)
 }
 
