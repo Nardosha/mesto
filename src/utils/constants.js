@@ -32,7 +32,7 @@ export const popupWithFormOptions = {
     formSelector: '.form',
     inputSelector: '.form__input',
     formEditProfilePopupSelector: '.popup_edit',
-      formAddImagePopupSelector: '.popup_add-photo',
+    formAddImagePopupSelector: '.popup_add-photo',
 }
 
 export const popupWithImageOptions = {
@@ -52,14 +52,6 @@ export const sectionOptions = {
 
 export const editingProfileButton = document.querySelector('.profile__edit-button')
 export const addPhotoButton = document.querySelector('.profile__add-button')
-
-const editProfilePopup = document.querySelector('[data-popup-type="EDIT"]')
-const editingProfilePopupForm = editProfilePopup.querySelector('.popup__form')
-
-export const profileFormSelectors = {
-    inputName: editingProfilePopupForm.querySelector('.form__input_field_user-full-name'),
-    inputDescription: editingProfilePopupForm.querySelector('.form__input_field_user-description')
-}
 
 export const initialCards = [
     {

@@ -2,13 +2,34 @@ export class FormValidator {
     constructor(options, formElement) {
         this.formElement = formElement
         this._options = options
+        this._buttonSubmit = this.formElement.querySelector(this._options.formButtonSubmitSelector)
+        this._inputList = Array.from(this.formElement.querySelectorAll(this._options.formInputSelector));
+        this.__errorContainerList = this._setErrorElements();
         this._isValidInputs = true
     }
 
-    _setFormElements() {
-        this._inputList = Array.from(this.formElement.querySelectorAll(this._options.formInputSelector))
-        this._buttonSubmit = this.formElement.querySelector(this._options.formButtonSubmitSelector)
+    enableValidation() {
+        this._toggleButtonState()
+        this._setEventListeners()
+    }
 
+    resetValidation() {
+        this._toggleButtonState();
+
+        this._inputList.forEach(input => {
+            this._hideError(input)
+        })
+    }
+
+    _setErrorElements() {
+        return this._inputList.reduce((acc, input) => {
+            const errorContainer = this.formElement.querySelector(`#${input.id}-error`)
+
+            if (!acc[input.name]) {
+                acc[input.name] = errorContainer
+            }
+            return acc
+        }, {})
     }
 
     _setEventListeners() {
@@ -25,25 +46,24 @@ export class FormValidator {
         this._setInputState(input, isValidInput)
     }
 
-    _showError(input, errorTextContainer) {
+    _showError(input) {
         input.classList.add(this._options.formInputTypeErrorClass)
-        errorTextContainer.classList.add(this._options.formInputErrorActiveClass)
-        errorTextContainer.textContent = input.validationMessage
+        this.__errorContainerList[input.name].classList.add(this._options.formInputErrorActiveClass)
+        this.__errorContainerList[input.name].textContent = input.validationMessage
     }
 
-    _hideError(input, errorTextContainer) {
+    _hideError(input) {
         input.classList.remove(this._options.formInputTypeErrorClass)
-        errorTextContainer.classList.remove(this._options.formInputErrorActiveClass)
-        errorTextContainer.textContent = ''
+
+        this.__errorContainerList[input.name].classList.remove(this._options.formInputErrorActiveClass)
+        this.__errorContainerList[input.name].textContent = ''
     }
 
     _setInputState(input, isValidInput) {
-        const errorTextContainer = this.formElement.querySelector(`#${input.id}-error`)
-
         if (!isValidInput) {
-            this._showError(input, errorTextContainer)
+            this._showError(input)
         } else {
-            this._hideError(input, errorTextContainer)
+            this._hideError(input)
         }
     }
 
@@ -62,22 +82,13 @@ export class FormValidator {
     }
 
     _toggleButtonState() {
-        this._isValidInputs = this._validateInputs()
+        this._isValidInputs = !this._validateInputs()
 
-        if (this._isValidInputs) {
+        if (!this._isValidInputs) {
             this._disableButtonSubmit()
         } else {
             this._enableButtonSubmit()
         }
     }
 
-    resetValidation() {
-        this._toggleButtonState()
-    }
-
-    enableValidation() {
-        this._setFormElements()
-        this._toggleButtonState()
-        this._setEventListeners()
-    }
 }

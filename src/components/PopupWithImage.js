@@ -4,8 +4,8 @@ import { popupWithImageOptions } from "../utils/constants";
 export default class PopupWithImage extends Popup {
     constructor(selector) {
         super(selector)
-        this._imagePopup = this._element.querySelector(popupWithImageOptions.imageSelector)
-        this._imageDescription = this._element.querySelector(popupWithImageOptions.descriptionSelector)
+        this._imagePopup = this._popup.querySelector(popupWithImageOptions.imageSelector)
+        this._imageDescription = this._popup.querySelector(popupWithImageOptions.descriptionSelector)
     }
 
     open({name, link}) {
