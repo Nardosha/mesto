@@ -10,7 +10,6 @@ import {
     initialCards,
     editingProfileButton,
     addPhotoButton,
-    profileFormSelectors,
     popupWithImageOptions,
     profileOptions,
     popupWithFormOptions,
@@ -67,16 +66,10 @@ const userProfile = new UserInfo(
     profileOptions.profileDescriptionSelector
 )
 
-
-const fillEditForm = ({name, description}) => {
-    profileFormSelectors.inputName.value = name
-    profileFormSelectors.inputDescription.value = description
-}
-
 // FORMS
 const openProfileFormPopup = () => {
     const currentUserInfo = userProfile.getUserInfo()
-    fillEditForm(currentUserInfo);
+    formProfilePopup.setInputValues(currentUserInfo)
     formProfilePopup.open()
 }
 
