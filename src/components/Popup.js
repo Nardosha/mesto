@@ -32,10 +32,4 @@ export default class Popup {
         document.addEventListener('keyup', this._handleEscClose.bind(this))
         document.addEventListener('mousedown', this._closeByClick.bind(this))
     }
-
-    // _removeEventListeners() {
-    //     this._closeButton.removeEventListener('click', this.close.bind(this))
-    //     document.removeEventListener('keyup', this._handleEscClose.bind(this))
-    //     document.removeEventListener('mousedown', this._closeByClick.bind(this))
-    // }
 }
