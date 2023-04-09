@@ -1,30 +1,18 @@
 import {Card} from './Card.js'
-import Popup from './Popup.js'
 import {FormValidator} from "./FormValidator.js";
 import '../pages/index.css'
 import PopupWithImage from "./PopupWithImage";
 import Section from "./Section.js";
 import PopupWithForm from "./PopupWithForm.js";
 import {validationOptions, cardOptions, initialCards} from "../utils/constants.js"
+import UserInfo from "./UserInfo";
 
-// PROFILE
-const profileName = document.querySelector('.profile__full-name')
-const profileDescription = document.querySelector('.profile__description')
-
-// EDIT PROFILE POPUP
 const editingProfileButton = document.querySelector('.profile__edit-button')
 const editProfilePopup = document.querySelector('[data-popup-type="EDIT"]')
 const editingProfilePopupForm = editProfilePopup.querySelector('.popup__form')
 const inputName = editingProfilePopupForm.querySelector('.form__input_field_user-full-name')
 const inputDescription = editingProfilePopupForm.querySelector('.form__input_field_user-description')
-
-
-// ADD PHOTO POPUP
 const addPhotoButton = document.querySelector('.profile__add-button')
-const addPhotoPopup = document.querySelector('[data-popup-type="ADD"]')
-// const cardForm = addPhotoPopup.querySelector('.popup__form')
-const inputPhotoDescription = document.querySelector('.form__input_field_image-description')
-const inputPhotoSrc = document.querySelector('.form__input_field_image-src')
 
 const validatedForms = {}
 
@@ -66,21 +54,34 @@ const createCard = ({name, link}) => {
 
 
 // PROFILE
-const fillEditForm = () => {
-    inputName.value = profileName.textContent
-    inputDescription.value = profileDescription.textContent
+const userProfile = new UserInfo(
+    '.profile__full-name',
+    '.profile__description')
+
+
+const fillEditForm = ({name, description}) => {
+    inputName.value = name
+    inputDescription.value = description
 }
 
-const editPopup = new PopupWithForm({
-    selector: '.popup_edit',
-    handleSubmit: function (formData) {
-        profileName.textContent = formData.userFullName
-        profileDescription.textContent = formData.userDescription
-        editPopup.close()
-    }
-})
+const formImagePopup = new PopupWithForm('.popup_add-photo',
+    formData => {
+        createCard(formData)
+        formImagePopup.close()
+    })
 
-editPopup.setEventListeners()
+formImagePopup.setEventListeners()
+
+
+
+const formProfilePopup = new PopupWithForm('.popup_edit',
+    (formData) => {
+        userProfile.setUserInfo(formData)
+        formProfilePopup.close()
+    }
+)
+
+formProfilePopup.setEventListeners()
 
 
 // SECTION
@@ -99,11 +100,12 @@ enableValidations(validationOptions)
 
 // LISTENERS
 editingProfileButton.addEventListener('click', () => {
-    fillEditForm();
-    editPopup.open()
+
+    const currentUserInfo = userProfile.getUserInfo()
+    fillEditForm(currentUserInfo);
+    formProfilePopup.open()
 })
 
 addPhotoButton.addEventListener('click', () => {
-    const addImagePopup = new Popup('.popup_add-photo')
-    addImagePopup.open()
+    formImagePopup.open()
 })
