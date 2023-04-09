@@ -44,7 +44,7 @@ const imagePopup = new PopupWithImage(
 
 imagePopup.setEventListeners()
 
-const getCard = ({name, link}) => {
+const getCard = ({ name, link }) => {
     const card = new Card({ name, link },
         cardOptions.templateSelector,
         () => {
@@ -68,24 +68,29 @@ const userProfile = new UserInfo(
 
 // FORMS
 const openProfileFormPopup = () => {
-    const currentUserInfo = userProfile.getUserInfo()
-    formProfilePopup.setInputValues(currentUserInfo)
-    formProfilePopup.open()
+    const formName = formProfilePopup.getFormName();
+    validatedForms[formName].resetValidation();
+
+    const currentUserInfo = userProfile.getUserInfo();
+    formProfilePopup.setInputValues(currentUserInfo);
+
+    formProfilePopup.open();
 }
 
 const submitImageForm = (formData) => {
     createCard(formData)
-    formImagePopup.close()
+    formImagePopup.close();
 }
 
 const submitProfileForm = (formData) => {
     userProfile.setUserInfo(formData)
-    formProfilePopup.close()
+    formProfilePopup.close();
 }
 
 const formImagePopup = new PopupWithForm(
     popupWithFormOptions.formAddImagePopupSelector,
-    submitImageForm)
+    submitImageForm
+)
 
 formImagePopup.setEventListeners()
 

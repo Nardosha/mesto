@@ -32,7 +32,7 @@ export const popupWithFormOptions = {
     formSelector: '.form',
     inputSelector: '.form__input',
     formEditProfilePopupSelector: '.popup_edit',
-      formAddImagePopupSelector: '.popup_add-photo',
+    formAddImagePopupSelector: '.popup_add-photo',
 }
 
 export const popupWithImageOptions = {
