@@ -3,64 +3,56 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    devtool:  'source-map',
-    entry: './scripts/index.js',
+    devtool: 'source-map',
+    entry: './src/components/index.js',
     output: {
-        filename: '[name].[hash:5].js', // название файла с уникальным хэшом
-        path: path.join(__dirname, 'build'), // складываем "filename" в папку build
-        clean: true // удалять старые файлы пееред новым билдом
+        filename: '[name].[hash:5].js',
+        path: path.join(__dirname, 'dist'),
+        clean: true
     },
     devServer: {
-        static: {
-            directory: path.join(__dirname, 'build')
-        },
+        static: path.resolve(__dirname, 'dist'),
         compress: true,
-        port: 9000,
-        hot: true,
-        open: true
+        port: 8080,
+        open: true,
+        hot: true
     },
     plugins: [
-        new HtmlWebpackPlugin({template: './index.html'}), // HTML плагин с указанием адреса html шаблона
-        new MiniCssExtractPlugin({filename: 'style.[hash:5].css'}), // CSS плагин с конфигом названия файла
+        new HtmlWebpackPlugin({template: './src/index.html'}),
+        new MiniCssExtractPlugin({filename: 'style.[hash:5].css'}),
     ],
     module: {
         rules: [
-            { // правило для babel-loader:
-                test: /\.js$/, // для всех файлов с расширением .js
-                exclude: /node_modules/, // кроме папки node_modules
-                use: { // использовать
-                    loader: 'babel-loader', //babel-loader
-                    options: { // с опциями:
-                        presets: [ // пресет
-                            ['@babel/preset-env', {targets: "defaults"}]
-                        ]
-                    }
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
                 }
             },
-            {//правило для css:
-                test: /\.css$/i, // для всех файлов с расширением .css
-                use: [MiniCssExtractPlugin.loader, { // использовать
-                    loader: 'css-loader', // лоадер - css-loader
-                    options: { // с опциями:
-                        importLoaders: 1 // также использовать еще 1 лоадер (postcss-loader)
-                    }
-                }, 'postcss-loader'] //лоадер- css-loader
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, {
+                    loader: "css-loader",
+                    options: { importLoaders: 1 }
+                },
+                    'postcss-loader'
+                ]
             },
-            {//правило для assets:
-                test: /\.(png|jpg|svg)$/, // для всех файлов с расширением .png и .jpg
-                type: 'asset/resource', // лоадер - asset/resource
+            {
+                test: /\.(png|jpg|svg)$/,
+                type: 'asset/resource',
                 generator: {
-                    filename: 'img/[name].[hash:5][ext]' // положить все картинки в папку img с названием [name] и хэшом и расширением [ext]
+                    filename: 'img/[name].[hash:5][ext]'
                 }
             },
-            {// правило для шрифтов
+            {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'fonts/[name].[hash:5][ext]' // положить все шрифты в папку fonts с названием [name] и хэшом и расширением [ext]
+                    filename: 'fonts/[name].[hash:5][ext]'
                 }
             },
         ]
     }
-
 }
