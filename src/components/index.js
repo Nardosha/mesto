@@ -10,7 +10,11 @@ import {
     initialCards,
     editingProfileButton,
     addPhotoButton,
-    profileFormSelectors
+    profileFormSelectors,
+    popupWithImageOptions,
+    profileOptions,
+    popupWithFormOptions,
+    sectionOptions
 } from "../utils/constants.js"
 import '../pages/index.css'
 
@@ -18,10 +22,10 @@ import '../pages/index.css'
 const validatedForms = {}
 
 const enableValidations = (config) => {
-    const formList = Array.from(document.querySelectorAll(validationOptions.formSelector));
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
 
     formList.forEach(form => {
-        const validatedForm = new FormValidator(validationOptions, form)
+        const validatedForm = new FormValidator(config, form)
 
         const validatedFormName = validatedForm.formElement.getAttribute('name')
 
@@ -35,7 +39,7 @@ const enableValidations = (config) => {
 }
 
 // PHOTO
-const imagePopup = new PopupWithImage('.popup-show-photo')
+const imagePopup = new PopupWithImage(popupWithImageOptions.imagePopupSelector)
 
 imagePopup.setEventListeners()
 
@@ -45,7 +49,7 @@ const createCard = ({name, link}) => {
             link,
         },
         cardOptions.templateSelector,
-        ({target}) => {
+        () => {
             imagePopup.open({name, link})
         }
     )
@@ -56,8 +60,9 @@ const createCard = ({name, link}) => {
 
 // PROFILE
 const userProfile = new UserInfo(
-    '.profile__full-name',
-    '.profile__description')
+    profileOptions.profileNameSelector,
+    profileOptions.profileDescriptionSelector
+)
 
 
 const fillEditForm = ({name, description}) => {
@@ -66,7 +71,7 @@ const fillEditForm = ({name, description}) => {
 }
 
 // FORMS
-const formImagePopup = new PopupWithForm('.popup_add-photo',
+const formImagePopup = new PopupWithForm(popupWithFormOptions.formAddImagePopupSelector,
     formData => {
         createCard(formData)
         formImagePopup.close()
@@ -75,7 +80,7 @@ const formImagePopup = new PopupWithForm('.popup_add-photo',
 formImagePopup.setEventListeners()
 
 
-const formProfilePopup = new PopupWithForm('.popup_edit',
+const formProfilePopup = new PopupWithForm(popupWithFormOptions.formEditProfilePopupSelector,
     (formData) => {
         userProfile.setUserInfo(formData)
         formProfilePopup.close()
@@ -91,7 +96,7 @@ const imagesSection = new Section(
         items: initialCards,
         renderer: (cardParams) => createCard(cardParams)
     },
-    '.content-photos__list'
+    sectionOptions.imagesContainer
 )
 
 imagesSection.renderItems();
