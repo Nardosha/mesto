@@ -1,9 +1,9 @@
-import {Card} from './Card.js'
-import {FormValidator} from "./FormValidator.js";
-import PopupWithImage from "./PopupWithImage";
-import Section from "./Section.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo";
+import {Card} from '../components/Card.js'
+import {FormValidator} from "../components/FormValidator.js";
+import PopupWithImage from "../components/PopupWithImage";
+import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo";
 import {
     validationOptions,
     cardOptions,
@@ -16,7 +16,7 @@ import {
     popupWithFormOptions,
     sectionOptions
 } from "../utils/constants.js"
-import '../pages/index.css'
+import './index.css'
 
 // VALIDATION
 const validatedForms = {}

@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     devtool: 'source-map',
-    entry: './src/components/index.js',
+    entry: './src/pages/index.js',
     output: {
         filename: '[name].[hash:5].js',
         path: path.join(__dirname, 'dist'),
