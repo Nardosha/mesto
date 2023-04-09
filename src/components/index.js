@@ -39,7 +39,9 @@ const enableValidations = (config) => {
 }
 
 // PHOTO
-const imagePopup = new PopupWithImage(popupWithImageOptions.imagePopupSelector)
+const imagePopup = new PopupWithImage(
+    popupWithImageOptions.imagePopupSelector
+)
 
 imagePopup.setEventListeners()
 
@@ -71,28 +73,42 @@ const fillEditForm = ({name, description}) => {
 }
 
 // FORMS
-const formImagePopup = new PopupWithForm(popupWithFormOptions.formAddImagePopupSelector,
-    formData => {
-        createCard(formData)
-        formImagePopup.close()
-    })
+const openProfileFormPopup = () => {
+    const currentUserInfo = userProfile.getUserInfo()
+    fillEditForm(currentUserInfo);
+    formProfilePopup.open()
+}
+
+const submitImageForm = (formData) => {
+    createCard(formData)
+    formImagePopup.close()
+
+    const formName = formImagePopup.getFormName()
+    validatedForms[formName].resetValidation()
+}
+
+const submitProfileForm = (formData) => {
+    userProfile.setUserInfo(formData)
+    formProfilePopup.close()
+}
+
+const formImagePopup = new PopupWithForm(
+    popupWithFormOptions.formAddImagePopupSelector,
+    submitImageForm)
 
 formImagePopup.setEventListeners()
 
 
-const formProfilePopup = new PopupWithForm(popupWithFormOptions.formEditProfilePopupSelector,
-    (formData) => {
-        userProfile.setUserInfo(formData)
-        formProfilePopup.close()
-    }
+const formProfilePopup = new PopupWithForm(
+    popupWithFormOptions.formEditProfilePopupSelector,
+    submitProfileForm
 )
 
 formProfilePopup.setEventListeners()
 
 
 // SECTION
-const imagesSection = new Section(
-    {
+const imagesSection = new Section({
         items: initialCards,
         renderer: (cardParams) => createCard(cardParams)
     },
@@ -105,11 +121,7 @@ enableValidations(validationOptions)
 
 
 // LISTENERS
-editingProfileButton.addEventListener('click', () => {
-    const currentUserInfo = userProfile.getUserInfo()
-    fillEditForm(currentUserInfo);
-    formProfilePopup.open()
-})
+editingProfileButton.addEventListener('click', openProfileFormPopup)
 
 addPhotoButton.addEventListener('click', () => {
     formImagePopup.open()
