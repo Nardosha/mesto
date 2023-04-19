@@ -88,7 +88,7 @@
         </div>
     </dialog>
 
-    <dialog class="popup popup_add-photo" data-popup-type="ADD" open>
+    <dialog class="popup popup-add-photo" data-popup-type="ADD" open>
         <div class="popup__container">
             <button class="button popup__button-close"
                     type="button"
@@ -149,6 +149,57 @@
         </div>
     </dialog>
 
+    <dialog class="popup popup_update-avatar" open>
+        <div class="popup__container">
+            <button class="button popup__button-close"
+                    type="button"
+                    data-action="CLOSE"
+                    aria-label="Закрыть">
+            </button>
+
+            <h2 class="popup__title">Обновить аватар</h2>
+
+            <form class="popup__form form" action="#" name="form_avatar" id="form_avatar">
+                <fieldset class="form__inputs" form="form_avatar">
+                    <label class="form__label" for="input_avatar_src">
+                        <input class="form__input form__input_field_avatar-src"
+                               id="input_avatar_src"
+                               value=""
+                               name="link"
+                               type="url"
+                               placeholder="Ссылка на картинку"
+                               required>
+
+                        <span class="form__input-error" id="input_avatar_src-error"></span>
+                    </label>
+
+                </fieldset>
+
+                <button class="form__button-submit"
+                        type="submit"
+                        data-action="SUBMIT">Сохранить
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog class="popup confirm-popup">
+        <div class="popup__container">
+            <button class="button popup__button-close"
+                    type="button"
+                    data-action="CLOSE"
+                    aria-label="Закрыть">
+            </button>
+
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button class="form__button-submit"
+                    type="submit"
+                    id="confirm_button_submit"
+                    data-action="SUBMIT">Да
+            </button>
+        </div>
+    </dialog>
+
     <template class="photo-template">
         <li class="photo-item">
             <button class="button photo-item__button-delete" type="button" aria-label="Удалить"
@@ -160,9 +211,14 @@
             >
             <div class="photo-item__info">
                 <h2 class="photo-item__description">Описание фото</h2>
-                <button class="button photo-item__button-like" type="button" data-action="LIKE"></button>
+
+                <div class="photo-item__like-stats">
+                    <button class="button photo-item__button-like" type="button" data-action="LIKE"></button>
+                    <div class="photo-item__like-count">0</div>
+                </div>
             </div>
         </li>
     </template>
+
 </body>
 </html>
