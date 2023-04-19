@@ -16,6 +16,7 @@
 
 @import '../blocks/profile/profile.css';
 @import '../blocks/profile/__info-container/profile__info-container.css';
+@import '../blocks/profile/__avatar-button/profile__avatar-button.css';
 @import '../blocks/profile/__avatar/profile__avatar.css';
 @import '../blocks/profile/__settings/profile__settings.css';
 @import '../blocks/profile/__add-button/profile__add-button.css';
