@@ -1,12 +1,13 @@
-import { cardOptions } from '../utils/constants.js'
+import {cardOptions} from '../utils/constants.js'
 
 export class Card {
-    constructor({name, link}, selector, handleCardClick) {
+    constructor({name, link}, selector, handleCardClick, openConfirmationPopup) {
         this.description = name
         this.link = link
         this._isLiked = false
         this.templateSelector = selector
         this._handleCardClick = handleCardClick
+        this._openConfirmationPopup = openConfirmationPopup
     }
 
 
@@ -39,7 +40,7 @@ export class Card {
 
     _setEventListeners() {
         this._buttonLikeElement.addEventListener('click', this._toggleLike.bind(this))
-        this._buttonDeleteElement.addEventListener('click', this._handleDelete.bind(this))
+        this._buttonDeleteElement.addEventListener('click', this._openConfirmationPopup)
         this._imageElement.addEventListener('click', this._handleCardClick.bind(this))
     }
 
@@ -48,7 +49,7 @@ export class Card {
         this._isLiked = !this._isLiked
     }
 
-    _handleDelete() {
+    handleDelete() {
         this._cardElement.remove()
     }
 }

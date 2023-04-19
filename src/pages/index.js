@@ -13,9 +13,10 @@ import {
     popupWithImageOptions,
     profileOptions,
     popupWithFormOptions,
-    sectionOptions
+    sectionOptions, popupWithConfirmationOptions
 } from "../utils/constants.js"
 import './index.css'
+import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
 // VALIDATION
 const validatedForms = {}
@@ -37,6 +38,10 @@ const enableValidations = (config) => {
     })
 }
 
+// CONFIRMATION
+const confirmationPopup = new PopupWithConfirmation(
+    popupWithConfirmationOptions.confirmationPopupSelector)
+
 // PHOTO
 const imagePopup = new PopupWithImage(
     popupWithImageOptions.imagePopupSelector
@@ -44,14 +49,18 @@ const imagePopup = new PopupWithImage(
 
 imagePopup.setEventListeners()
 
-const getCard = ({ name, link }) => {
-    const card = new Card({ name, link },
+const getCard = ({name, link}) => {
+    const card = new Card({name, link},
         cardOptions.templateSelector,
         () => {
-            imagePopup.open({ name, link })
+            imagePopup.open({name, link})
+        },
+        () => {
+            confirmationPopup._handleAction = card.handleDelete.bind(card)
+            confirmationPopup.open();
         }
     )
-    return card.generateCardElement()
+    return card.generateCardElement();
 }
 
 const createCard = (formData) => {

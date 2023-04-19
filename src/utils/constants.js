@@ -28,6 +28,11 @@ export const popupOptions = {
     openedPopupClass: 'popup_opened',
 }
 
+export const popupWithConfirmationOptions = {
+    confirmationPopupSelector: '.confirmation-popup',
+    confirmationButtonSelector: '.form__button-submit'
+}
+
 export const popupWithFormOptions = {
     formSelector: '.form',
     inputSelector: '.form__input',
