@@ -39,6 +39,7 @@ export const popupWithFormOptions = {
     formEditProfilePopupSelector: '.popup_edit',
     formAddImagePopupSelector: '.popup-add-photo',
     formAvatarPopupSelector: '.popup_update-avatar',
+    formButtonSubmitSelector: '.form__button-submit',
 }
 
 export const popupWithImageOptions = {
