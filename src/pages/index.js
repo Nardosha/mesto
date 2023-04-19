@@ -13,7 +13,7 @@ import {
     popupWithImageOptions,
     profileOptions,
     popupWithFormOptions,
-    sectionOptions, popupWithConfirmationOptions
+    sectionOptions, popupWithConfirmationOptions, avatarButton
 } from "../utils/constants.js"
 import './index.css'
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
@@ -69,10 +69,16 @@ const createCard = (formData) => {
 }
 
 
+const submitAvatarForm = (formData) => {
+    userProfile.setAvatar(formData)
+    avatarPopup.close()
+}
+
 // PROFILE
 const userProfile = new UserInfo(
     profileOptions.profileNameSelector,
-    profileOptions.profileDescriptionSelector
+    profileOptions.profileDescriptionSelector,
+    profileOptions.profileAvatarSelector
 )
 
 // FORMS
@@ -111,6 +117,13 @@ const formProfilePopup = new PopupWithForm(
 
 formProfilePopup.setEventListeners()
 
+const avatarPopup = new PopupWithForm(
+    popupWithFormOptions.formAvatarPopupSelector,
+    submitAvatarForm
+)
+
+avatarPopup.setEventListeners()
+
 
 // SECTION
 const imagesSection = new Section({
@@ -132,4 +145,8 @@ addPhotoButton.addEventListener('click', () => {
     const formName = formImagePopup.getFormName()
     validatedForms[formName].resetValidation()
     formImagePopup.open()
+})
+
+avatarButton.addEventListener('click', () => {
+    avatarPopup.open()
 })

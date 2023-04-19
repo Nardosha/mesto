@@ -38,6 +38,7 @@ export const popupWithFormOptions = {
     inputSelector: '.form__input',
     formEditProfilePopupSelector: '.popup_edit',
     formAddImagePopupSelector: '.popup-add-photo',
+    formAvatarPopupSelector: '.popup_update-avatar',
 }
 
 export const popupWithImageOptions = {
@@ -49,6 +50,8 @@ export const popupWithImageOptions = {
 export const profileOptions = {
     profileNameSelector: '.profile__full-name',
     profileDescriptionSelector: '.profile__description',
+    profileAvatarSelector: '.profile__avatar',
+
 }
 
 export const sectionOptions = {
@@ -57,6 +60,7 @@ export const sectionOptions = {
 
 export const editingProfileButton = document.querySelector('.profile__edit-button')
 export const addPhotoButton = document.querySelector('.profile__add-button')
+export const avatarButton = document.querySelector('.profile__avatar-button')
 
 export const initialCards = [
     {

@@ -1,8 +1,13 @@
 export default class UserInfo {
-    constructor(nameSelector, descriptionSelector, link) {
+    constructor(nameSelector, descriptionSelector, selector) {
         this._nameElement = document.querySelector(nameSelector)
         this._descriptionElement = document.querySelector(descriptionSelector)
-        this._userAvatar = link
+        this._avatarElement = document.querySelector(selector)
+    }
+
+    setAvatar({link}) {
+        this._avatarElement.src = link
+        this._avatarElement.alt = this._nameElement
     }
 
     setUserInfo({name, description}) {
