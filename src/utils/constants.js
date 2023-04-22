@@ -43,7 +43,7 @@ export const popupWithFormOptions = {
 }
 
 export const popupWithImageOptions = {
-    imagePopupSelector:'.popup-show-photo',
+    imagePopupSelector: '.popup-show-photo',
     imageSelector: '.popup-show-photo__photo',
     descriptionSelector: '.popup-show-photo__description',
 }
@@ -89,3 +89,12 @@ export const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+
+//todo replace using github env
+export const apiConfig = {
+    url: 'https://mesto.nomoreparties.co/v1',
+    cohort: 'cohort-64',
+    headers: {
+            authorization: 'bb9d3cad-fe83-4951-9df0-d4b1a4879bd4'
+        }
+}

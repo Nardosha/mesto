@@ -13,10 +13,11 @@ import {
     popupWithImageOptions,
     profileOptions,
     popupWithFormOptions,
-    sectionOptions, popupWithConfirmationOptions, avatarButton
+    sectionOptions, popupWithConfirmationOptions, avatarButton, apiConfig
 } from "../utils/constants.js"
 import './index.css'
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
+import Api from "../components/API";
 
 // VALIDATION
 const validatedForms = {}
@@ -37,6 +38,11 @@ const enableValidations = (config) => {
         validatedForm.enableValidation()
     })
 }
+// API
+const api = new Api(apiConfig)
+// api.createCard(formData).then(res => {
+//     console.log(res)
+// })
 
 // CONFIRMATION
 const confirmationPopup = new PopupWithConfirmation(
@@ -61,11 +67,6 @@ const getCard = ({name, link}) => {
         }
     )
     return card.generateCardElement();
-}
-
-const createCard = (formData) => {
-    const cardElement = getCard(formData)
-    imagesSection.addItem(cardElement)
 }
 
 
@@ -126,14 +127,17 @@ avatarPopup.setEventListeners()
 
 
 // SECTION
-const imagesSection = new Section({
-        items: initialCards,
-        renderer: (cardParams) => createCard(cardParams)
-    },
-    sectionOptions.imagesContainer
-)
+api.getCards().then(cards => {
+    console.log(cards)
+    const imagesSection = new Section({
+            items: cards,
+            renderer: (cardParams) => imagesSection.addItem(getCard(cardParams))
+        },
+        sectionOptions.imagesContainer
+    )
+    imagesSection.renderItems();
+})
 
-imagesSection.renderItems();
 
 enableValidations(validationOptions)
 
@@ -150,3 +154,4 @@ addPhotoButton.addEventListener('click', () => {
 avatarButton.addEventListener('click', () => {
     avatarPopup.open()
 })
+
