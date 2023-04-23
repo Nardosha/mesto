@@ -22,10 +22,6 @@ export class Card {
         this.descriptionElement.textContent = this.description
         this._likeCounter.textContent = this._likes
 
-        if (this._likes) {
-            this._toggleLike()
-        }
-
         return this._cardElement
     }
 
@@ -55,7 +51,10 @@ export class Card {
     _toggleLike() {
         this._buttonLikeElement.classList.toggle(cardOptions.buttonLikeActiveClass)
         this._isLiked = !this._isLiked
+        this._likes += this._isLiked ? 1 : -1
+        this._likeCounter.textContent = this._likes
     }
+
 
     handleDelete() {
         this._cardElement.remove()
