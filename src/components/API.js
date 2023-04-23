@@ -5,6 +5,46 @@ export default class Api {
 
     }
 
+    loadUserInfo() {
+        return fetch(`${this.url}/users/me`, {
+            headers: this.headers
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Error: ${res?.message || res?.status}`)
+            })
+    }
+
+    editUserInfo(userInfo) {
+        return fetch(`${this.url}/users/me`, {
+            method: 'PATCH',
+            headers: this.headers,
+            body: JSON.stringify(userInfo)
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Error: ${res?.message || res?.status}`)
+            })
+    }
+
+    editUserAvatar(avatar) {
+        return fetch(`${this.url}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this.headers,
+            body: JSON.stringify(avatar)
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Error: ${res?.message || res?.status}`)
+            })
+    }
+
     getInitialCards() {
         return fetch(`${this.url}/cards`, {
             headers: this.headers

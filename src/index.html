@@ -15,11 +15,11 @@
             <section class="profile">
                 <div class="profile__info-container">
                     <button class="profile__avatar-button" type="button">
-                        <img class="profile__avatar" src="<%=require('./images/page/avatar.jpg')%>" alt="Фотография пользователя">
+                        <img class="profile__avatar" src="" alt="">
                     </button>
                     <div class="profile__settings">
-                        <h1 class="profile__full-name" data-user-field="userFullName">Жак-Ив Кусто</h1>
-                        <p class="profile__description" data-user-field="userDescription">Исследователь океана</p>
+                        <h1 class="profile__full-name" data-user-field="userFullName"></h1>
+                        <p class="profile__description" data-user-field="userDescription"></p>
                         <button class="button profile__edit-button" data-action="OPEN" data-action-type="EDIT" type="button"
                                 aria-label="Редактировать"></button>
                     </div>
@@ -70,7 +70,7 @@
                                id="input_user_description"
                                value=""
                                data-user-field="userDescription"
-                               name="description"
+                               name="about"
                                type="text"
                                placeholder="Введите описание"
                                minlength="2"
@@ -167,7 +167,7 @@
                         <input class="form__input form__input_field_avatar-src"
                                id="input_avatar_src"
                                value=""
-                               name="link"
+                               name="avatar"
                                type="url"
                                placeholder="Ссылка на картинку"
                                required>

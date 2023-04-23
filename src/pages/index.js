@@ -65,7 +65,6 @@ const likeCard = (card, id) => {
     api.likeCard(id)
         .then(res => {
             console.log('Success, ', res, card)
-            console.log(card.updateLikes)
             card.updateLikes(res)
         }).catch(err => {
         console.log(err)
@@ -100,17 +99,33 @@ const getCard = ({_id, name, link, likes}, isOwnCard) => {
 }
 
 
+// PROFILE
 const submitAvatarForm = (formData) => {
-    userProfile.setAvatar(formData)
-    avatarPopup.close()
+    api.editUserAvatar(formData).then(res => {
+        userProfile.saveUserInfo(res)
+        userProfile.updateUserInfoLayout(res)
+    }).catch(err => {
+        console.log(err)
+    }).finally(() => {
+        avatarPopup.close()
+    })
 }
 
-// PROFILE
 const userProfile = new UserInfo(
     profileOptions.profileNameSelector,
     profileOptions.profileDescriptionSelector,
-    profileOptions.profileAvatarSelector
+    profileOptions.profileAvatarSelector,
+    () => api.loadUserInfo()
 )
+
+userProfile.loadUserInfo()
+    .then(res => {
+            userProfile.saveUserInfo(res)
+            userProfile.updateUserInfoLayout(res)
+        }
+    ).catch(err => {
+    console.log(err)
+})
 
 // FORMS
 const openProfileFormPopup = () => {
@@ -130,21 +145,25 @@ const submitImageForm = (formData) => {
 
         }).catch(err => {
         console.log(err)
+    }).finally(() => {
+        formImagePopup.close();
     })
-
-    formImagePopup.close();
 }
 
 const submitProfileForm = (formData) => {
-    userProfile.setUserInfo(formData)
-    formProfilePopup.close();
+    api.editUserInfo(formData)
+        .then(res => {
+            userProfile.saveUserInfo(res)
+            userProfile.updateUserInfoLayout(formData)
+        }).finally(() => {
+        formProfilePopup.close();
+    })
 }
 
 const formImagePopup = new PopupWithForm(
     popupWithFormOptions.formAddImagePopupSelector,
     submitImageForm
 )
-
 formImagePopup.setEventListeners()
 
 
@@ -152,14 +171,13 @@ const formProfilePopup = new PopupWithForm(
     popupWithFormOptions.formEditProfilePopupSelector,
     submitProfileForm
 )
-
 formProfilePopup.setEventListeners()
+
 
 const avatarPopup = new PopupWithForm(
     popupWithFormOptions.formAvatarPopupSelector,
     submitAvatarForm
 )
-
 avatarPopup.setEventListeners()
 
 
@@ -189,6 +207,9 @@ addPhotoButton.addEventListener('click', () => {
 })
 
 avatarButton.addEventListener('click', () => {
+    const formName = avatarPopup.getFormName()
+    validatedForms[formName].resetValidation()
+
     avatarPopup.open()
 })
 
