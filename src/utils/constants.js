@@ -19,6 +19,7 @@ export const cardOptions = {
     descriptionSelector: '.photo-item__description',
     buttonLikeSelector: '.photo-item__button-like',
     buttonLikeActiveClass: 'photo-item__button-like_active',
+    likesSelector: '.photo-item__like-count',
     buttonDeleteSelector: '.photo-item__button-delete',
 }
 

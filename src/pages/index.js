@@ -52,8 +52,8 @@ const imagePopup = new PopupWithImage(
 
 imagePopup.setEventListeners()
 
-const getCard = ({name, link}) => {
-    const card = new Card({name, link},
+const getCard = ({name, link, likes, owner}) => {
+    const card = new Card({name, link, likes, owner},
         cardOptions.templateSelector,
         () => {
             imagePopup.open({name, link})
