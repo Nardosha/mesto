@@ -93,7 +93,7 @@ const getCard = (cardParams) => {
     const card = new Card({...cardParams, ...getCardInfo(cardParams)},
         cardOptions.templateSelector,
         () => {
-            imagePopup.open({name, link})
+            imagePopup.open({ name: cardParams.name, link: cardParams.link })
         },
         () => {
             confirmationPopup._handleAction = () => card.handleDelete();
