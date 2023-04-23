@@ -32,7 +32,7 @@ export const popupOptions = {
 
 export const popupWithConfirmationOptions = {
     confirmationPopupSelector: '.confirmation-popup',
-    confirmationButtonSelector: '.form__button-submit'
+    confirmationButtonSelector: '.popup__button-submit'
 }
 
 export const popupWithFormOptions = {
