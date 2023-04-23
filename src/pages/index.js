@@ -55,7 +55,28 @@ imagePopup.setEventListeners()
 const deleteCard = (id) => {
     api.deleteCard(id)
         .then(res => {
-            console.log('success', res?.message)
+            console.log('Success, ', res?.message || 'card has been successfully deleted')
+        }).catch(err => {
+        console.log(err)
+    })
+}
+
+const likeCard = (card, id) => {
+    api.likeCard(id)
+        .then(res => {
+            console.log('Success, ', res, card)
+            console.log(card.updateLikes)
+            card.updateLikes(res)
+        }).catch(err => {
+        console.log(err)
+    })
+}
+
+const dislikeCard = (card, id) => {
+    api.dislikeCard(id)
+        .then(res => {
+            console.log('Success, ', res)
+            card.updateLikes(res)
         }).catch(err => {
         console.log(err)
     })
@@ -71,6 +92,8 @@ const getCard = ({_id, name, link, likes}, isOwnCard) => {
             confirmationPopup._handleAction = () => card.handleDelete();
             confirmationPopup.open();
         },
+        (id) => likeCard(card, id),
+        (id) => dislikeCard(card, id),
         (id) => deleteCard(id)
     )
     return card.generateCardElement();

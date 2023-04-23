@@ -1,7 +1,7 @@
 import {cardOptions} from '../utils/constants.js'
 
 export class Card {
-    constructor({_id, name, link, likes, isOwnCard}, selector, handleCardClick, openConfirmationPopup, deleteHandler) {
+    constructor({_id, name, link, likes, isOwnCard}, selector, handleCardClick, openConfirmationPopup, likeHandler, dislikeHandler, deleteHandler) {
         this.description = name
         this.link = link
         this._likes = likes.length
@@ -10,6 +10,8 @@ export class Card {
         this.templateSelector = selector
         this._handleCardClick = handleCardClick
         this._openConfirmationPopup = openConfirmationPopup
+        this._likeHandler = likeHandler
+        this._dislikeHandler = dislikeHandler
         this._deleteHandler = deleteHandler
         this._id = _id
     }
@@ -50,15 +52,33 @@ export class Card {
 
     _setEventListeners() {
         this._buttonLikeElement.addEventListener('click', this._toggleLike.bind(this))
-        this._buttonDeleteElement?.addEventListener('click', this._openConfirmationPopup)
+        this._buttonDeleteElement.addEventListener('click', this._openConfirmationPopup)
         this._imageElement.addEventListener('click', this._handleCardClick.bind(this))
     }
 
-    _toggleLike() {
+    updateLikes(data) {
+        this._likes = data.likes.length
+        this._likeCounter.textContent = this._likes
+    }
+
+    _toggleLikeClass() {
         this._buttonLikeElement.classList.toggle(cardOptions.buttonLikeActiveClass)
         this._isLiked = !this._isLiked
-        this._likes += this._isLiked ? 1 : -1
-        this._likeCounter.textContent = this._likes
+    }
+
+    _toggleLike() {
+        this._isLiked ? this._handleDislike() : this._handleLike();
+
+    }
+
+    _handleLike() {
+        this._toggleLikeClass();
+        this._likeHandler(this._id)
+    }
+
+    _handleDislike() {
+        this._toggleLikeClass();
+        this._dislikeHandler(this._id)
     }
 
     handleDelete() {
