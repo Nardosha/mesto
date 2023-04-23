@@ -14,10 +14,12 @@
         <main class="page">
             <section class="profile">
                 <div class="profile__info-container">
-                    <img class="profile__avatar" src="<%=require('./images/page/avatar.jpg')%>" alt="Фотография пользователя">
+                    <button class="profile__avatar-button" type="button">
+                        <img class="profile__avatar" src="" alt="">
+                    </button>
                     <div class="profile__settings">
-                        <h1 class="profile__full-name" data-user-field="userFullName">Жак-Ив Кусто</h1>
-                        <p class="profile__description" data-user-field="userDescription">Исследователь океана</p>
+                        <h1 class="profile__full-name" data-user-field="userFullName"></h1>
+                        <p class="profile__description" data-user-field="userDescription"></p>
                         <button class="button profile__edit-button" data-action="OPEN" data-action-type="EDIT" type="button"
                                 aria-label="Редактировать"></button>
                     </div>
@@ -68,7 +70,7 @@
                                id="input_user_description"
                                value=""
                                data-user-field="userDescription"
-                               name="description"
+                               name="about"
                                type="text"
                                placeholder="Введите описание"
                                minlength="2"
@@ -88,7 +90,7 @@
         </div>
     </dialog>
 
-    <dialog class="popup popup_add-photo" data-popup-type="ADD" open>
+    <dialog class="popup popup-add-photo" data-popup-type="ADD" open>
         <div class="popup__container">
             <button class="button popup__button-close"
                     type="button"
@@ -149,6 +151,57 @@
         </div>
     </dialog>
 
+    <dialog class="popup popup_update-avatar" open>
+        <div class="popup__container">
+            <button class="button popup__button-close"
+                    type="button"
+                    data-action="CLOSE"
+                    aria-label="Закрыть">
+            </button>
+
+            <h2 class="popup__title">Обновить аватар</h2>
+
+            <form class="popup__form form" action="#" name="form_avatar" id="form_avatar">
+                <fieldset class="form__inputs" form="form_avatar">
+                    <label class="form__label" for="input_avatar_src">
+                        <input class="form__input form__input_field_avatar-src"
+                               id="input_avatar_src"
+                               value=""
+                               name="avatar"
+                               type="url"
+                               placeholder="Ссылка на картинку"
+                               required>
+
+                        <span class="form__input-error" id="input_avatar_src-error"></span>
+                    </label>
+
+                </fieldset>
+
+                <button class="form__button-submit"
+                        type="submit"
+                        data-action="SUBMIT">Сохранить
+                </button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog class="popup confirmation-popup">
+        <div class="popup__container">
+            <button class="button popup__button-close"
+                    type="button"
+                    data-action="CLOSE"
+                    aria-label="Закрыть">
+            </button>
+
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button class="form__button-submit"
+                    type="submit"
+                    id="confirm_button_submit"
+                    data-action="SUBMIT">Да
+            </button>
+        </div>
+    </dialog>
+
     <template class="photo-template">
         <li class="photo-item">
             <button class="button photo-item__button-delete" type="button" aria-label="Удалить"
@@ -160,9 +213,14 @@
             >
             <div class="photo-item__info">
                 <h2 class="photo-item__description">Описание фото</h2>
-                <button class="button photo-item__button-like" type="button" data-action="LIKE"></button>
+
+                <div class="photo-item__like-stats">
+                    <button class="button photo-item__button-like" type="button" data-action="LIKE"></button>
+                    <div class="photo-item__like-count">0</div>
+                </div>
             </div>
         </li>
     </template>
+
 </body>
 </html>

@@ -19,7 +19,9 @@ export const cardOptions = {
     descriptionSelector: '.photo-item__description',
     buttonLikeSelector: '.photo-item__button-like',
     buttonLikeActiveClass: 'photo-item__button-like_active',
+    likesSelector: '.photo-item__like-count',
     buttonDeleteSelector: '.photo-item__button-delete',
+    buttonDeleteHiddenClass: 'photo-item__button-delete_visibility_hidden',
 }
 
 export const popupOptions = {
@@ -28,15 +30,22 @@ export const popupOptions = {
     openedPopupClass: 'popup_opened',
 }
 
+export const popupWithConfirmationOptions = {
+    confirmationPopupSelector: '.confirmation-popup',
+    confirmationButtonSelector: '.form__button-submit'
+}
+
 export const popupWithFormOptions = {
     formSelector: '.form',
     inputSelector: '.form__input',
     formEditProfilePopupSelector: '.popup_edit',
-    formAddImagePopupSelector: '.popup_add-photo',
+    formAddImagePopupSelector: '.popup-add-photo',
+    formAvatarPopupSelector: '.popup_update-avatar',
+    formButtonSubmitSelector: '.form__button-submit',
 }
 
 export const popupWithImageOptions = {
-    imagePopupSelector:'.popup-show-photo',
+    imagePopupSelector: '.popup-show-photo',
     imageSelector: '.popup-show-photo__photo',
     descriptionSelector: '.popup-show-photo__description',
 }
@@ -44,6 +53,8 @@ export const popupWithImageOptions = {
 export const profileOptions = {
     profileNameSelector: '.profile__full-name',
     profileDescriptionSelector: '.profile__description',
+    profileAvatarSelector: '.profile__avatar',
+
 }
 
 export const sectionOptions = {
@@ -52,6 +63,7 @@ export const sectionOptions = {
 
 export const editingProfileButton = document.querySelector('.profile__edit-button')
 export const addPhotoButton = document.querySelector('.profile__add-button')
+export const avatarButton = document.querySelector('.profile__avatar-button')
 
 export const initialCards = [
     {
@@ -79,3 +91,13 @@ export const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+
+//todo replace using github env
+export const apiConfig = {
+    url: 'https://mesto.nomoreparties.co/v1',
+    cohort: 'cohort-64',
+    headers: {
+        authorization: 'bb9d3cad-fe83-4951-9df0-d4b1a4879bd4',
+        'Content-Type': 'application/json'
+    }
+}
