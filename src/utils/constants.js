@@ -21,6 +21,7 @@ export const cardOptions = {
     buttonLikeActiveClass: 'photo-item__button-like_active',
     likesSelector: '.photo-item__like-count',
     buttonDeleteSelector: '.photo-item__button-delete',
+    buttonDeleteHiddenClass: 'photo-item__button-delete_visibility_hidden',
 }
 
 export const popupOptions = {

@@ -1,11 +1,11 @@
 import {cardOptions} from '../utils/constants.js'
 
 export class Card {
-    constructor({name, link, likes, owner}, selector, handleCardClick, openConfirmationPopup) {
+    constructor({name, link, likes, isOwnCard}, selector, handleCardClick, openConfirmationPopup) {
         this.description = name
         this.link = link
         this._likes = likes.length
-        this._owner = owner
+        this._isOwnCard = isOwnCard
         this._isLiked = false
         this.templateSelector = selector
         this._handleCardClick = handleCardClick
@@ -21,6 +21,10 @@ export class Card {
         this._imageElement.alt = this.link
         this.descriptionElement.textContent = this.description
         this._likeCounter.textContent = this._likes
+
+        if (!this._isOwnCard) {
+            this._hideDeleteButton()
+        }
 
         return this._cardElement
     }
@@ -44,7 +48,7 @@ export class Card {
 
     _setEventListeners() {
         this._buttonLikeElement.addEventListener('click', this._toggleLike.bind(this))
-        this._buttonDeleteElement.addEventListener('click', this._openConfirmationPopup)
+        this._buttonDeleteElement?.addEventListener('click', this._openConfirmationPopup)
         this._imageElement.addEventListener('click', this._handleCardClick.bind(this))
     }
 
@@ -55,8 +59,11 @@ export class Card {
         this._likeCounter.textContent = this._likes
     }
 
-
     handleDelete() {
         this._cardElement.remove()
+    }
+
+    _hideDeleteButton() {
+        this._buttonDeleteElement.classList.add(cardOptions.buttonDeleteHiddenClass)
     }
 }

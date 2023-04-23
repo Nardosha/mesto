@@ -52,8 +52,8 @@ const imagePopup = new PopupWithImage(
 
 imagePopup.setEventListeners()
 
-const getCard = ({name, link, likes, owner}) => {
-    const card = new Card({name, link, likes, owner},
+const getCard = ({name, link, likes}, isOwnCard) => {
+    const card = new Card({name, link, likes, isOwnCard},
         cardOptions.templateSelector,
         () => {
             imagePopup.open({name, link})
@@ -93,7 +93,7 @@ const openProfileFormPopup = () => {
 const submitImageForm = (formData) => {
     api.createCard(formData)
         .then(card => {
-            imagesSection.addItem(getCard(card))
+            imagesSection.addItem(getCard(card, true))
 
         }).catch(err => {
         console.log(err)
@@ -132,7 +132,7 @@ avatarPopup.setEventListeners()
 
 // SECTION
 const imagesSection = new Section(
-    (cardParams) => imagesSection.addItem(getCard(cardParams)),
+    (cardParams) => imagesSection.addItem(getCard(cardParams, false)),
     sectionOptions.imagesContainer
 )
 

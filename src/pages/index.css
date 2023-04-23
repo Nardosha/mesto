@@ -38,6 +38,7 @@
 @import '../blocks/photo-item/__button-like/_active/photo-item__button-like_active.css';
 @import '../blocks/photo-item/__like-count/photo-item__like-count.css';
 @import '../blocks/photo-item/__button-delete/photo-item__button-delete.css';
+@import '../blocks/photo-item/__button-delete/_visibility/photo-item__button-delete_visibility_hidden.css';
 
 
 @import '../blocks/footer/footer.css';
