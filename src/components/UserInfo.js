@@ -10,11 +10,6 @@ export default class UserInfo {
         this._id = null
     }
 
-    setAvatar({avatar}) {
-        this._avatarElement.src = avatar
-        this._avatarElement.alt = this._nameElement
-    }
-
     updateUserInfoLayout() {
         this._nameElement.textContent = this._name
         this._descriptionElement.textContent = this._about
@@ -25,7 +20,8 @@ export default class UserInfo {
     getUserInfo() {
         return {
             name: this._name,
-            about: this._about
+            about: this._about,
+            id: this._id
         }
     }
 

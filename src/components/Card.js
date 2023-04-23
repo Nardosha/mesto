@@ -1,12 +1,20 @@
 import {cardOptions} from '../utils/constants.js'
 
 export class Card {
-    constructor({_id, name, link, likes, isOwnCard}, selector, handleCardClick, openConfirmationPopup, likeHandler, dislikeHandler, deleteHandler) {
+    constructor(
+        {_id, name, link, likes, owner, isOwnCard, isLiked },
+        selector,
+        handleCardClick,
+        openConfirmationPopup,
+        likeHandler,
+        dislikeHandler,
+        deleteHandler
+    ) {
         this.description = name
         this.link = link
-        this._likes = likes.length
-        this._isOwnCard = isOwnCard
-        this._isLiked = false
+        this._likes = [...likes]
+        this._likeNumber = likes.length
+        this._owner = owner
         this.templateSelector = selector
         this._handleCardClick = handleCardClick
         this._openConfirmationPopup = openConfirmationPopup
@@ -14,6 +22,8 @@ export class Card {
         this._dislikeHandler = dislikeHandler
         this._deleteHandler = deleteHandler
         this._id = _id
+        this._isLiked = isLiked
+        this._isOwnCard = isOwnCard
     }
 
 
@@ -24,10 +34,14 @@ export class Card {
         this._imageElement.src = this.link
         this._imageElement.alt = this.link
         this.descriptionElement.textContent = this.description
-        this._likeCounter.textContent = this._likes
+        this._likeCounter.textContent = this._likeNumber
 
         if (!this._isOwnCard) {
             this._hideDeleteButton()
+        }
+
+        if (this._isLiked) {
+            this._toggleLikeClass()
         }
 
         return this._cardElement
@@ -57,8 +71,9 @@ export class Card {
     }
 
     updateLikes(data) {
-        this._likes = data.likes.length
-        this._likeCounter.textContent = this._likes
+        this._likes = [...data.likes]
+        this._likeNumber = data.likes.length
+        this._likeCounter.textContent = this._likeNumber
     }
 
     _toggleLikeClass() {

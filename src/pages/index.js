@@ -45,7 +45,8 @@ const api = new Api(apiConfig)
 const confirmationPopup = new PopupWithConfirmation(
     popupWithConfirmationOptions.confirmationPopupSelector)
 
-// PHOTO
+
+// CARD
 const imagePopup = new PopupWithImage(
     popupWithImageOptions.imagePopupSelector
 )
@@ -55,7 +56,7 @@ imagePopup.setEventListeners()
 const deleteCard = (id) => {
     api.deleteCard(id)
         .then(res => {
-            console.log('Success, ', res?.message || 'card has been successfully deleted')
+            console.log('Success!, ', res?.message || 'card has been successfully deleted')
         }).catch(err => {
         console.log(err)
     })
@@ -64,7 +65,6 @@ const deleteCard = (id) => {
 const likeCard = (card, id) => {
     api.likeCard(id)
         .then(res => {
-            console.log('Success, ', res, card)
             card.updateLikes(res)
         }).catch(err => {
         console.log(err)
@@ -74,15 +74,23 @@ const likeCard = (card, id) => {
 const dislikeCard = (card, id) => {
     api.dislikeCard(id)
         .then(res => {
-            console.log('Success, ', res)
             card.updateLikes(res)
         }).catch(err => {
         console.log(err)
     })
 }
 
-const getCard = ({_id, name, link, likes}, isOwnCard) => {
-    const card = new Card({_id, name, link, likes, isOwnCard},
+const getCardInfo = ({_id, likes, owner}) => {
+    const userId = userProfile.getUserInfo().id;
+
+    return {
+        isOwnCard: userId === owner._id,
+        isLiked: likes.find(user => user._id === userId),
+    }
+}
+
+const getCard = (cardParams) => {
+    const card = new Card({...cardParams, ...getCardInfo(cardParams)},
         cardOptions.templateSelector,
         () => {
             imagePopup.open({name, link})
@@ -100,17 +108,6 @@ const getCard = ({_id, name, link, likes}, isOwnCard) => {
 
 
 // PROFILE
-const submitAvatarForm = (formData) => {
-    api.editUserAvatar(formData).then(res => {
-        userProfile.saveUserInfo(res)
-        userProfile.updateUserInfoLayout(res)
-    }).catch(err => {
-        console.log(err)
-    }).finally(() => {
-        avatarPopup.close()
-    })
-}
-
 const userProfile = new UserInfo(
     profileOptions.profileNameSelector,
     profileOptions.profileDescriptionSelector,
@@ -128,6 +125,17 @@ userProfile.loadUserInfo()
 })
 
 // FORMS
+const submitAvatarForm = (formData) => {
+    api.editUserAvatar(formData).then(res => {
+        userProfile.saveUserInfo(res)
+        userProfile.updateUserInfoLayout(res)
+    }).catch(err => {
+        console.log(err)
+    }).finally(() => {
+        avatarPopup.close()
+    })
+}
+
 const openProfileFormPopup = () => {
     const formName = formProfilePopup.getFormName();
     validatedForms[formName].resetValidation();
@@ -141,7 +149,7 @@ const openProfileFormPopup = () => {
 const submitImageForm = (formData) => {
     api.createCard(formData)
         .then(card => {
-            imagesSection.addItem(getCard(card, true))
+            imagesSection.addItem(getCard(card))
 
         }).catch(err => {
         console.log(err)
@@ -183,7 +191,7 @@ avatarPopup.setEventListeners()
 
 // SECTION
 const imagesSection = new Section(
-    (cardParams) => imagesSection.addItem(getCard(cardParams, false)),
+    (cardParams) => imagesSection.addItem(getCard(cardParams)),
     sectionOptions.imagesContainer
 )
 
