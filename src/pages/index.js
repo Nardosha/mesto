@@ -40,9 +40,6 @@ const enableValidations = (config) => {
 }
 // API
 const api = new Api(apiConfig)
-// api.createCard(formData).then(res => {
-//     console.log(res)
-// })
 
 // CONFIRMATION
 const confirmationPopup = new PopupWithConfirmation(
@@ -94,7 +91,14 @@ const openProfileFormPopup = () => {
 }
 
 const submitImageForm = (formData) => {
-    createCard(formData)
+    api.createCard(formData)
+        .then(card => {
+            imagesSection.addItem(getCard(card))
+
+        }).catch(err => {
+        console.log(err)
+    })
+
     formImagePopup.close();
 }
 
@@ -127,15 +131,15 @@ avatarPopup.setEventListeners()
 
 
 // SECTION
-api.getCards().then(cards => {
-    console.log(cards)
-    const imagesSection = new Section({
-            items: cards,
-            renderer: (cardParams) => imagesSection.addItem(getCard(cardParams))
-        },
-        sectionOptions.imagesContainer
-    )
-    imagesSection.renderItems();
+const imagesSection = new Section(
+    (cardParams) => imagesSection.addItem(getCard(cardParams)),
+    sectionOptions.imagesContainer
+)
+
+api.getInitialCards().then(cards => {
+    imagesSection.renderItems(cards);
+}).catch(err => {
+    console.log(err)
 })
 
 

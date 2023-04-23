@@ -5,18 +5,28 @@ export default class Api {
 
     }
 
-    getCards() {
-        console.log(this.headers)
-        return fetch(`${this.url}/cards`, {headers: this.headers})
-             .then(res => res.json())
+    getInitialCards() {
+        return fetch(`${this.url}/cards`, {
+            headers: this.headers
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Error: ${res?.message || res?.status}`)
+            })
     }
 
     createCard(cardParams) {
         return fetch(`${this.url}/cards`, {
             method: 'POST',
             headers: this.headers,
-            'Content-Type': 'application/json',
             body: JSON.stringify(cardParams)
-        }).then(res => res.json())
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Error: ${res?.message || res?.status}`)
+        })
     }
 }
