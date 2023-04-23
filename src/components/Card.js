@@ -1,7 +1,7 @@
 import {cardOptions} from '../utils/constants.js'
 
 export class Card {
-    constructor({name, link, likes, isOwnCard}, selector, handleCardClick, openConfirmationPopup) {
+    constructor({_id, name, link, likes, isOwnCard}, selector, handleCardClick, openConfirmationPopup, deleteHandler) {
         this.description = name
         this.link = link
         this._likes = likes.length
@@ -10,6 +10,8 @@ export class Card {
         this.templateSelector = selector
         this._handleCardClick = handleCardClick
         this._openConfirmationPopup = openConfirmationPopup
+        this._deleteHandler = deleteHandler
+        this._id = _id
     }
 
 
@@ -60,6 +62,7 @@ export class Card {
     }
 
     handleDelete() {
+        this._deleteHandler(this._id)
         this._cardElement.remove()
     }
 

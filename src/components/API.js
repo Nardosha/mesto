@@ -29,4 +29,16 @@ export default class Api {
             return Promise.reject(`Error: ${res?.message || res?.status}`)
         })
     }
+
+    deleteCard(cardId) {
+        return fetch(`${this.url}/cards/${cardId}`, {
+            method: 'DELETE',
+            headers: this.headers,
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Error: ${res?.message || res?.status}`)
+        })
+    }
 }

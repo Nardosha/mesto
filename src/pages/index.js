@@ -52,16 +52,26 @@ const imagePopup = new PopupWithImage(
 
 imagePopup.setEventListeners()
 
-const getCard = ({name, link, likes}, isOwnCard) => {
-    const card = new Card({name, link, likes, isOwnCard},
+const deleteCard = (id) => {
+    api.deleteCard(id)
+        .then(res => {
+            console.log('success', res?.message)
+        }).catch(err => {
+        console.log(err)
+    })
+}
+
+const getCard = ({_id, name, link, likes}, isOwnCard) => {
+    const card = new Card({_id, name, link, likes, isOwnCard},
         cardOptions.templateSelector,
         () => {
             imagePopup.open({name, link})
         },
         () => {
-            confirmationPopup._handleAction = card.handleDelete.bind(card)
+            confirmationPopup._handleAction = () => card.handleDelete();
             confirmationPopup.open();
-        }
+        },
+        (id) => deleteCard(id)
     )
     return card.generateCardElement();
 }
