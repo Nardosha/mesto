@@ -7,7 +7,6 @@ import UserInfo from "../components/UserInfo";
 import {
     validationOptions,
     cardOptions,
-    initialCards,
     editingProfileButton,
     addPhotoButton,
     popupWithImageOptions,
@@ -93,7 +92,7 @@ const getCard = (cardParams) => {
     const card = new Card({...cardParams, ...getCardInfo(cardParams)},
         cardOptions.templateSelector,
         () => {
-            imagePopup.open({ name: cardParams.name, link: cardParams.link })
+            imagePopup.open({name: cardParams.name, link: cardParams.link})
         },
         () => {
             confirmationPopup._handleAction = () => card.handleDelete();
@@ -112,13 +111,15 @@ const userProfile = new UserInfo(
     profileOptions.profileNameSelector,
     profileOptions.profileDescriptionSelector,
     profileOptions.profileAvatarSelector,
-    () => api.loadUserInfo()
 )
 
-userProfile.loadUserInfo()
+api.loadUserInfo()
     .then(res => {
-            userProfile.saveUserInfo(res)
-            userProfile.updateUserInfoLayout(res)
+            userProfile.setUserInfo(res)
+
+            initialCards.then(cards => {
+                imagesSection.renderItems(cards);
+                })
         }
     ).catch(err => {
     console.log(err)
@@ -127,12 +128,10 @@ userProfile.loadUserInfo()
 // FORMS
 const submitAvatarForm = (formData) => {
     api.editUserAvatar(formData).then(res => {
-        userProfile.saveUserInfo(res)
-        userProfile.updateUserInfoLayout(res)
+        userProfile.setUserInfo(res)
+        avatarPopup.close()
     }).catch(err => {
         console.log(err)
-    }).finally(() => {
-        avatarPopup.close()
     })
 }
 
@@ -150,21 +149,19 @@ const submitImageForm = (formData) => {
     api.createCard(formData)
         .then(card => {
             imagesSection.addItem(getCard(card))
-
+            formImagePopup.close();
         }).catch(err => {
         console.log(err)
-    }).finally(() => {
-        formImagePopup.close();
     })
 }
 
 const submitProfileForm = (formData) => {
     api.editUserInfo(formData)
         .then(res => {
-            userProfile.saveUserInfo(res)
-            userProfile.updateUserInfoLayout(formData)
-        }).finally(() => {
-        formProfilePopup.close();
+            userProfile.setUserInfo(res)
+            formProfilePopup.close();
+        }).catch(err => {
+        console.log(err)
     })
 }
 
@@ -195,12 +192,7 @@ const imagesSection = new Section(
     sectionOptions.imagesContainer
 )
 
-api.getInitialCards().then(cards => {
-    imagesSection.renderItems(cards);
-}).catch(err => {
-    console.log(err)
-})
-
+const initialCards = api.getInitialCards()
 
 enableValidations(validationOptions)
 
