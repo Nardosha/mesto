@@ -7,7 +7,6 @@ import UserInfo from "../components/UserInfo";
 import {
     validationOptions,
     cardOptions,
-    initialCards,
     editingProfileButton,
     addPhotoButton,
     popupWithImageOptions,
@@ -112,13 +111,15 @@ const userProfile = new UserInfo(
     profileOptions.profileNameSelector,
     profileOptions.profileDescriptionSelector,
     profileOptions.profileAvatarSelector,
-    () => api.loadUserInfo()
 )
 
-userProfile.loadUserInfo()
+api.loadUserInfo()
     .then(res => {
-            userProfile.saveUserInfo(res)
-            userProfile.updateUserInfoLayout(res)
+            userProfile.setUserInfo(res)
+
+            initialCards.then(cards => {
+                imagesSection.renderItems(cards);
+                })
         }
     ).catch(err => {
     console.log(err)
@@ -127,8 +128,7 @@ userProfile.loadUserInfo()
 // FORMS
 const submitAvatarForm = (formData) => {
     api.editUserAvatar(formData).then(res => {
-        userProfile.saveUserInfo(res)
-        userProfile.updateUserInfoLayout(res)
+        userProfile.setUserInfo(res)
         avatarPopup.close()
     }).catch(err => {
         console.log(err)
@@ -158,8 +158,7 @@ const submitImageForm = (formData) => {
 const submitProfileForm = (formData) => {
     api.editUserInfo(formData)
         .then(res => {
-            userProfile.saveUserInfo(res)
-            userProfile.updateUserInfoLayout(formData)
+            userProfile.setUserInfo(res)
             formProfilePopup.close();
         }).catch(err => {
         console.log(err)
@@ -193,12 +192,7 @@ const imagesSection = new Section(
     sectionOptions.imagesContainer
 )
 
-api.getInitialCards().then(cards => {
-    imagesSection.renderItems(cards);
-}).catch(err => {
-    console.log(err)
-})
-
+const initialCards = api.getInitialCards()
 
 enableValidations(validationOptions)
 

@@ -75,7 +75,6 @@ export default class Api {
     }
 
     _handleResult(response) {
-        console.log(response)
         if (response.ok) {
             return response.json()
         }
