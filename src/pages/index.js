@@ -93,7 +93,7 @@ const getCard = (cardParams) => {
     const card = new Card({...cardParams, ...getCardInfo(cardParams)},
         cardOptions.templateSelector,
         () => {
-            imagePopup.open({ name: cardParams.name, link: cardParams.link })
+            imagePopup.open({name: cardParams.name, link: cardParams.link})
         },
         () => {
             confirmationPopup._handleAction = () => card.handleDelete();
@@ -129,10 +129,9 @@ const submitAvatarForm = (formData) => {
     api.editUserAvatar(formData).then(res => {
         userProfile.saveUserInfo(res)
         userProfile.updateUserInfoLayout(res)
+        avatarPopup.close()
     }).catch(err => {
         console.log(err)
-    }).finally(() => {
-        avatarPopup.close()
     })
 }
 
@@ -150,11 +149,9 @@ const submitImageForm = (formData) => {
     api.createCard(formData)
         .then(card => {
             imagesSection.addItem(getCard(card))
-
+            formImagePopup.close();
         }).catch(err => {
         console.log(err)
-    }).finally(() => {
-        formImagePopup.close();
     })
 }
 
@@ -163,8 +160,9 @@ const submitProfileForm = (formData) => {
         .then(res => {
             userProfile.saveUserInfo(res)
             userProfile.updateUserInfoLayout(formData)
-        }).finally(() => {
-        formProfilePopup.close();
+            formProfilePopup.close();
+        }).catch(err => {
+        console.log(err)
     })
 }
 

@@ -36,25 +36,13 @@ export default class Api {
             method: 'PATCH',
             headers: this.headers,
             body: JSON.stringify(avatar)
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Error: ${res?.message || res?.status}`)
-            })
+        }).then(this._handleResult)
     }
 
     getInitialCards() {
         return fetch(`${this.url}/cards`, {
             headers: this.headers
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Error: ${res?.message || res?.status}`)
-            })
+        }).then(this._handleResult)
     }
 
     createCard(cardParams) {
@@ -62,47 +50,35 @@ export default class Api {
             method: 'POST',
             headers: this.headers,
             body: JSON.stringify(cardParams)
-        }).then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Error: ${res?.message || res?.status}`)
-        })
+        }).then(this._handleResult)
     }
 
     deleteCard(cardId) {
         return fetch(`${this.url}/cards/${cardId}`, {
             method: 'DELETE',
             headers: this.headers,
-        }).then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Error: ${res?.message || res?.status}`)
-        })
+        }).then(this._handleResult)
     }
 
     likeCard(cardId) {
         return fetch(`${this.url}/cards/${cardId}/likes`, {
             method: 'PUT',
             headers: this.headers,
-        }).then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Error: ${res?.message || res?.status}`)
-        })
+        }).then(this._handleResult)
     }
 
     dislikeCard(cardId) {
         return fetch(`${this.url}/cards/${cardId}/likes`, {
             method: 'DELETE',
             headers: this.headers,
-        }).then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Error: ${res?.message || res?.status}`)
-        })
+        }).then(this._handleResult)
+    }
+
+    _handleResult(response) {
+        console.log(response)
+        if (response.ok) {
+            return response.json()
+        }
+        return Promise.reject(`Error: ${response?.message || response?.status}`)
     }
 }
