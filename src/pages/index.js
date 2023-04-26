@@ -116,14 +116,14 @@ const userProfile = new UserInfo(
 api.loadUserInfo()
     .then(res => {
             userProfile.setUserInfo(res)
-
-            initialCards.then(cards => {
-                imagesSection.renderItems(cards);
-                })
-        }
-    ).catch(err => {
-    console.log(err)
+            return initialCards
+        })
+    .then((cards) => {
+        imagesSection.renderItems(cards)
 })
+    .catch(err => {
+        console.log(err)
+    })
 
 // FORMS
 const submitAvatarForm = (formData) => {
