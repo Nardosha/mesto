@@ -15,10 +15,10 @@ export default class UserInfo {
     }
 
     setUserInfo(info) {
-        this._nameElement.textContent = info.name
-        this._descriptionElement.textContent = info.about
-        this._avatarElement.src = info.avatar
-        this._avatarElement.alt = info.avatar
-        this._id = info._id
+        this._nameElement.textContent = info?.name || '';
+        this._descriptionElement.textContent = info?.about || ''
+        this._avatarElement.src = info?.avatar || ''
+        this._avatarElement.alt = info?.avatar || ''
+        this._id = info?._id || null
     }
 }
