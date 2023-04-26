@@ -8,13 +8,7 @@ export default class Api {
     loadUserInfo() {
         return fetch(`${this.url}/users/me`, {
             headers: this.headers
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Error: ${res?.message || res?.status}`)
-            })
+        }).then(this._handleResult)
     }
 
     editUserInfo(userInfo) {
@@ -22,13 +16,7 @@ export default class Api {
             method: 'PATCH',
             headers: this.headers,
             body: JSON.stringify(userInfo)
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Error: ${res?.message || res?.status}`)
-            })
+        }).then(this._handleResult)
     }
 
     editUserAvatar(avatar) {
