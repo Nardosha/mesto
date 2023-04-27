@@ -148,7 +148,7 @@ const openProfileFormPopup = () => {
 const submitImageForm = (formData) => {
     api.createCard(formData)
         .then(card => {
-            imagesSection.addItem(getCard(card))
+            imagesSection.addNewItem(getCard(card))
             formImagePopup.close();
         }).catch(err => {
         console.log(err)
